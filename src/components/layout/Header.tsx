@@ -1,66 +1,108 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
-import { siteConfig } from "@/data/content";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { DEFAULT_HANDLE } from "@/lib/shopify";
+
+const nav = [
+  { href: `#features`, label: "Features" },
+  { href: `#how-it-works`, label: "How It Works" },
+  { href: `#reviews`, label: "Reviews" },
+  { href: `#faq`, label: "FAQ" },
+];
 
 export function Header() {
   const { cart, openCart, justAdded } = useCart();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(!isHome);
+
+  useEffect(() => {
+    if (!isHome) {
+      setScrolled(true);
+      return;
+    }
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   return (
-    <header className="sticky top-0 z-[100] h-[72px] border-b border-plum/10 bg-cream/95 backdrop-blur-md">
-      <div className="container-main flex h-full items-center justify-between">
+    <header
+      className={cn(
+        "fixed top-9 z-[100] w-full transition-all duration-500",
+        scrolled
+          ? "border-b border-plum/10 bg-cream/90 shadow-[0_4px_30px_rgba(26,18,22,0.06)] backdrop-blur-xl"
+          : "bg-transparent"
+      )}
+    >
+      <div className="container-wide flex h-[72px] items-center justify-between md:h-20">
         <Link
           href="/"
-          className="font-heading text-[1.375rem] font-semibold uppercase tracking-wider text-plum"
+          className={cn(
+            "font-heading text-xl tracking-wide transition-colors md:text-2xl",
+            scrolled ? "text-ink" : "text-white"
+          )}
         >
           Nova Triggers
         </Link>
 
-        <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex gap-8">
-            <li>
-              <Link href={`/products/${siteConfig.productHandle}`} className="text-[0.9375rem] font-medium text-charcoal hover:text-plum">
-                Shop
-              </Link>
-            </li>
-            <li>
-              <Link href="/#how-it-works" className="text-[0.9375rem] font-medium text-charcoal hover:text-plum">
-                How It Works
-              </Link>
-            </li>
-            <li>
-              <Link href="/#reviews" className="text-[0.9375rem] font-medium text-charcoal hover:text-plum">
-                Reviews
-              </Link>
-            </li>
-            <li>
-              <Link href="/#faq" className="text-[0.9375rem] font-medium text-charcoal hover:text-plum">
-                FAQ
-              </Link>
-            </li>
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-8">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-coral",
+                    scrolled ? "text-charcoal" : "text-white/80 hover:text-white"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
-        <button
-          type="button"
-          onClick={openCart}
-          className="relative p-2 text-plum"
-          aria-label="Open cart"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <path d="M16 10a4 4 0 01-8 0" />
-          </svg>
-          {cart && cart.totalQuantity > 0 && (
-            <span
-              className={`absolute right-0 top-0 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-coral text-[0.625rem] font-bold text-white ${justAdded ? "cart-bounce" : ""}`}
-            >
-              {cart.totalQuantity}
-            </span>
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <Button
+            asChild
+            size="sm"
+            variant={scrolled ? "default" : "secondary"}
+            className="hidden sm:inline-flex"
+          >
+            <Link href={`/products/${DEFAULT_HANDLE}`}>Shop Now</Link>
+          </Button>
+
+          <button
+            type="button"
+            onClick={openCart}
+            className={cn(
+              "relative rounded-full p-2.5 transition-colors",
+              scrolled ? "text-plum hover:bg-plum/5" : "text-white hover:bg-white/10"
+            )}
+            aria-label="Open cart"
+          >
+            <ShoppingBag className="h-5 w-5" />
+            {cart && cart.totalQuantity > 0 && (
+              <span
+                className={cn(
+                  "absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-coral px-1 text-[0.625rem] font-bold text-white",
+                  justAdded && "cart-bounce"
+                )}
+              >
+                {cart.totalQuantity}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );

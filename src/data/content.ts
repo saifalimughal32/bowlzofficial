@@ -210,3 +210,47 @@ export const buyBoxBullets = [
   "USB rechargeable — 2 hrs per charge",
   "Adjustable up to 50\" — discreet wear",
 ];
+
+export const productSpecs = [
+  { label: "Heat-up time", value: "3 seconds" },
+  { label: "Heat levels", value: "113°F · 131°F · 149°F" },
+  { label: "Vibration modes", value: "3 gentle settings" },
+  { label: "Battery life", value: "Up to 2 hours per charge" },
+  { label: "Fit range", value: "Adjustable up to 50\"" },
+  { label: "Safety", value: "Auto shut-off after 30 min" },
+  { label: "Charging", value: "USB rechargeable" },
+  { label: "Shipping", value: "California · 1 business day" },
+];
+
+export const homeFeatures = [
+  {
+    title: "3-Second Instant Heat",
+    description:
+      "Warmth the moment cramps hit. Three calibrated heat levels let you dial in gentle or deep soothing relief.",
+  },
+  {
+    title: "Triple Vibration Modes",
+    description:
+      "Gentle massage paired with heat eases tension without overwhelming — designed for all-day comfort.",
+  },
+  {
+    title: "Discreet Under-Clothing Wear",
+    description:
+      "Slim, adjustable belt disappears under a hoodie, dress, or jeans. Relief that follows you everywhere.",
+  },
+  {
+    title: "USB Rechargeable Freedom",
+    description:
+      "Up to 2 hours per charge. No plug, no wires — desk, car, errands, bed. Charge it like your phone.",
+  },
+  {
+    title: "Soft Skin-Friendly Strap",
+    description:
+      "Premium adjustable band fits up to 50 inches with a beautifully textured, comfortable touch.",
+  },
+  {
+    title: "Smart Auto Shut-Off",
+    description:
+      "30-minute inactivity shut-off for peace of mind. Personal comfort product built for everyday trust.",
+  },
+];

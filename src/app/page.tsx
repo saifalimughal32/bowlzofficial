@@ -1,16 +1,12 @@
-import { Hero } from "@/components/sections/Hero";
-import { SocialProofStrip } from "@/components/sections/SocialProofStrip";
-import { ProblemSection } from "@/components/sections/ProblemSection";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Benefits } from "@/components/sections/Benefits";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
-import { VideoDemo } from "@/components/sections/VideoDemo";
-import { FeaturedOffer } from "@/components/sections/FeaturedOffer";
-import { Reviews } from "@/components/sections/Reviews";
-import { Comparison } from "@/components/sections/Comparison";
-import { Guarantee } from "@/components/sections/Guarantee";
-import { FAQ } from "@/components/sections/FAQ";
-import { FinalCTA } from "@/components/sections/FinalCTA";
+import { HomeHero } from "@/components/home/HomeHero";
+import { HomeMarquee } from "@/components/home/HomeMarquee";
+import { HomeFeatureGrid } from "@/components/home/HomeFeatureGrid";
+import { HomeShowcase } from "@/components/home/HomeShowcase";
+import { HomeSpecs } from "@/components/home/HomeSpecs";
+import { HomeReviews } from "@/components/home/HomeReviews";
+import { HomeBundles } from "@/components/home/HomeBundles";
+import { HomeFAQ } from "@/components/home/HomeFAQ";
+import { HomeFinalCTA } from "@/components/home/HomeFinalCTA";
 import { siteConfig } from "@/data/content";
 import { getProduct } from "@/lib/shopify";
 import { galleryUrls, pickImage } from "@/lib/product-gallery";
@@ -21,28 +17,40 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero heroImage={pickImage(urls, 0)} />
-      <SocialProofStrip />
-      <ProblemSection />
-      <HowItWorks />
-      <Benefits benefitImages={[pickImage(urls, 1), pickImage(urls, 2), pickImage(urls, 3), pickImage(urls, 4)]} />
-      <BeforeAfter />
-      <VideoDemo posterImages={[pickImage(urls, 5), pickImage(urls, 6), pickImage(urls, 7)]} />
-      <FeaturedOffer />
-      <Reviews
-        reviewImages={[
+      <HomeHero
+        heroImage={pickImage(urls, 0)}
+        secondaryImage={pickImage(urls, 1)}
+      />
+      <HomeMarquee />
+      <HomeFeatureGrid
+        images={[
+          pickImage(urls, 2),
+          pickImage(urls, 3),
+          pickImage(urls, 4),
+          pickImage(urls, 5),
+          pickImage(urls, 6),
+          pickImage(urls, 7),
+        ]}
+      />
+      <HomeShowcase
+        images={[
           pickImage(urls, 8),
           pickImage(urls, 9),
           pickImage(urls, 10),
+        ]}
+      />
+      <HomeSpecs />
+      <HomeReviews
+        images={[
           pickImage(urls, 11),
           pickImage(urls, 12),
           pickImage(urls, 13),
+          pickImage(urls, 14),
         ]}
       />
-      <Comparison />
-      <Guarantee />
-      <FAQ />
-      <FinalCTA />
+      <HomeBundles />
+      <HomeFAQ />
+      <HomeFinalCTA />
     </>
   );
 }
