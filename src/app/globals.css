@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fbf7f4;
+  --color-plum: #5b2a47;
+  --color-coral: #e08363;
+  --color-coral-hover: #d07254;
+  --color-rose: #e9c9c2;
+  --color-taupe: #a8a196;
+  --color-taupe-dark: #6b6460;
+  --color-charcoal: #2e2a2b;
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-plum);
+}
+
+.text-body {
+  color: var(--color-taupe-dark);
+}
+
+.text-caption {
+  color: var(--color-taupe);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-coral px-8 py-4 text-base font-semibold text-white shadow-[0_4px_16px_rgba(224,131,99,0.35)] transition-all duration-200 ease-out hover:bg-coral-hover hover:-translate-y-px active:scale-[0.98];
+}
+
+.btn-primary-lg {
+  @apply px-10 py-[1.125rem] text-[1.0625rem];
+}
+
+.btn-full {
+  @apply w-full;
+}
+
+.section {
+  @apply py-16 md:py-24;
+}
+
+.section-alt {
+  @apply bg-white;
+}
+
+.section-rose {
+  @apply bg-gradient-to-b from-rose/40 to-cream;
+}
+
+.container-main {
+  @apply mx-auto w-full max-w-[1200px] px-5;
+}
+
+.image-placeholder {
+  @apply flex items-center justify-center rounded-[20px] bg-gradient-to-br from-rose/60 to-cream text-center font-heading text-sm text-plum/50 shadow-[0_8px_32px_rgba(91,42,71,0.08)] ring-1 ring-plum/5;
+}
+
+.image-slot {
+  @apply relative overflow-hidden rounded-[20px] bg-gradient-to-br from-rose/40 to-cream ring-1 ring-plum/5;
+}
+
+.image-slot-label {
+  @apply absolute inset-0 flex flex-col items-center justify-center gap-1 p-4 text-center text-xs font-medium uppercase tracking-wider text-plum/40;
+}
+
+/* Scroll reveal */
+.animate-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-in-delay-1 { transition-delay: 0.1s; }
+.animate-in-delay-2 { transition-delay: 0.2s; }
+.animate-in-delay-3 { transition-delay: 0.3s; }
+
+/* Cart count bounce */
+@keyframes cart-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+
+.cart-bounce {
+  animation: cart-bounce 0.4s ease-out;
+}
+
+/* Add to cart success pulse */
+@keyframes success-pulse {
+  0% { box-shadow: 0 4px 16px rgba(224, 131, 99, 0.35); }
+  50% { box-shadow: 0 4px 24px rgba(224, 131, 99, 0.6); }
+  100% { box-shadow: 0 4px 16px rgba(224, 131, 99, 0.35); }
+}
+
+.btn-success-pulse {
+  animation: success-pulse 0.6s ease-out;
+}
+
+/* Rating bar */
+.rating-bar {
+  @apply h-2 rounded-full bg-plum/10 overflow-hidden;
+}
+
+.rating-bar-fill {
+  @apply h-full rounded-full bg-[#F5A623] transition-all duration-700 ease-out;
+}
+
+/* Bundle selected checkmark */
+.bundle-selected {
+  @apply border-plum bg-plum/[0.03] shadow-[0_0_0_1px_#5b2a47];
+}
+
+/* Free shipping progress */
+.shipping-progress {
+  @apply h-2 rounded-full bg-plum/10 overflow-hidden;
+}
+
+.shipping-progress-fill {
+  @apply h-full rounded-full bg-coral transition-all duration-500 ease-out;
+}
+
+/* UGC reel card */
+.ugc-reel {
+  @apply relative aspect-[9/16] overflow-hidden rounded-2xl bg-plum/90 ring-1 ring-plum/10 transition-transform duration-200 hover:scale-[1.02];
+}
