@@ -3,6 +3,7 @@ import {
   adminGraphql,
   isAdminConfigured,
 } from "./admin";
+import { buildDirectCartUrl } from "./checkout-fallback";
 import {
   PRODUCT_BY_HANDLE,
   CART_CREATE,
@@ -264,15 +265,32 @@ export async function getCart(cartId: string): Promise<Cart | null> {
 
 export async function createCart(variantId: string, quantity = 1): Promise<Cart | null> {
   const client = await getStorefrontClient();
-  if (!client) return null;
+  if (client) {
+    try {
+      const response = await client.request(CART_CREATE, {
+        variables: { lines: [{ merchandiseId: variantId, quantity }] },
+      });
 
-  const response = await client.request(CART_CREATE, {
-    variables: { lines: [{ merchandiseId: variantId, quantity }] },
-  });
+      const userErrors = response.data?.cartCreate?.userErrors;
+      if (userErrors?.length) {
+        console.error("Shopify cartCreate userErrors:", userErrors);
+      }
 
-  const cart = response.data?.cartCreate?.cart;
-  if (!cart) return null;
-  return mapCart(cart as Parameters<typeof mapCart>[0]);
+      const cart = response.data?.cartCreate?.cart;
+      if (cart) return mapCart(cart as Parameters<typeof mapCart>[0]);
+    } catch (error) {
+      console.error("Storefront cartCreate error:", error);
+    }
+  }
+
+  return null;
+}
+
+export function getDirectCheckoutUrl(
+  variantId: string,
+  quantity = 1
+): string | null {
+  return buildDirectCartUrl(variantId, quantity);
 }
 
 export async function addToCart(
@@ -283,13 +301,23 @@ export async function addToCart(
   const client = await getStorefrontClient();
   if (!client) return null;
 
-  const response = await client.request(CART_LINES_ADD, {
-    variables: { cartId, lines: [{ merchandiseId: variantId, quantity }] },
-  });
+  try {
+    const response = await client.request(CART_LINES_ADD, {
+      variables: { cartId, lines: [{ merchandiseId: variantId, quantity }] },
+    });
 
-  const cart = response.data?.cartLinesAdd?.cart;
-  if (!cart) return null;
-  return mapCart(cart as Parameters<typeof mapCart>[0]);
+    const userErrors = response.data?.cartLinesAdd?.userErrors;
+    if (userErrors?.length) {
+      console.error("Shopify cartLinesAdd userErrors:", userErrors);
+    }
+
+    const cart = response.data?.cartLinesAdd?.cart;
+    if (cart) return mapCart(cart as Parameters<typeof mapCart>[0]);
+  } catch (error) {
+    console.error("Storefront cartLinesAdd error:", error);
+  }
+
+  return null;
 }
 
 export async function updateCartLine(

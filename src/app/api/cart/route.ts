@@ -3,6 +3,7 @@ import {
   addToCart,
   createCart,
   getCart,
+  getDirectCheckoutUrl,
   removeFromCart,
   updateCartLine,
   isShopifyConfigured,
@@ -44,6 +45,13 @@ export async function POST(request: Request) {
         break;
       default:
         return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+    }
+
+    if (!cart && variantId && (action === "create" || action === "add")) {
+      const checkoutUrl = getDirectCheckoutUrl(variantId, quantity);
+      if (checkoutUrl) {
+        return NextResponse.json({ cart: null, checkoutUrl });
+      }
     }
 
     return NextResponse.json({ cart });

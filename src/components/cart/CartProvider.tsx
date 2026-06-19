@@ -44,7 +44,7 @@ async function cartFetch(body: Record<string, unknown>) {
     body: JSON.stringify(body),
   });
   if (!res.ok) throw new Error("Cart request failed");
-  return res.json() as Promise<{ cart: Cart | null; error?: string }>;
+  return res.json() as Promise<{ cart: Cart | null; checkoutUrl?: string; error?: string }>;
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
@@ -73,6 +73,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         variantId,
         quantity,
       });
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+        return;
+      }
       if (data.cart) {
         setCart(data.cart);
         setCartIdCookie(data.cart.id);
