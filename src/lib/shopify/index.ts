@@ -136,7 +136,8 @@ function mapPublicJsonProduct(raw: {
       compareAtPrice: variant.compare_at_price
         ? { amount: variant.compare_at_price, currencyCode: "USD" }
         : null,
-      availableForSale: variant.available,
+      // Shopify public .json omits `available`; treat missing as in stock.
+      availableForSale: variant.available !== false,
     })),
   };
 }

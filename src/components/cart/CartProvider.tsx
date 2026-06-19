@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import type { Cart } from "@/lib/shopify/types";
+import { buildDirectCartUrl } from "@/lib/shopify/checkout-fallback";
 
 type CartContextValue = {
   cart: Cart | null;
@@ -63,6 +64,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (cartId) refreshCart(cartId).catch(() => undefined);
   }, [refreshCart]);
 
+  const redirectToCheckout = useCallback((variantId: string, quantity: number) => {
+    const url = buildDirectCartUrl(variantId, quantity);
+    if (url) window.location.href = url;
+  }, []);
+
   const addItem = useCallback(async (variantId: string, quantity = 1) => {
     setIsLoading(true);
     try {
@@ -83,11 +89,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setJustAdded(true);
         setIsOpen(true);
         setTimeout(() => setJustAdded(false), 600);
+        return;
       }
+      redirectToCheckout(variantId, quantity);
+    } catch {
+      redirectToCheckout(variantId, quantity);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [redirectToCheckout]);
 
   const updateLine = useCallback(async (lineId: string, quantity: number) => {
     const cartId = getCartIdFromCookie();

@@ -151,7 +151,7 @@ export function ProductBuyBox({ product }: Props) {
         <button
           type="button"
           onClick={handleAdd}
-          disabled={isLoading || !selectedVariant?.availableForSale}
+          disabled={isLoading || selectedVariant?.availableForSale === false}
           className={`btn-primary btn-full btn-primary-lg disabled:opacity-50 ${addedPulse ? "btn-success-pulse" : ""}`}
         >
           {isLoading ? "Adding…" : justAdded ? "Added ✓" : "Add to Cart →"}
