@@ -2,7 +2,9 @@ import { benefits } from "@/data/content";
 import { AnimateIn } from "@/components/ui/AnimateIn";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 
-export function Benefits() {
+type Props = { benefitImages?: string[] };
+
+export function Benefits({ benefitImages = [] }: Props) {
   return (
     <section className="section section-alt">
       <div className="container-main">
@@ -18,7 +20,7 @@ export function Benefits() {
                 className={`grid items-center gap-8 md:grid-cols-2 ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}
               >
                 <ImageSlot
-                  src={b.imageSrc}
+                  src={b.imageSrc || benefitImages[i] || ""}
                   alt={b.title}
                   label={b.imageLabel}
                   hint={b.imageHint}

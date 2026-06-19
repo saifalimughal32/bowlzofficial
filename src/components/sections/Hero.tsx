@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { TrustBadges, RatingChip } from "@/components/ui/TrustBadges";
 import { PaymentIcons } from "@/components/ui/PaymentIcons";
 import { AnimateIn } from "@/components/ui/AnimateIn";
@@ -6,7 +7,9 @@ import { ImageSlot } from "@/components/ui/ImageSlot";
 import { siteConfig } from "@/data/content";
 import { DEFAULT_HANDLE } from "@/lib/shopify";
 
-export function Hero() {
+type Props = { heroImage?: string };
+
+export function Hero({ heroImage }: Props) {
   return (
     <section className="section overflow-hidden pb-12 pt-8 md:pb-20 md:pt-12">
       <div className="container-main">
@@ -35,14 +38,27 @@ export function Hero() {
             </div>
           </AnimateIn>
           <AnimateIn delay={2}>
-            <ImageSlot
-              src=""
-              alt="Nova Triggers heated menstrual relief vibration belt — woman wearing belt at home"
-              label="Hero lifestyle photo"
-              hint="Warm natural light · product visible · cozy setting"
-              aspect="portrait"
-              priority
-            />
+            {heroImage ? (
+              <div className="image-slot aspect-[4/5] max-h-[560px]">
+                <Image
+                  src={heroImage}
+                  alt="Nova Triggers heated menstrual relief vibration belt"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            ) : (
+              <ImageSlot
+                src=""
+                alt="Nova Triggers heated menstrual relief vibration belt — woman wearing belt at home"
+                label="Hero lifestyle photo"
+                hint="Warm natural light · product visible · cozy setting"
+                aspect="portrait"
+                priority
+              />
+            )}
           </AnimateIn>
         </div>
       </div>

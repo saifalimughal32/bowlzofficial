@@ -41,7 +41,7 @@ function ReviewPhoto({ src, author }: { src: string; author: string }) {
   );
 }
 
-export function Reviews() {
+export function Reviews({ reviewImages = [] }: { reviewImages?: string[] }) {
   return (
     <section className="section section-rose" id="reviews">
       <div className="container-main">
@@ -66,7 +66,7 @@ export function Reviews() {
           {reviews.map((r, i) => (
             <AnimateIn key={r.author} delay={(i % 3 + 1) as 1 | 2 | 3}>
               <article className="h-full rounded-[20px] bg-white p-5 shadow-[0_2px_8px_rgba(138,44,77,0.06)] transition hover:shadow-[0_8px_24px_rgba(138,44,77,0.08)]">
-                <ReviewPhoto src={r.imageSrc} author={r.author} />
+                <ReviewPhoto src={r.imageSrc || reviewImages[i] || ""} author={r.author} />
                 <div className="mb-2 text-gold">★★★★★</div>
                 <p className="mb-4 text-[0.9375rem] leading-relaxed text-taupe-dark">
                   &ldquo;{r.text}&rdquo;
