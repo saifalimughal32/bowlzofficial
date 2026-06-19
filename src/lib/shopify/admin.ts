@@ -1,7 +1,10 @@
-const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
+const storeDomain =
+  process.env.SHOPIFY_STORE_DOMAIN ||
+  process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
 const adminToken = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
 const storefrontToken =
   process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
   process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
 
 export const isAdminConfigured = Boolean(storeDomain && adminToken);

@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Shopify is not configured. Add SHOPIFY_STORE_DOMAIN and NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN to enable checkout.",
+          "Shopify is not configured. Add SHOPIFY_STORE_DOMAIN and SHOPIFY_STOREFRONT_ACCESS_TOKEN (or SHOPIFY_ADMIN_ACCESS_TOKEN) in Vercel env settings.",
         cart: null,
       },
       { status: 503 }
