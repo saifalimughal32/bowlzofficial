@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #fbf7f4;
-  --color-plum: #5b2a47;
-  --color-coral: #e08363;
-  --color-coral-hover: #d07254;
-  --color-rose: #e9c9c2;
-  --color-taupe: #a8a196;
-  --color-taupe-dark: #6b6460;
-  --color-charcoal: #2e2a2b;
+  --color-cream: #fdf6f7;
+  --color-plum: #8a2c4d;
+  --color-coral: #de5d7c;
+  --color-coral-hover: #cc4d6b;
+  --color-rose: #f3c4ce;
+  --color-blush: #f9dde4;
+  --color-gold: #c79a6b;
+  --color-taupe: #b7a8ac;
+  --color-taupe-dark: #6e5e63;
+  --color-charcoal: #2f2730;
   --font-heading: "Fraunces", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
 }
@@ -41,7 +43,7 @@ h4 {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-coral px-8 py-4 text-base font-semibold text-white shadow-[0_4px_16px_rgba(224,131,99,0.35)] transition-all duration-200 ease-out hover:bg-coral-hover hover:-translate-y-px active:scale-[0.98];
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-coral px-8 py-4 text-base font-semibold text-white shadow-[0_4px_16px_rgba(222,93,124,0.35)] transition-all duration-200 ease-out hover:bg-coral-hover hover:-translate-y-px active:scale-[0.98];
 }
 
 .btn-primary-lg {
@@ -64,12 +66,16 @@ h4 {
   @apply bg-gradient-to-b from-rose/40 to-cream;
 }
 
+.section-blush {
+  @apply bg-gradient-to-b from-blush/60 to-cream;
+}
+
 .container-main {
   @apply mx-auto w-full max-w-[1200px] px-5;
 }
 
 .image-placeholder {
-  @apply flex items-center justify-center rounded-[20px] bg-gradient-to-br from-rose/60 to-cream text-center font-heading text-sm text-plum/50 shadow-[0_8px_32px_rgba(91,42,71,0.08)] ring-1 ring-plum/5;
+  @apply flex items-center justify-center rounded-[20px] bg-gradient-to-br from-rose/60 to-cream text-center font-heading text-sm text-plum/50 shadow-[0_8px_32px_rgba(138,44,77,0.08)] ring-1 ring-plum/5;
 }
 
 .image-slot {
@@ -108,9 +114,9 @@ h4 {
 
 /* Add to cart success pulse */
 @keyframes success-pulse {
-  0% { box-shadow: 0 4px 16px rgba(224, 131, 99, 0.35); }
-  50% { box-shadow: 0 4px 24px rgba(224, 131, 99, 0.6); }
-  100% { box-shadow: 0 4px 16px rgba(224, 131, 99, 0.35); }
+  0% { box-shadow: 0 4px 16px rgba(222, 93, 124, 0.35); }
+  50% { box-shadow: 0 4px 24px rgba(222, 93, 124, 0.6); }
+  100% { box-shadow: 0 4px 16px rgba(222, 93, 124, 0.35); }
 }
 
 .btn-success-pulse {
@@ -123,12 +129,12 @@ h4 {
 }
 
 .rating-bar-fill {
-  @apply h-full rounded-full bg-[#F5A623] transition-all duration-700 ease-out;
+  @apply h-full rounded-full bg-gold transition-all duration-700 ease-out;
 }
 
 /* Bundle selected checkmark */
 .bundle-selected {
-  @apply border-plum bg-plum/[0.03] shadow-[0_0_0_1px_#5b2a47];
+  @apply border-plum bg-plum/[0.03] shadow-[0_0_0_1px_#8a2c4d];
 }
 
 /* Free shipping progress */

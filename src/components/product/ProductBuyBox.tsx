@@ -19,25 +19,29 @@ export function ProductBuyBox({ product }: Props) {
   );
   const [addedPulse, setAddedPulse] = useState(false);
 
-  const selectedVariant = product.variants[selectedIndex] ?? product.variants[0];
   const selectedBundle = bundles[selectedIndex];
+  const selectedVariant = product.variants[selectedIndex] ?? product.variants[0];
+  const cartQuantity = selectedBundle?.qty ?? 1;
+  const hasDedicatedVariant = Boolean(product.variants[selectedIndex]);
 
-  const displayPrice = selectedVariant
+  const displayPrice = hasDedicatedVariant && selectedVariant
     ? formatMoney(selectedVariant.price.amount, selectedVariant.price.currencyCode)
-    : `$${bundles[selectedIndex]?.price ?? 79}`;
+    : `$${selectedBundle?.price ?? bundles[0]?.price ?? 55.58}`;
 
-  const comparePrice = selectedVariant?.compareAtPrice
+  const comparePrice = hasDedicatedVariant && selectedVariant?.compareAtPrice
     ? formatMoney(selectedVariant.compareAtPrice.amount, selectedVariant.compareAtPrice.currencyCode)
-    : bundles[selectedIndex]?.compareAt
-      ? `$${bundles[selectedIndex].compareAt}`
+    : selectedBundle?.compareAt
+      ? `$${selectedBundle.compareAt}`
       : null;
 
   const saveAmount = useMemo(() => {
-    if (!selectedVariant?.compareAtPrice) return bundles[selectedIndex]?.save;
-    const compare = parseFloat(selectedVariant.compareAtPrice.amount);
-    const price = parseFloat(selectedVariant.price.amount);
-    return compare > price ? Math.round(compare - price) : null;
-  }, [selectedVariant, selectedIndex]);
+    if (hasDedicatedVariant && selectedVariant?.compareAtPrice) {
+      const compare = parseFloat(selectedVariant.compareAtPrice.amount);
+      const price = parseFloat(selectedVariant.price.amount);
+      return compare > price ? Math.round(compare - price) : null;
+    }
+    return selectedBundle?.save ?? null;
+  }, [hasDedicatedVariant, selectedVariant, selectedBundle]);
 
   useEffect(() => {
     if (justAdded) {
@@ -48,7 +52,8 @@ export function ProductBuyBox({ product }: Props) {
   }, [justAdded]);
 
   const handleAdd = () => {
-    if (selectedVariant) addItem(selectedVariant.id, 1);
+    const variant = product.variants[selectedIndex] ?? product.variants[0];
+    if (variant) addItem(variant.id, cartQuantity);
   };
 
   return (
@@ -57,7 +62,7 @@ export function ProductBuyBox({ product }: Props) {
         <h1 className="mb-2 text-[clamp(1.5rem,3vw,2rem)]">{product.title}</h1>
 
         <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
-          <span className="text-[#F5A623]">★★★★★</span>
+          <span className="text-gold">★★★★★</span>
           <span className="text-taupe-dark">
             {siteConfig.starRating} ({siteConfig.reviewCount})
           </span>
@@ -68,7 +73,7 @@ export function ProductBuyBox({ product }: Props) {
         </div>
 
         <p className="mb-6 italic text-taupe-dark">
-          &ldquo;Soothing warmth that goes wherever you do.&rdquo;
+          &ldquo;Heats in 3 seconds — warmth and vibration that goes wherever you do.&rdquo;
         </p>
 
         <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-plum">
@@ -76,12 +81,15 @@ export function ProductBuyBox({ product }: Props) {
         </p>
 
         <div className="mb-6 space-y-3">
-          {product.variants.map((variant, i) => {
-            const bundle = bundles[i];
+          {bundles.map((bundle, i) => {
+            const variant = product.variants[i];
             const isSelected = selectedIndex === i;
+            const bundlePrice = variant
+              ? formatMoney(variant.price.amount, variant.price.currencyCode)
+              : `$${bundle.price}`;
             return (
               <label
-                key={variant.id}
+                key={bundle.qty}
                 className={`relative block cursor-pointer rounded-xl border-2 p-4 transition-all duration-200 ${
                   isSelected
                     ? "bundle-selected scale-[1.01]"
@@ -95,7 +103,7 @@ export function ProductBuyBox({ product }: Props) {
                   checked={isSelected}
                   onChange={() => setSelectedIndex(i)}
                 />
-                {bundle?.badge && (
+                {bundle.badge && (
                   <span className="absolute -top-2.5 right-4 rounded-full bg-plum px-2.5 py-1 text-[0.6875rem] font-bold uppercase text-white">
                     {bundle.badge}
                   </span>
@@ -114,15 +122,13 @@ export function ProductBuyBox({ product }: Props) {
                       )}
                     </span>
                     <div>
-                      <div className="font-semibold">{variant.title || bundle?.label}</div>
-                      {bundle?.subtitle && (
+                      <div className="font-semibold">{variant?.title ?? bundle.label}</div>
+                      {bundle.subtitle && (
                         <div className="text-sm text-coral">{bundle.subtitle}</div>
                       )}
                     </div>
                   </div>
-                  <div className="font-bold text-plum">
-                    {formatMoney(variant.price.amount, variant.price.currencyCode)}
-                  </div>
+                  <div className="font-bold text-plum">{bundlePrice}</div>
                 </div>
               </label>
             );
@@ -168,7 +174,7 @@ export function ProductBuyBox({ product }: Props) {
 
       <StickyAtc
         price={displayPrice}
-        label={selectedBundle?.label ?? selectedVariant?.title ?? "1 Pad"}
+        label={selectedBundle?.label ?? selectedVariant?.title ?? "1 Belt"}
         onAdd={handleAdd}
         isLoading={isLoading}
       />
@@ -229,7 +235,7 @@ export function ProductGallery({ product }: Props) {
   const galleryLabels = [
     { label: "Hero lifestyle", hint: "Woman using product" },
     { label: "On-body wear", hint: "Under clothing" },
-    { label: "Controls", hint: "Heat + massage settings" },
+    { label: "Controls", hint: "Heat + vibration settings" },
     { label: "Scale", hint: "In-hand size reference" },
     { label: "Packaging", hint: "Unboxing shot" },
   ];

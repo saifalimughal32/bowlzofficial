@@ -7,7 +7,7 @@ export function SocialProofStrip() {
       <div className="container-main">
         <AnimateIn>
           <p className="text-[0.9375rem] text-taupe-dark">
-            <span className="mr-2 text-[#F5A623]">★★★★★</span>
+            <span className="mr-2 text-gold">★★★★★</span>
             Trusted by <span className="font-semibold text-plum">{siteConfig.customerCount}</span> women across the USA
           </p>
         </AnimateIn>

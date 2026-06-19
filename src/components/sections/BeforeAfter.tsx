@@ -9,8 +9,8 @@ const withoutItems = [
 
 const withItems = [
   "Warm, comfortable, upright",
-  "Steady cordless heat for hours",
-  "Soothing relief on demand",
+  "Instant heat + gentle vibration",
+  "Up to 2 hours per USB charge",
   "\"I barely noticed it was day one\"",
 ];
 
@@ -39,7 +39,7 @@ export function BeforeAfter() {
             </div>
           </AnimateIn>
           <AnimateIn delay={2}>
-            <div className="rounded-[20px] border-2 border-rose bg-white p-8 shadow-[0_8px_32px_rgba(91,42,71,0.1)]">
+            <div className="rounded-[20px] border-2 border-rose bg-white p-8 shadow-[0_8px_32px_rgba(138,44,77,0.1)]">
               <div className="mb-4 font-heading text-sm uppercase tracking-widest text-coral">
                 With Nova Triggers
               </div>

@@ -13,7 +13,9 @@ import {
 } from "./queries";
 import type { Cart, Product, ProductImage, ProductVariant } from "./types";
 
-const DEFAULT_HANDLE = "period-heating-pad";
+const DEFAULT_HANDLE =
+  process.env.SHOPIFY_PRODUCT_HANDLE?.trim() ||
+  "heated-menstrual-relief-vibration-belt";
 
 const ADMIN_PRODUCT_BY_HANDLE = `
   query ProductByHandle($handle: String!) {
@@ -103,6 +105,59 @@ function mapAdminProduct(raw: {
   };
 }
 
+function mapPublicJsonProduct(raw: {
+  id: number;
+  handle: string;
+  title: string;
+  body_html: string;
+  images: { src: string; alt: string | null }[];
+  variants: {
+    id: number;
+    title: string;
+    price: string;
+    compare_at_price: string | null;
+    available: boolean;
+  }[];
+}): Product {
+  return {
+    id: `gid://shopify/Product/${raw.id}`,
+    handle: raw.handle,
+    title: raw.title,
+    description: raw.body_html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
+    images: raw.images.map((image) => ({
+      url: image.src,
+      altText: image.alt,
+    })),
+    variants: raw.variants.map((variant) => ({
+      id: `gid://shopify/ProductVariant/${variant.id}`,
+      title: variant.title,
+      price: { amount: variant.price, currencyCode: "USD" },
+      compareAtPrice: variant.compare_at_price
+        ? { amount: variant.compare_at_price, currencyCode: "USD" }
+        : null,
+      availableForSale: variant.available,
+    })),
+  };
+}
+
+async function fetchProductFromPublicJson(handle: string): Promise<Product | null> {
+  const domain =
+    process.env.SHOPIFY_STORE_DOMAIN ||
+    process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+  if (!domain) return null;
+
+  try {
+    const res = await fetch(`https://${domain}/products/${handle}.json`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { product?: Parameters<typeof mapPublicJsonProduct>[0] };
+    return json.product ? mapPublicJsonProduct(json.product) : null;
+  } catch {
+    return null;
+  }
+}
+
 function mapCart(raw: {
   id: string;
   checkoutUrl: string;
@@ -119,34 +174,34 @@ function mapCart(raw: {
   };
 }
 
-export function getMockProduct(): Product {
+export function getMockProduct(handle: string = DEFAULT_HANDLE): Product {
   return {
     id: "gid://shopify/Product/mock",
-    handle: DEFAULT_HANDLE,
-    title: "Nova Triggers™ Cordless Period Heat + Massage Pad",
+    handle,
+    title: "Heated Menstrual Relief Vibration Belt",
     description:
-      "Soothing, cordless heat and gentle massage you can wear under your clothes. Designed for comfort during your cycle.",
+      "Instant heat and gentle vibration belt you can wear under your clothes. Warms in 3 seconds with 3 heat levels and 3 vibration modes.",
     images: [],
     variants: [
       {
         id: "gid://shopify/ProductVariant/mock-1",
-        title: "1 Pad",
-        price: { amount: "49.00", currencyCode: "USD" },
+        title: "1 Belt",
+        price: { amount: "55.58", currencyCode: "USD" },
         compareAtPrice: { amount: "79.00", currencyCode: "USD" },
         availableForSale: true,
       },
       {
         id: "gid://shopify/ProductVariant/mock-2",
-        title: "2 Pads",
-        price: { amount: "79.00", currencyCode: "USD" },
-        compareAtPrice: { amount: "98.00", currencyCode: "USD" },
+        title: "2 Belts",
+        price: { amount: "99.00", currencyCode: "USD" },
+        compareAtPrice: { amount: "111.00", currencyCode: "USD" },
         availableForSale: true,
       },
       {
         id: "gid://shopify/ProductVariant/mock-3",
-        title: "3 Pads",
-        price: { amount: "99.00", currencyCode: "USD" },
-        compareAtPrice: { amount: "147.00", currencyCode: "USD" },
+        title: "3 Belts",
+        price: { amount: "139.00", currencyCode: "USD" },
+        compareAtPrice: { amount: "167.00", currencyCode: "USD" },
         availableForSale: true,
       },
     ],
@@ -157,18 +212,22 @@ export async function getProduct(
   handle: string = DEFAULT_HANDLE
 ): Promise<Product | null> {
   if (!isShopifyConfigured) {
-    const mock = getMockProduct();
+    const mock = getMockProduct(handle);
     return mock.handle === handle ? mock : null;
   }
 
   try {
     if (isAdminConfigured) {
-      const data = await adminGraphql<{ productByHandle: Parameters<typeof mapAdminProduct>[0] | null }>(
-        ADMIN_PRODUCT_BY_HANDLE,
-        { handle }
-      );
-      if (data.productByHandle) {
-        return mapAdminProduct(data.productByHandle);
+      try {
+        const data = await adminGraphql<{ productByHandle: Parameters<typeof mapAdminProduct>[0] | null }>(
+          ADMIN_PRODUCT_BY_HANDLE,
+          { handle }
+        );
+        if (data.productByHandle) {
+          return mapAdminProduct(data.productByHandle);
+        }
+      } catch (adminError) {
+        console.error("Shopify admin product fetch error:", adminError);
       }
     }
 
@@ -180,11 +239,16 @@ export async function getProduct(
         return mapStorefrontProduct(product as Parameters<typeof mapStorefrontProduct>[0]);
       }
     }
+
+    const publicProduct = await fetchProductFromPublicJson(handle);
+    if (publicProduct) {
+      return publicProduct;
+    }
   } catch (error) {
     console.error("Shopify product fetch error:", error);
   }
 
-  const mock = getMockProduct();
+  const mock = getMockProduct(handle);
   return mock.handle === handle ? mock : null;
 }
 

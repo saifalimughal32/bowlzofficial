@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCart } from "@/components/cart/CartProvider";
+import { siteConfig } from "@/data/content";
 
 export function Header() {
   const { cart, openCart, justAdded } = useCart();
@@ -19,7 +20,7 @@ export function Header() {
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex gap-8">
             <li>
-              <Link href="/products/period-heating-pad" className="text-[0.9375rem] font-medium text-charcoal hover:text-plum">
+              <Link href={`/products/${siteConfig.productHandle}`} className="text-[0.9375rem] font-medium text-charcoal hover:text-plum">
                 Shop
               </Link>
             </li>

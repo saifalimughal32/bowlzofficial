@@ -7,7 +7,7 @@ export function Guarantee() {
     <section className="section">
       <div className="container-main">
         <AnimateIn>
-          <div className="relative mx-auto max-w-[720px] overflow-hidden rounded-[20px] border-2 border-rose bg-white p-10 text-center shadow-[0_8px_32px_rgba(91,42,71,0.1)] md:p-14">
+          <div className="relative mx-auto max-w-[720px] overflow-hidden rounded-[20px] border-2 border-rose bg-white p-10 text-center shadow-[0_8px_32px_rgba(138,44,77,0.1)] md:p-14">
             {/* Guarantee seal */}
             <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-plum/20 bg-cream">
               <div className="text-center">

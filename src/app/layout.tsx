@@ -22,7 +22,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — Cordless Period Heat + Massage Pad`,
+    default: `${siteConfig.name} — Heated Menstrual Relief Vibration Belt`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,

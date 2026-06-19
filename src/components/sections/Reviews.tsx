@@ -55,7 +55,7 @@ export function Reviews() {
           <div className="mb-12 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-16">
             <div className="text-center">
               <div className="font-heading text-5xl leading-none text-plum">{siteConfig.starRating}</div>
-              <div className="mt-2 text-xl text-[#F5A623]">★★★★★</div>
+              <div className="mt-2 text-xl text-gold">★★★★★</div>
               <div className="mt-1 text-sm text-taupe-dark">Based on {siteConfig.reviewCount} reviews</div>
             </div>
             <RatingBars />
@@ -65,9 +65,9 @@ export function Reviews() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r, i) => (
             <AnimateIn key={r.author} delay={(i % 3 + 1) as 1 | 2 | 3}>
-              <article className="h-full rounded-[20px] bg-white p-5 shadow-[0_2px_8px_rgba(91,42,71,0.06)] transition hover:shadow-[0_8px_24px_rgba(91,42,71,0.08)]">
+              <article className="h-full rounded-[20px] bg-white p-5 shadow-[0_2px_8px_rgba(138,44,77,0.06)] transition hover:shadow-[0_8px_24px_rgba(138,44,77,0.08)]">
                 <ReviewPhoto src={r.imageSrc} author={r.author} />
-                <div className="mb-2 text-[#F5A623]">★★★★★</div>
+                <div className="mb-2 text-gold">★★★★★</div>
                 <p className="mb-4 text-[0.9375rem] leading-relaxed text-taupe-dark">
                   &ldquo;{r.text}&rdquo;
                 </p>

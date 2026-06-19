@@ -17,7 +17,7 @@ export function Comparison() {
         </AnimateIn>
         <AnimateIn delay={1}>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[500px] overflow-hidden rounded-[20px] bg-white text-[0.9375rem] shadow-[0_2px_8px_rgba(91,42,71,0.06)]">
+            <table className="w-full min-w-[500px] overflow-hidden rounded-[20px] bg-white text-[0.9375rem] shadow-[0_2px_8px_rgba(138,44,77,0.06)]">
               <thead>
                 <tr className="bg-plum text-white">
                   <th className="p-4 text-left font-semibold"></th>

@@ -18,9 +18,9 @@ export function Hero() {
                 Period cramps don&apos;t get to run your day anymore.
               </h1>
               <p className="mb-6 text-lg leading-relaxed text-taupe-dark">
-                Soothing, cordless heat + gentle massage you can wear under your clothes —
-                targeted relief that goes from your bed, to your desk, to the whole rest of
-                your life.
+                A heated menstrual relief belt that warms in 3 seconds — with 3 heat levels
+                and 3 vibration modes you can wear discreetly under your clothes, from bed
+                to desk to everywhere else.
               </p>
               <Link href={`/products/${DEFAULT_HANDLE}`} className="btn-primary btn-primary-lg">
                 Get Soothing Relief →
@@ -37,7 +37,7 @@ export function Hero() {
           <AnimateIn delay={2}>
             <ImageSlot
               src=""
-              alt="Nova Triggers period heating pad — woman using product at home"
+              alt="Nova Triggers heated menstrual relief vibration belt — woman wearing belt at home"
               label="Hero lifestyle photo"
               hint="Warm natural light · product visible · cozy setting"
               aspect="portrait"

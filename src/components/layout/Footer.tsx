@@ -12,8 +12,7 @@ export function Footer() {
               Nova Triggers
             </div>
             <p>
-              Soothing, cordless warmth for every day of your cycle. Designed for comfort.
-              Built for your real life.
+              Heated menstrual relief belt — instant warmth and gentle vibration for every day of your cycle. Designed for comfort, built for your real life.
             </p>
             <div className="mt-4">
               <PaymentIcons />
@@ -22,8 +21,8 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-sm uppercase tracking-wider text-white">Shop</h4>
             <p>
-              <Link href="/products/period-heating-pad" className="hover:opacity-80">
-                Heating Pad
+              <Link href={`/products/${siteConfig.productHandle}`} className="hover:opacity-80">
+                Heating Belt
               </Link>
             </p>
             <p>

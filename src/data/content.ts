@@ -1,7 +1,8 @@
 export const siteConfig = {
   name: "Nova Triggers",
+  productHandle: "heated-menstrual-relief-vibration-belt",
   description:
-    "Soothing, cordless period heat + massage pad. Wear it under your clothes. Ships from the USA. 30-Night Comfort Guarantee.",
+    "Heated menstrual relief vibration belt. Warms in 3 seconds, 3 heat + 3 vibration levels. USB rechargeable, adjustable up to 50\". Ships from California.",
   url: "https://novatriggers.com",
   email: "hello@novatriggers.com",
   freeShippingThreshold: 49,
@@ -13,8 +14,8 @@ export const siteConfig = {
 export const bundles = [
   {
     qty: 1,
-    label: "1 Pad — Try it",
-    price: 49,
+    label: "1 Belt — Try it",
+    price: 55.58,
     compareAt: 79,
     save: null as number | null,
     badge: null as string | null,
@@ -23,22 +24,22 @@ export const bundles = [
   },
   {
     qty: 2,
-    label: "2 Pads — One for home, one for your bag",
-    price: 79,
-    compareAt: 98,
-    save: 19,
+    label: "2 Belts — One for home, one for your bag",
+    price: 99,
+    compareAt: 111,
+    save: 12,
     badge: "Most Popular",
-    subtitle: "Save $19 · Free travel pouch",
+    subtitle: "Save $12 · Free travel pouch",
     default: true,
   },
   {
     qty: 3,
-    label: "3 Pads — Share with the women you love",
-    price: 99,
-    compareAt: 147,
-    save: 48,
+    label: "3 Belts — Share with the women you love",
+    price: 139,
+    compareAt: 167,
+    save: 28,
     badge: "Best Value",
-    subtitle: "Save $48 · Free travel pouch",
+    subtitle: "Save $28 · Free travel pouch",
     default: false,
   },
 ];
@@ -56,7 +57,7 @@ export const ugcClips = [
     id: "ugc-1",
     label: "Day 1 at the office",
     caption: "Wore it under my sweater all day",
-    videoSrc: "", // Add: /videos/ugc-office.mp4
+    videoSrc: "",
   },
   {
     id: "ugc-2",
@@ -73,49 +74,49 @@ export const ugcClips = [
 ];
 
 export const cartUpsell = {
-  label: "Add a 2nd pad for your bag",
-  price: 30,
+  label: "Add a 2nd belt for your bag",
+  price: 43,
   description: "One for home, one on the go — most women grab both.",
 };
 
 export const reviews = [
   {
-    text: "I wore it under my sweater at the office and got through my whole day. First period in years I didn't go home early.",
+    text: "I wore it under my sweater at the office and got through my whole day. The heat kicks in within seconds — first period in years I didn't go home early.",
     author: "Mia T.",
     location: "Denver CO",
     date: "2 weeks ago",
-    imageSrc: "", // Add: /images/reviews/mia.jpg
+    imageSrc: "",
   },
   {
-    text: "Bought one, immediately ordered a second for my daughter. This is the gift every woman secretly wants.",
+    text: "Bought one, immediately ordered a second for my daughter. The vibration settings are so soothing. This is the gift every woman secretly wants.",
     author: "Karen L.",
     location: "Tampa FL",
     date: "1 month ago",
     imageSrc: "",
   },
   {
-    text: "I was sure it was overhyped. Day 1 changed my mind — the heat actually stays warm. Skeptic turned believer.",
+    text: "I was sure it was overhyped. Day 1 changed my mind — it warms up in literally 3 seconds. Skeptic turned believer.",
     author: "Destiny W.",
     location: "Columbus OH",
     date: "3 weeks ago",
     imageSrc: "",
   },
   {
-    text: "So discreet under my work clothes. I finally feel like myself on day one and two instead of just surviving.",
+    text: "So discreet under my work clothes. The adjustable strap fits perfectly and nobody has to know you're getting relief all day.",
     author: "Jessica M.",
     location: "Austin TX",
     date: "1 week ago",
     imageSrc: "",
   },
   {
-    text: "The massage setting is my favorite. It's like a warm hug when cramps hit. Already recommended to three friends.",
+    text: "The massage setting is my favorite. Three heat levels and three vibration modes — it's like a warm hug when cramps hit.",
     author: "Alicia R.",
     location: "Seattle WA",
     date: "2 months ago",
     imageSrc: "",
   },
   {
-    text: "Got the 2-pack — one stays in my nightstand, one in my work bag. Best purchase I've made for myself in years.",
+    text: "Got the 2-pack — one stays in my nightstand, one in my work bag. USB rechargeable and lasts about 2 hours. Best purchase I've made for myself in years.",
     author: "Taylor B.",
     location: "Nashville TN",
     date: "3 weeks ago",
@@ -125,32 +126,32 @@ export const reviews = [
 
 export const faqs = [
   {
-    q: "Is it actually cordless?",
-    a: "Yes — Nova Triggers is fully rechargeable. Wear it anywhere with no plug or wires. Charge it like your phone and take soothing comfort wherever you go.",
+    q: "How fast does it heat up?",
+    a: "The belt warms up in just 3 seconds. Choose from 3 heat levels — 113°F, 131°F, or 149°F — to find the warmth that feels right for you.",
+  },
+  {
+    q: "Is it cordless and rechargeable?",
+    a: "Yes — fully USB rechargeable with up to 2 hours of use per charge. No plug, no wires. Wear it anywhere and charge it like your phone.",
   },
   {
     q: "Can I wear it under clothes?",
-    a: "Absolutely. It's slim and discreet under a hoodie, dress, or jeans. Most women wear it all day without anyone noticing.",
+    a: "Absolutely. The slim, adjustable belt fits up to 50 inches and is discreet under a hoodie, dress, or jeans. Most women wear it all day without anyone noticing.",
   },
   {
-    q: "How long does the heat last?",
-    a: "Several hours per charge depending on your heat level setting. Low heat lasts longest; higher settings provide more intense soothing warmth for shorter sessions.",
+    q: "What about the vibration massage?",
+    a: "Three vibration settings work alongside the heat to ease tension. It's gentle, soothing, and designed for comfortable daily wear — not intense massage.",
   },
   {
     q: "Is it safe to use?",
-    a: "Nova Triggers is designed for comfortable, soothing warmth with auto heat regulation. It is a personal comfort product, not a medical device. Consult your healthcare provider for medical concerns.",
+    a: "Yes — it includes an automatic shut-off after 30 minutes of inactivity for safety. Nova Triggers is a personal comfort product, not a medical device. Consult your healthcare provider for medical concerns.",
   },
   {
     q: "How long does shipping take?",
-    a: "We ship from the USA. Most orders arrive within 3–7 business days. You'll receive tracking as soon as your order ships.",
+    a: "We ship from California within 1 business day. Most orders arrive within 3–7 business days. You'll receive tracking as soon as your order ships.",
   },
   {
     q: "What if it doesn't work for me?",
     a: "You're covered by our 30-Night Comfort Guarantee. Try it through a full cycle — if it doesn't bring you real comfort, send it back for a full refund. No awkward questions.",
-  },
-  {
-    q: "Can I use it for back or stomach?",
-    a: "Yes — Nova Triggers wraps around your waist and works great for lower-belly and lower-back comfort. Position it wherever soothing warmth feels best.",
   },
   {
     q: "Is it a good gift?",
@@ -160,33 +161,33 @@ export const faqs = [
 
 export const benefits = [
   {
-    title: "Cordless freedom",
+    title: "Heats in 3 seconds",
     description:
-      "Relief that follows you everywhere — desk, car, errands, bed. No plug. No wires. No staying put.",
-    imageLabel: "Lifestyle photo",
-    imageHint: "Woman wearing pad at desk / on couch",
-    imageSrc: "", // Add: /images/benefits/cordless.jpg
-  },
-  {
-    title: "3 heat levels",
-    description:
-      "Dial in exactly the warmth that feels good today. Some days you need gentle. Some days you need more.",
-    imageLabel: "Controls close-up",
-    imageHint: "Heat level buttons / LED indicator",
+      "Instant warmth when cramps hit — no waiting around. Three heat levels from gentle to deep soothing warmth.",
+    imageLabel: "Heat levels demo",
+    imageHint: "Control panel showing 3 heat settings",
     imageSrc: "",
   },
   {
-    title: "Heat + gentle massage",
+    title: "3 vibration modes",
     description:
-      "Soothing warmth and gentle vibration work together to ease tension — a cozy ritual you actually look forward to.",
-    imageLabel: "Product detail",
-    imageHint: "Pad texture / massage mode",
+      "Gentle vibration works with the heat to ease tension. Three settings let you dial in exactly what feels good today.",
+    imageLabel: "Vibration settings",
+    imageHint: "Control panel / vibration mode buttons",
     imageSrc: "",
   },
   {
-    title: "Discreet & slim",
+    title: "USB rechargeable",
     description:
-      "Wear it under a hoodie, dress, or jeans. Nobody has to know you're getting soothing comfort all day.",
+      "Up to 2 hours per charge. No plug, no wires. Relief that follows you everywhere — desk, car, errands, bed.",
+    imageLabel: "USB charging",
+    imageHint: "Belt charging via USB cable",
+    imageSrc: "",
+  },
+  {
+    title: "Adjustable & discreet",
+    description:
+      "Fits up to 50 inches with a soft, skin-friendly strap. Wear it under a hoodie, dress, or jeans — nobody has to know.",
     imageLabel: "Under clothing",
     imageHint: "Discreet wear under hoodie or dress",
     imageSrc: "",
@@ -194,17 +195,18 @@ export const benefits = [
 ];
 
 export const comparisonRows = [
-  { feature: "Cordless", nova: true, pills: false, bottle: false },
-  { feature: "Lasts hours", nova: true, pills: false, bottle: false },
+  { feature: "Heats in 3 seconds", nova: true, pills: false, bottle: false },
+  { feature: "Heat + vibration", nova: true, pills: false, bottle: false },
+  { feature: "USB rechargeable", nova: true, pills: false, bottle: false },
   { feature: "Drug-free comfort", nova: true, pills: false, bottle: true },
   { feature: "Wear anywhere", nova: true, pills: true, bottle: false },
-  { feature: "Heat + massage", nova: true, pills: false, bottle: false },
+  { feature: "Auto shut-off safety", nova: true, pills: false, bottle: false },
   { feature: "Discreet under clothes", nova: true, pills: true, bottle: false },
 ];
 
 export const buyBoxBullets = [
-  "Cordless & rechargeable",
-  "Heat + gentle massage",
-  "Discreet under clothes",
-  "Drug-free, soothing comfort",
+  "Heats in 3 seconds",
+  "3 heat + 3 vibration levels",
+  "USB rechargeable — 2 hrs per charge",
+  "Adjustable up to 50\" — discreet wear",
 ];
