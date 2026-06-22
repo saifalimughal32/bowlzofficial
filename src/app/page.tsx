@@ -16,7 +16,7 @@ export default function HomePage() {
         id="bowlz"
         title="Bowlz"
         products={bowlzProducts.slice(0, 4)}
-        seeAllHref="/shop#bowlz"
+        seeAllHref="/shop/bowlz"
         seeAllLabel="Shop All Bowlz"
       />
       <TrustBar />
@@ -24,7 +24,7 @@ export default function HomePage() {
         id="bongz"
         title="Bongz"
         products={bongzProducts.slice(0, 4)}
-        seeAllHref="/shop#bongz"
+        seeAllHref="/shop/bongz"
         seeAllLabel="Shop All Bongz"
       />
       <HomeEditorial />

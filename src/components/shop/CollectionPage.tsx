@@ -20,7 +20,7 @@ export function CollectionPage({ section, showSwatches = false }: Props) {
       <CollectionTrustBar />
       <ShopProductSection
         id={section.id}
-        title={`${section.title}:`}
+        title={section.title}
         products={section.products}
         shopAllHref={section.shopAllHref}
         shopAllLabel={section.shopAllLabel}

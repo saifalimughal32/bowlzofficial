@@ -6,13 +6,138 @@ import Link from "next/link";
 import { useCart } from "@/components/cart/CartProvider";
 import { TrustBadges } from "@/components/ui/TrustBadges";
 import { PaymentIcons } from "@/components/ui/PaymentIcons";
-import { ImageSlot } from "@/components/ui/ImageSlot";
-import { buyBoxBullets, bundles, siteConfig } from "@/data/content";
+import {
+  bongzBuyBoxBullets,
+  buyBoxBullets,
+  bundles,
+  isBundleProduct,
+  siteConfig,
+} from "@/data/content";
 import { formatMoney, type Product } from "@/lib/shopify";
 
 type Props = { product: Product };
 
 export function ProductBuyBox({ product }: Props) {
+  if (isBundleProduct(product.handle)) {
+    return <BundleProductBuyBox product={product} />;
+  }
+
+  return <StandardProductBuyBox product={product} />;
+}
+
+function StandardProductBuyBox({ product }: Props) {
+  const { addItem, isLoading, justAdded } = useCart();
+  const [addedPulse, setAddedPulse] = useState(false);
+  const variant = product.variants[0];
+
+  const displayPrice = variant
+    ? formatMoney(variant.price.amount, variant.price.currencyCode)
+    : "$0";
+
+  const comparePrice = variant?.compareAtPrice
+    ? formatMoney(variant.compareAtPrice.amount, variant.compareAtPrice.currencyCode)
+    : null;
+
+  const saveAmount = useMemo(() => {
+    if (!variant?.compareAtPrice) return null;
+    const compare = parseFloat(variant.compareAtPrice.amount);
+    const price = parseFloat(variant.price.amount);
+    return compare > price ? Math.round(compare - price) : null;
+  }, [variant]);
+
+  const bullets = product.handle === "swabz" || product.handle.includes("replacement")
+    ? buyBoxBullets.slice(2, 5)
+    : bongzBuyBoxBullets;
+
+  const summary =
+    product.description?.slice(0, 180) ||
+    "Premium magnetic glass and accessories built for everyday sessions.";
+
+  useEffect(() => {
+    if (justAdded) {
+      setAddedPulse(true);
+      const t = setTimeout(() => setAddedPulse(false), 600);
+      return () => clearTimeout(t);
+    }
+  }, [justAdded]);
+
+  const handleAdd = () => {
+    if (variant) addItem(variant.id, 1);
+  };
+
+  return (
+    <>
+      <div id="buybox" className="lg:sticky lg:top-24">
+        <h1 className="mb-2 text-[clamp(1.5rem,3vw,2rem)]">{product.title}</h1>
+
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
+          <span className="text-gold">★★★★★</span>
+          <span className="text-taupe-dark">
+            {siteConfig.starRating} ({siteConfig.reviewCount})
+          </span>
+          <span className="text-caption">·</span>
+          <Link href="#reviews" className="underline text-taupe-dark hover:text-plum">
+            {siteConfig.customerCount} customers
+          </Link>
+        </div>
+
+        <p className="mb-6 text-taupe-dark">{summary}</p>
+
+        <div className="mb-1 flex items-baseline gap-3">
+          <span className="text-3xl font-bold">{displayPrice}</span>
+          {comparePrice && (
+            <span className="text-lg text-caption line-through">{comparePrice}</span>
+          )}
+        </div>
+        {saveAmount && (
+          <div className="mb-2 font-semibold text-coral">Save ${saveAmount}</div>
+        )}
+        <p className="mb-6 text-sm text-taupe-dark">
+          or 4 interest-free payments with Shop Pay / Klarna
+        </p>
+
+        <button
+          type="button"
+          onClick={handleAdd}
+          disabled={isLoading || variant?.availableForSale === false}
+          className={`btn-primary btn-full btn-primary-lg disabled:opacity-50 ${addedPulse ? "btn-success-pulse" : ""}`}
+        >
+          {variant?.availableForSale === false
+            ? "Sold Out"
+            : isLoading
+              ? "Adding…"
+              : justAdded
+                ? "Added ✓"
+                : "Add to Cart →"}
+        </button>
+
+        <TrustBadges />
+        <PaymentIcons className="mt-4" />
+
+        <ul className="mt-6 space-y-2.5">
+          {bullets.map((b) => (
+            <li
+              key={b}
+              className="relative pl-7 text-[0.9375rem] text-taupe-dark before:absolute before:left-0 before:font-bold before:text-coral before:content-['✓']"
+            >
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <StickyAtc
+        price={displayPrice}
+        label={product.title}
+        onAdd={handleAdd}
+        isLoading={isLoading}
+        disabled={variant?.availableForSale === false}
+      />
+    </>
+  );
+}
+
+function BundleProductBuyBox({ product }: Props) {
   const { addItem, isLoading, justAdded } = useCart();
   const [selectedIndex, setSelectedIndex] = useState(
     () => bundles.findIndex((b) => b.default) || 1
@@ -174,7 +299,7 @@ export function ProductBuyBox({ product }: Props) {
 
       <StickyAtc
         price={displayPrice}
-        label={selectedBundle?.label ?? selectedVariant?.title ?? "1 Belt"}
+        label={selectedBundle?.label ?? selectedVariant?.title ?? product.title}
         onAdd={handleAdd}
         isLoading={isLoading}
       />
@@ -187,11 +312,13 @@ function StickyAtc({
   label,
   onAdd,
   isLoading,
+  disabled = false,
 }: {
   price: string;
   label: string;
   onAdd: () => void;
   isLoading: boolean;
+  disabled?: boolean;
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -218,10 +345,10 @@ function StickyAtc({
         <button
           type="button"
           onClick={onAdd}
-          disabled={isLoading}
+          disabled={isLoading || disabled}
           className="btn-primary min-h-[48px] flex-1 py-3 disabled:opacity-50"
         >
-          Add to Cart →
+          {disabled ? "Sold Out" : "Add to Cart →"}
         </button>
       </div>
     </div>
@@ -231,14 +358,6 @@ function StickyAtc({
 export function ProductGallery({ product }: Props) {
   const [active, setActive] = useState(0);
   const images = product.images.length > 0 ? product.images : [];
-
-  const galleryLabels = [
-    { label: "Hero lifestyle", hint: "Woman using product" },
-    { label: "On-body wear", hint: "Under clothing" },
-    { label: "Controls", hint: "Heat + vibration settings" },
-    { label: "Scale", hint: "In-hand size reference" },
-    { label: "Packaging", hint: "Unboxing shot" },
-  ];
 
   return (
     <div>
@@ -255,36 +374,33 @@ export function ProductGallery({ product }: Props) {
             />
           </div>
         ) : (
-          <ImageSlot
-            src=""
-            alt={product.title}
-            label={galleryLabels[active]?.label ?? "Product photo"}
-            hint={galleryLabels[active]?.hint}
-            aspect="square"
-            priority
-          />
+          <div className="image-slot flex aspect-square items-center justify-center bg-cream text-sm text-muted">
+            {product.title}
+          </div>
         )}
       </div>
-      <div className="grid grid-cols-5 gap-2">
-        {galleryLabels.map((g, i) => (
-          <button
-            key={g.label}
-            type="button"
-            onClick={() => setActive(i)}
-            className={`aspect-square overflow-hidden rounded-lg transition-all duration-200 ${
-              active === i ? "ring-2 ring-plum ring-offset-1" : "opacity-60 hover:opacity-90"
-            }`}
-          >
-            {images[i]?.url ? (
-              <Image src={images[i].url} alt="" width={100} height={100} className="h-full w-full object-cover" />
-            ) : (
-              <div className="flex h-full items-center justify-center bg-rose/40 text-[0.5rem] uppercase text-plum/50">
-                {i + 1}
-              </div>
-            )}
-          </button>
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="grid grid-cols-5 gap-2">
+          {images.slice(0, 5).map((image, i) => (
+            <button
+              key={image.url}
+              type="button"
+              onClick={() => setActive(i)}
+              className={`aspect-square overflow-hidden rounded-lg transition-all duration-200 ${
+                active === i ? "ring-2 ring-plum ring-offset-1" : "opacity-60 hover:opacity-90"
+              }`}
+            >
+              <Image
+                src={image.url}
+                alt={image.altText || `${product.title} ${i + 1}`}
+                width={100}
+                height={100}
+                className="h-full w-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

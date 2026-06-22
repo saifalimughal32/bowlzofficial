@@ -336,7 +336,7 @@ export const productSections: ProductSection[] = [
     id: "bowlz",
     title: "Bowlz",
     products: bowlzProducts,
-    shopAllHref: "https://bowlzofficial.com/collections/bowlz-1",
+    shopAllHref: "/shop/bowlz",
     shopAllLabel: "Shop All Bowlz",
     columns: 2,
   },
@@ -344,7 +344,7 @@ export const productSections: ProductSection[] = [
     id: "bongz",
     title: "Bongz",
     products: bongzProducts,
-    shopAllHref: "https://bowlzofficial.com/collections/glass",
+    shopAllHref: "/shop/bongz",
     shopAllLabel: "Shop All Bongz",
     columns: 2,
   },
@@ -421,6 +421,18 @@ export const bundles = [
   },
 ];
 
+export const bundleProductHandles = [
+  "bowlz-v2",
+  "v3-18mm",
+  "faceted",
+  "xl-pre-order",
+  "platinum",
+] as const;
+
+export function isBundleProduct(handle: string) {
+  return (bundleProductHandles as readonly string[]).includes(handle);
+}
+
 export const buyBoxBullets = [
   "Fits 14mm bongs",
   "100% shatterproof design",
@@ -428,6 +440,13 @@ export const buyBoxBullets = [
   "Food-grade, cool-touch materials",
   "High heat-resistant magnets",
   "Airtight — doesn't affect airflow",
+];
+
+export const bongzBuyBoxBullets = [
+  "Magnetic glass construction",
+  "Built for everyday sessions",
+  "Pairs with Bowlz magnetic bowls",
+  "Premium, display-ready quality",
 ];
 
 export const cartUpsell = {

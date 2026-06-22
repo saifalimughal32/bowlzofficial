@@ -141,8 +141,8 @@ function mapPublicJsonProduct(raw: {
 async function fetchProductFromPublicJson(handle: string): Promise<Product | null> {
   const domain =
     process.env.SHOPIFY_STORE_DOMAIN ||
-    process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
-  if (!domain) return null;
+    process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
+    "bowlzofficial.com";
 
   try {
     const res = await fetch(`https://${domain}/products/${handle}.json`, {
@@ -175,6 +175,14 @@ function mapCart(raw: {
 const DEFAULT_HANDLE =
   process.env.SHOPIFY_PRODUCT_HANDLE?.trim() || "bowlz-v2";
 
+import {
+  bowlzProducts,
+  bongzProducts,
+  cleaningProducts,
+} from "@/data/content";
+
+const CATALOG_PRODUCTS = [...bowlzProducts, ...bongzProducts, ...cleaningProducts];
+
 const MOCK_IMAGES: Record<string, string> = {
   "bowlz-v2":
     "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8096.png?v=1774974454",
@@ -184,9 +192,52 @@ const MOCK_IMAGES: Record<string, string> = {
     "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A5132_7e837930-8002-4491-b6fd-d9aebe10fa21.jpg?v=1770650047",
   "xl-pre-order":
     "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_8.png?v=1774974454",
+  platinum:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_11.png?v=1774974454",
+  tubez:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1_fd5146ab-67d2-4f07-8183-be825247d297.png?v=1775494606",
+  beakerz:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1_8b18ff22-e2e0-4ab1-9ec0-2b612c647ff0.png?v=1775495004",
+  percs:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8753.png?v=1775495154",
+  base:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8742.png?v=1775495325",
+  "tubez-replacement-neck":
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8719.png?v=1775495283",
+  "replacement-glass-downstem":
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8768.png?v=1775495191",
+  swabz:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_10.png?v=1780777450",
 };
 
 export function getMockProduct(handle: string = DEFAULT_HANDLE): Product {
+  const catalog = CATALOG_PRODUCTS.find((product) => product.handle === handle);
+
+  if (catalog) {
+    return {
+      id: `gid://shopify/Product/mock-${handle}`,
+      handle,
+      title: catalog.title,
+      description:
+        "Premium magnetic glass and accessories from Bowlz — built for real sessions.",
+      images: [{ url: catalog.image, altText: catalog.title }],
+      variants: [
+        {
+          id: `gid://shopify/ProductVariant/mock-${handle}`,
+          title: catalog.title,
+          price: {
+            amount: catalog.priceMin.toFixed(2),
+            currencyCode: "USD",
+          },
+          compareAtPrice: catalog.compareAt
+            ? { amount: catalog.compareAt.toFixed(2), currencyCode: "USD" }
+            : null,
+          availableForSale: catalog.soldOut !== true,
+        },
+      ],
+    };
+  }
+
   const image =
     MOCK_IMAGES[handle] ??
     MOCK_IMAGES["bowlz-v2"];

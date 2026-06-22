@@ -9,7 +9,7 @@ export function HomeEditorial() {
   return (
     <HomeSection tight className="!pb-0">
       <div className="container-main">
-        <Link href="/shop#bowlz" className="group block">
+        <Link href="/shop/bowlz" className="group block">
           <div className="image-banner relative aspect-[16/9] sm:aspect-[21/9]">
             <Image
               src={editorial.image}
