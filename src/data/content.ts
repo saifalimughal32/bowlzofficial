@@ -387,21 +387,49 @@ export const homeReviews = [
     name: "Marcus T.",
     text: "The magnetic connection is solid and the bowl cleans with one wipe. No more broken glass on the floor — this thing is built different.",
     location: "Los Angeles, United States",
+    product: "OG Bowl",
   },
   {
     name: "Jordan K.",
     text: "Fits my 14mm perfectly. Holds a half gram easy and the cool-touch material doesn't heat up like traditional glass.",
     location: "Denver, United States",
+    product: "V3 Bowl",
   },
   {
     name: "Alex R.",
     text: "Bought the OG and a V3. Both are airtight and don't mess with airflow. Shipping was fast and packaging felt premium.",
     location: "Portland, United States",
+    product: "OG + V3 Bundle",
   },
   {
     name: "Chris M.",
     text: "Finally something clumsy-stoner friendly. Dropped it twice already and not a scratch. The Swabz pair perfectly for cleaning.",
     location: "Austin, United States",
+    product: "Swabz Kit",
+  },
+  {
+    name: "Sarah L.",
+    text: "Our shop restocks Bowlz every month — customers ask for them by name. Magnetic fit is a real differentiator on the shelf.",
+    location: "Miami, United States",
+    product: "Wholesale Partner",
+  },
+  {
+    name: "Devin P.",
+    text: "Switched from glass after my third break. Six months in and it still looks new. Cleaning takes literally thirty seconds.",
+    location: "Chicago, United States",
+    product: "OG Bowl",
+  },
+  {
+    name: "Taylor S.",
+    text: "The Bongz magnetic base changed my whole setup. No wobble, no leaks, and the glass quality is legit. Worth every penny.",
+    location: "Seattle, United States",
+    product: "Bongz",
+  },
+  {
+    name: "Morgan W.",
+    text: "Ordered on Tuesday, arrived Thursday. Packaging was discreet and professional. Already recommended to three friends.",
+    location: "Phoenix, United States",
+    product: "V3 Bowl",
   },
 ];
 
