@@ -1,0 +1,59 @@
+{%- liquid
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+  assign sold_out = true
+  unless product.available
+    assign sold_out = true
+  else
+    assign sold_out = false
+  endunless
+  assign first_variant = product.selected_or_first_available_variant
+-%}
+
+<article class="flex flex-col" style="display:flex;flex-direction:column;height:100%;">
+  <a href="{{ product.url }}" class="group block flex-1" style="flex:1;text-decoration:none;color:inherit;">
+    <div class="product-card-image relative mb-2 md:mb-3">
+      {%- if sold_out -%}
+        <span class="product-badge product-badge-sold">Sold Out</span>
+      {%- elsif on_sale -%}
+        {%- assign save_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+        <span class="product-badge product-badge-sale">Save {{ save_pct }}%</span>
+      {%- endif -%}
+
+      {%- if product.featured_image -%}
+        {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, class: 'product-card-img', loading: 'lazy', widths: '300,400,600', sizes: '(max-width: 640px) 50vw, 25vw' }}
+      {%- endif -%}
+    </div>
+
+    <h3 class="mb-1.5 text-center text-sm font-medium leading-snug text-ink md:text-base" style="margin-bottom:0.375rem;text-align:center;font-size:0.875rem;font-weight:500;">
+      {{ product.title }}
+    </h3>
+    <p class="text-center text-sm" style="text-align:center;font-size:0.875rem;">
+      {%- if on_sale -%}
+        <span class="line-through text-ink mr-1.5">{{ product.compare_at_price | money }}</span>
+        <span class="font-bold text-red-600">{{ product.price | money }}</span>
+      {%- else -%}
+        <span class="text-ink">{{ product.price | money }}</span>
+      {%- endif -%}
+    </p>
+  </a>
+
+  {%- if show_add_to_cart -%}
+    <button
+      type="button"
+      class="btn-primary btn-primary-sm btn-full mt-3"
+      data-quick-add
+      data-variant-id="{{ first_variant.id }}"
+      data-label="{{ 'products.product.add_to_cart' | t }}"
+      {% if sold_out %}disabled{% endif %}
+    >
+      {%- if sold_out -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- else -%}
+        {{ 'products.product.add_to_cart' | t }}
+      {%- endif -%}
+    </button>
+  {%- endif -%}
+</article>

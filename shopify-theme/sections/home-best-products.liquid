@@ -1,0 +1,75 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section id="{{ section.settings.section_id }}" class="home-section">
+  <div class="container-main">
+    {% render 'section-header', title: section.settings.title %}
+    <div class="product-grid">
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product, show_add_to_cart: section.settings.show_add_to_cart %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div class="product-card-image" style="background:#f4f4f4;aspect-ratio:1;border-radius:0.5rem;"></div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_view_all and collection != blank -%}
+      {% render 'section-footer-link', href: collection.url, label: section.settings.view_all_label %}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "bowlz"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Bowlz"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show add to cart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "Shop All Bowlz"
+    }
+  ],
+  "presets": [{ "name": "Featured products grid" }]
+}
+{% endschema %}

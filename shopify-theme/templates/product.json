@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "bullet_1": { "type": "bullet", "settings": { "text": "Fits 14mm bongs" } },
+        "bullet_2": { "type": "bullet", "settings": { "text": "Higher volume (holds a half gram)" } },
+        "bullet_3": { "type": "bullet", "settings": { "text": "Cleans with one wipe post-sesh" } },
+        "bullet_4": { "type": "bullet", "settings": { "text": "100% shatterproof (aka clumsy st*ner friendly)" } },
+        "bullet_5": { "type": "bullet", "settings": { "text": "Made from food-grade, cool-touch materials" } },
+        "bullet_6": { "type": "bullet", "settings": { "text": "Airtight (doesn't affect airflow)" } },
+        "bullet_7": { "type": "bullet", "settings": { "text": "High heat-resistant magnets" } }
+      },
+      "block_order": ["bullet_1", "bullet_2", "bullet_3", "bullet_4", "bullet_5", "bullet_6", "bullet_7"],
+      "settings": {
+        "category_label": "Magnetic Bowl Piece"
+      }
+    },
+    "reviews": {
+      "type": "home-reviews",
+      "settings": { "heading": "Don't Take Our Word for It" }
+    },
+    "faq": {
+      "type": "product-faq",
+      "settings": { "heading": "Questions? We've got you." }
+    }
+  },
+  "order": ["main", "reviews", "faq"]
+}

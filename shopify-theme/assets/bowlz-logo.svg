@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" fill="none" role="img" aria-label="bowlz">
+  <g stroke="#d4d4d4" stroke-width="1.35" stroke-linejoin="miter">
+    <path d="M8 8V40M8 8H18.5C22.8 8 25.5 10.4 25.5 14.2C25.5 17.1 23.8 19 21.2 19.6C24.4 20.3 27 22.8 27 26.5C27 31.2 23.5 40 17.5 40H8Z" />
+    <path d="M40 8V40M40 8H29.5C25.2 8 22.5 10.4 22.5 14.2C22.5 17.1 24.2 19 26.8 19.6C23.6 20.3 21 22.8 21 26.5C21 31.2 24.5 40 30.5 40H40Z" />
+  </g>
+  <text
+    x="58"
+    y="34"
+    fill="#58a618"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="30"
+    font-weight="700"
+    letter-spacing="-0.04em"
+  >
+    bowlz
+  </text>
+</svg>

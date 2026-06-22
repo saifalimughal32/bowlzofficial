@@ -1,0 +1,111 @@
+<section id="reviews" class="reviews-section">
+  {%- if section.settings.background_image != blank -%}
+    {{ section.settings.background_image | image_url: width: 1600 | image_tag: class: 'reviews-section__bg', loading: 'lazy', sizes: '100vw' }}
+  {%- endif -%}
+  <div class="reviews-section__overlay" aria-hidden="true"></div>
+
+  <div class="container-main relative" style="position:relative;">
+    <div class="mb-10 text-center md:mb-12">
+      <h2 class="section-label text-white" style="color:#fff;">{{ section.settings.heading }}</h2>
+
+      <div class="mx-auto mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/90" style="margin-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem 2rem;color:rgba(255,255,255,0.9);">
+        <p class="text-sm md:text-base">
+          <span class="font-bold tabular-nums text-white">
+            <span data-counter="{{ settings.customer_count }}" data-counter-suffix="+" class="tabular-nums"></span>
+          </span>
+          <span class="text-white/75"> customers</span>
+        </p>
+        <span class="hidden h-4 w-px bg-white/25 sm:block" aria-hidden style="display:none;width:1px;height:1rem;background:rgba(255,255,255,0.25);"></span>
+        <p class="text-sm md:text-base">
+          <span class="font-bold text-white">{{ settings.star_rating }}</span>
+          <span class="text-white/75"> average rating</span>
+        </p>
+        <span class="hidden h-4 w-px bg-white/25 sm:block" aria-hidden style="display:none;width:1px;height:1rem;background:rgba(255,255,255,0.25);"></span>
+        <p class="text-sm md:text-base">
+          <span class="font-bold text-white">{{ settings.review_count }}</span>
+          <span class="text-white/75"> verified reviews</span>
+        </p>
+      </div>
+    </div>
+
+    <ul class="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6" style="display:grid;gap:1rem;list-style:none;padding:0;margin:0;">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <article class="review-card">
+            <div class="mb-2 flex items-start justify-between gap-3" style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+              <h3 class="text-sm font-bold uppercase tracking-wide text-ink md:text-base">{{ block.settings.name }}</h3>
+              <span aria-label="5 out of 5 stars" style="display:inline-flex;gap:2px;color:var(--color-brand);">
+                {%- for i in (1..5) -%}★{%- endfor -%}
+              </span>
+            </div>
+            <p class="mb-3 text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-muted">Verified Customer</p>
+            <p class="mb-5 flex-1 text-sm leading-relaxed text-ink/90 md:text-base" style="margin-bottom:1.25rem;flex:1;line-height:1.625;">{{ block.settings.text }}</p>
+            <div class="mt-auto space-y-1 border-t border-black/[0.06] pt-4" style="margin-top:auto;border-top:1px solid rgba(0,0,0,0.06);padding-top:1rem;">
+              {%- if block.settings.product != blank -%}
+                <p class="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-brand">{{ block.settings.product }}</p>
+              {%- endif -%}
+              <p class="text-xs text-muted md:text-sm">{{ block.settings.location }}</p>
+            </div>
+          </article>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 640px) {
+    #reviews .hidden.sm\\:block { display: block !important; }
+    #reviews ul { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    #reviews ul { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Don't Take Our Word for It"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Marcus T." },
+        { "type": "textarea", "id": "text", "label": "Review text" },
+        { "type": "text", "id": "location", "label": "Location", "default": "Los Angeles, United States" },
+        { "type": "text", "id": "product", "label": "Product name", "default": "OG Bowl" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Marcus T.", "text": "The magnetic connection is solid and the bowl cleans with one wipe. No more broken glass on the floor — this thing is built different.", "location": "Los Angeles, United States", "product": "OG Bowl" } },
+        { "type": "review", "settings": { "name": "Jordan K.", "text": "Fits my 14mm perfectly. Holds a half gram easy and the cool-touch material doesn't heat up like traditional glass.", "location": "Denver, United States", "product": "V3 Bowl" } },
+        { "type": "review", "settings": { "name": "Alex R.", "text": "Bought the OG and a V3. Both are airtight and don't mess with airflow. Shipping was fast and packaging felt premium.", "location": "Portland, United States", "product": "OG + V3 Bundle" } },
+        { "type": "review", "settings": { "name": "Chris M.", "text": "Finally something clumsy-stoner friendly. Dropped it twice already and not a scratch. The Swabz pair perfectly for cleaning.", "location": "Austin, United States", "product": "Swabz Kit" } },
+        { "type": "review", "settings": { "name": "Sarah L.", "text": "Our shop restocks Bowlz every month — customers ask for them by name. Magnetic fit is a real differentiator on the shelf.", "location": "Miami, United States", "product": "Wholesale Partner" } },
+        { "type": "review", "settings": { "name": "Devin P.", "text": "Switched from glass after my third break. Six months in and it still looks new. Cleaning takes literally thirty seconds.", "location": "Chicago, United States", "product": "OG Bowl" } },
+        { "type": "review", "settings": { "name": "Taylor S.", "text": "The Bongz magnetic base changed my whole setup. No wobble, no leaks, and the glass quality is legit. Worth every penny.", "location": "Seattle, United States", "product": "Bongz" } },
+        { "type": "review", "settings": { "name": "Morgan W.", "text": "Ordered on Tuesday, arrived Thursday. Packaging was discreet and professional. Already recommended to three friends.", "location": "Phoenix, United States", "product": "V3 Bowl" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

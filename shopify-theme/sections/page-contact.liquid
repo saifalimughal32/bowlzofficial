@@ -1,0 +1,67 @@
+<section class="home-section pt-24 md:pt-28" style="padding-top:6rem;">
+  <div class="container-main">
+    <div class="mb-10 text-center">
+      <h1 class="shop-section-title">{{ page.title }}</h1>
+      {%- if section.settings.subtext != blank -%}
+        <p class="mt-3 text-muted">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="mx-auto max-w-3xl rounded-[var(--radius-banner)] bg-white p-6 ring-1 ring-black/[0.06] md:p-10 lg:p-12" style="max-width:48rem;margin:0 auto;border-radius:var(--radius-banner);background:#fff;padding:2.5rem;box-shadow:0 0 0 1px rgba(0,0,0,0.06);">
+      <form
+        class="space-y-5"
+        data-mailto-form
+        data-mailto-email="{{ settings.contact_email }}"
+        data-mailto-subject="Contact Form"
+        data-mailto-body-fn="bowlzContactBody"
+      >
+        <div class="grid gap-5 sm:grid-cols-2" style="display:grid;gap:1.25rem;">
+          <div>
+            <label for="contact-name" class="form-label">{{ 'contact.form.name' | t }}</label>
+            <input id="contact-name" name="name" type="text" required class="form-input" placeholder="Your name">
+          </div>
+          <div>
+            <label for="contact-email" class="form-label">{{ 'contact.form.email' | t }}</label>
+            <input id="contact-email" name="email" type="email" required class="form-input" placeholder="you@email.com">
+          </div>
+        </div>
+        <div>
+          <label for="contact-subject" class="form-label">{{ 'contact.form.subject' | t }}</label>
+          <input id="contact-subject" name="subject" type="text" required class="form-input" placeholder="How can we help?">
+        </div>
+        <div>
+          <label for="contact-message" class="form-label">{{ 'contact.form.message' | t }}</label>
+          <textarea id="contact-message" name="message" rows="5" required class="form-input form-textarea" placeholder="Tell us what you need."></textarea>
+        </div>
+        <div class="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between" style="display:flex;flex-direction:column;gap:0.75rem;">
+          <button type="submit" class="btn-pill btn-pill-brand w-full sm:w-auto">{{ 'contact.form.send' | t }}</button>
+          <a href="/pages/wholesale" class="btn-pill btn-pill-outline w-full text-center sm:w-auto" style="text-align:center;">Wholesale Inquiries</a>
+        </div>
+      </form>
+      <p data-form-success hidden class="rounded-xl bg-brand/10 px-4 py-3 text-center text-sm font-medium text-brand" style="margin-top:1rem;">{{ 'contact.form.success' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 640px) {
+    .sm\\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .sm\\:flex-row { flex-direction: row; align-items: center; justify-content: space-between; }
+    .sm\\:w-auto { width: auto; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Questions about orders, products, or wholesale? Send us a message."
+    }
+  ]
+}
+{% endschema %}

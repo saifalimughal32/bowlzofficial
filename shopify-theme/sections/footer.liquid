@@ -1,0 +1,91 @@
+<footer class="bg-white text-ink">
+  <section class="border-b border-black/10 bg-white py-12 md:py-16">
+    <div class="w-full px-4 md:px-5" style="padding:0 1.25rem;">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12" style="display:grid;gap:2rem;">
+        <div>
+          <h2 class="mb-2 text-2xl font-bold text-ink md:text-3xl">{{ 'newsletter.heading' | t }}</h2>
+          <p class="text-sm text-muted md:text-base">{{ 'newsletter.subtext' | t }}</p>
+        </div>
+        <form
+          class="flex flex-col gap-3 sm:flex-row"
+          data-mailto-form
+          data-mailto-email="{{ settings.contact_email }}"
+          data-mailto-subject="Newsletter Signup"
+          style="display:flex;flex-direction:column;gap:0.75rem;"
+        >
+          <label for="footer-email" class="sr-only">{{ 'newsletter.label' | t }}</label>
+          <input id="footer-email" name="email" type="email" required autocomplete="email" placeholder="{{ 'newsletter.placeholder' | t }}" class="footer-newsletter-input min-h-[48px] flex-1">
+          <button type="submit" class="footer-subscribe-btn shrink-0">{{ 'newsletter.button' | t }}</button>
+        </form>
+        <p data-form-success hidden class="text-sm font-medium text-brand">{{ 'newsletter.success' | t }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="w-full py-12 md:py-16" style="padding:3rem 1.25rem;">
+    <div class="mb-10 px-4 md:px-5">
+      {% render 'logo', variant: 'dark' %}
+    </div>
+    <div class="grid gap-10 px-4 sm:grid-cols-2 md:px-5 lg:grid-cols-4 lg:gap-8" style="display:grid;gap:2.5rem;">
+      {%- if linklists[section.settings.shop_menu].links.size > 0 -%}
+        <ul class="space-y-3" style="list-style:none;padding:0;margin:0;">
+          {%- for link in linklists[section.settings.shop_menu].links -%}
+            <li><a href="{{ link.url }}" class="footer-nav-link">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if linklists[section.settings.learn_menu].links.size > 0 -%}
+        <ul class="space-y-3" style="list-style:none;padding:0;margin:0;">
+          {%- for link in linklists[section.settings.learn_menu].links -%}
+            <li><a href="{{ link.url }}" class="footer-nav-link">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if linklists[section.settings.support_menu].links.size > 0 -%}
+        <ul class="space-y-3" style="list-style:none;padding:0;margin:0;">
+          {%- for link in linklists[section.settings.support_menu].links -%}
+            <li><a href="{{ link.url }}" class="footer-nav-link">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <div>
+        <h3 class="footer-nav-link mb-4">{{ 'sections.footer.contact' | t }}</h3>
+        <a href="mailto:{{ settings.contact_email }}" class="mb-5 block text-sm text-muted" style="margin-bottom:1.25rem;display:block;">{{ settings.contact_email }}</a>
+        {% render 'social-icons' %}
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-black/10">
+    <div class="flex w-full flex-col gap-6 px-4 py-6 md:flex-row md:items-center md:justify-between md:px-5" style="display:flex;padding:1.5rem 1.25rem;">
+      {% render 'payment-icons' %}
+      <p class="text-xs text-muted md:text-sm">© {{ 'now' | date: '%Y' }}, {{ shop.name | upcase }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop menu",
+      "default": "footer-shop"
+    },
+    {
+      "type": "link_list",
+      "id": "learn_menu",
+      "label": "Learn menu",
+      "default": "footer-learn"
+    },
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Support menu",
+      "default": "footer-support"
+    }
+  ]
+}
+{% endschema %}

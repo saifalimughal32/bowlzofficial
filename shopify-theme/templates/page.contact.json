@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-contact",
+      "settings": {
+        "subtext": "Questions about orders, products, or wholesale? Send us a message."
+      }
+    }
+  },
+  "order": ["main"]
+}

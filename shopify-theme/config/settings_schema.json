@@ -1,0 +1,200 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Bowlz",
+    "theme_version": "1.0.0",
+    "theme_author": "Bowlz Official",
+    "theme_documentation_url": "https://bowlzofficial.com",
+    "theme_support_url": "mailto:hello@bowlzofficial.com"
+  },
+  {
+    "name": "Brand Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_brand",
+        "label": "Brand green",
+        "default": "#1f4d3a"
+      },
+      {
+        "type": "color",
+        "id": "color_brand_dark",
+        "label": "Brand green (dark)",
+        "default": "#163828"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink",
+        "default": "#0a0a0a"
+      },
+      {
+        "type": "color",
+        "id": "color_charcoal",
+        "label": "Charcoal",
+        "default": "#1b252f"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted text",
+        "default": "#6b6b6b"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_serif",
+        "label": "Serif accent font",
+        "default": "playfair_display_n6"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_icon",
+        "label": "Logo icon (age gate)"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 80,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo width",
+        "default": 120
+      }
+    ]
+  },
+  {
+    "name": "Promo & Trust",
+    "settings": [
+      {
+        "type": "text",
+        "id": "promo_text",
+        "label": "Promo bar text",
+        "default": "20% off magnetic glass + a free OG bowl. While supplies last."
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold ($)",
+        "default": 75
+      },
+      {
+        "type": "number",
+        "id": "customer_count",
+        "label": "Customer count (for animated counter)",
+        "default": 50000
+      },
+      {
+        "type": "text",
+        "id": "customer_count_display",
+        "label": "Customer count display",
+        "default": "50,000+"
+      },
+      {
+        "type": "text",
+        "id": "star_rating",
+        "label": "Star rating",
+        "default": "4.9"
+      },
+      {
+        "type": "text",
+        "id": "review_count",
+        "label": "Review count label",
+        "default": "1,000+"
+      }
+    ]
+  },
+  {
+    "name": "Social & Contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact email",
+        "default": "hello@bowlzofficial.com"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "product",
+        "id": "cart_upsell_product",
+        "label": "Cart upsell product"
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_label",
+        "label": "Cart upsell label",
+        "default": "Add Swabz cleaning kit"
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_description",
+        "label": "Cart upsell description",
+        "default": "Keep your bowl spotless — pairs perfectly with every Bowlz piece."
+      }
+    ]
+  },
+  {
+    "name": "Age Gate",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "age_gate_enabled",
+        "label": "Enable age gate",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "age_gate_title",
+        "label": "Age gate title",
+        "default": "Are you 21+?"
+      },
+      {
+        "type": "text",
+        "id": "age_gate_subtitle",
+        "label": "Age gate subtitle",
+        "default": "(we have to ask 😉)"
+      }
+    ]
+  }
+]

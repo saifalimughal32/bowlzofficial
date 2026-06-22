@@ -1,0 +1,84 @@
+<section aria-label="As seen in press" class="border-y border-black/[0.08] bg-white py-8 md:py-10" style="border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);padding:2rem 0;">
+  <p class="mb-6 text-center text-xs font-semibold uppercase tracking-[0.22em] text-ink md:mb-8 md:text-sm" style="text-align:center;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.22em;margin-bottom:1.5rem;">
+    {{ section.settings.heading }}
+  </p>
+
+  <div class="press-marquee-mask relative overflow-hidden">
+    <div class="flex w-max animate-press-marquee items-center" style="display:flex;width:max-content;align-items:center;">
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <div class="flex shrink-0 items-center px-10 text-ink md:px-14" style="flex-shrink:0;padding:0 2.5rem;display:flex;align-items:center;" {{ block.shopify_attributes }}>
+            {% render 'press-logo', logo_type: block.settings.logo_type, block: block %}
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "As seen in",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "As Seen In"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Press logo",
+      "settings": [
+        {
+          "type": "select",
+          "id": "logo_type",
+          "label": "Logo",
+          "options": [
+            { "value": "wapo", "label": "Washington Post" },
+            { "value": "nyt", "label": "New York Times" },
+            { "value": "forbes", "label": "Forbes" },
+            { "value": "inc", "label": "Inc." },
+            { "value": "high-times", "label": "High Times" },
+            { "value": "rolling-stone", "label": "Rolling Stone" },
+            { "value": "wired", "label": "Wired" },
+            { "value": "gq", "label": "GQ" },
+            { "value": "entrepreneur", "label": "Entrepreneur" },
+            { "value": "custom", "label": "Custom image" }
+          ],
+          "default": "forbes"
+        },
+        {
+          "type": "text",
+          "id": "logo_name",
+          "label": "Custom logo name"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Custom logo image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "As seen in",
+      "blocks": [
+        { "type": "logo", "settings": { "logo_type": "wapo" } },
+        { "type": "logo", "settings": { "logo_type": "nyt" } },
+        { "type": "logo", "settings": { "logo_type": "forbes" } },
+        { "type": "logo", "settings": { "logo_type": "inc" } },
+        { "type": "logo", "settings": { "logo_type": "high-times" } },
+        { "type": "logo", "settings": { "logo_type": "rolling-stone" } },
+        { "type": "logo", "settings": { "logo_type": "wired" } },
+        { "type": "logo", "settings": { "logo_type": "gq" } },
+        { "type": "logo", "settings": { "logo_type": "entrepreneur" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+<div class="promo-bar">
+  <p>{{ section.settings.text | default: settings.promo_text }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Promo text",
+      "default": "20% off magnetic glass + a free OG bowl. While supplies last."
+    }
+  ]
+}
+{% endschema %}

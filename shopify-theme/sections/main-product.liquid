@@ -1,0 +1,156 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="product-page-hero pb-12 pt-24 md:pb-16 md:pt-28" style="padding-top:6rem;padding-bottom:3rem;">
+  <div class="container-main">
+    <nav class="mb-6 text-sm text-muted" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}" class="hover:text-ink" style="color:var(--color-muted);text-decoration:none;">Home</a>
+      <span class="mx-2">/</span>
+      <a href="{{ routes.all_products_collection_url }}" class="hover:text-ink" style="color:var(--color-muted);text-decoration:none;">Shop</a>
+      <span class="mx-2">/</span>
+      <span class="text-ink">{{ product.title }}</span>
+    </nav>
+
+    <div class="grid items-start gap-6 lg:grid-cols-2 lg:gap-10 xl:gap-14" style="display:grid;gap:1.5rem;">
+      <div class="lg:sticky lg:top-28">
+        {% render 'product-gallery', product: product %}
+      </div>
+
+      <div>
+        <div id="buybox" class="product-buy-card lg:sticky lg:top-28">
+          {%- if section.settings.category_label != blank -%}
+            <p class="product-buy-label">{{ section.settings.category_label }}</p>
+          {%- endif -%}
+
+          <h1 class="mb-3 text-[clamp(1.375rem,3.5vw,2rem)] font-bold leading-tight text-ink">{{ product.title }}</h1>
+
+          <div class="mb-5 flex flex-wrap items-center gap-2 text-sm" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;">
+            <span style="color:#c9a227;">★★★★★</span>
+            <span class="font-medium text-ink">{{ settings.star_rating }} ({{ settings.review_count }})</span>
+            <span class="text-muted">·</span>
+            <a href="#reviews" class="font-medium text-brand" style="color:var(--color-brand);">{{ settings.customer_count_display }} customers</a>
+          </div>
+
+          <form data-product-form method="post" action="{{ routes.cart_add_url }}">
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+            <div class="mb-1 flex flex-wrap items-baseline gap-3" style="display:flex;align-items:baseline;gap:0.75rem;margin-bottom:0.25rem;">
+              <span class="product-buy-price" data-product-price>{{ current_variant.price | money }}</span>
+              {%- if current_variant.compare_at_price > current_variant.price -%}
+                <span class="text-lg text-muted line-through" data-product-compare>{{ current_variant.compare_at_price | money }}</span>
+              {%- else -%}
+                <span class="text-lg text-muted line-through" data-product-compare style="display:none;"></span>
+              {%- endif -%}
+            </div>
+            {%- if current_variant.compare_at_price > current_variant.price -%}
+              {%- assign save_amt = current_variant.compare_at_price | minus: current_variant.price | divided_by: 100 -%}
+              <p class="mb-2 text-sm font-semibold text-red-600" data-product-save>Save ${{ save_amt }}</p>
+            {%- else -%}
+              <p class="mb-2 text-sm font-semibold text-red-600" data-product-save style="display:none;"></p>
+            {%- endif -%}
+
+            <p class="mb-5 text-sm text-muted">or 4 interest-free payments with Shop Pay / Klarna</p>
+
+            {% render 'variant-picker', product: product %}
+
+            {%- if current_variant.available -%}
+              <p class="mb-4 text-sm font-semibold text-brand">In stock — ready to ship</p>
+            {%- endif -%}
+
+            <button
+              type="submit"
+              data-add-to-cart
+              data-label-add="{{ 'products.product.add_to_cart' | t }}"
+              class="btn-primary btn-full btn-primary-lg"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          </form>
+
+          {% render 'trust-badges' %}
+          {% render 'payment-icons' %}
+
+          <div class="product-buy-divider"></div>
+
+          {%- if section.blocks.size > 0 -%}
+            <ul class="space-y-2.5" style="list-style:none;padding:0;margin:0;">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'bullet' -%}
+                  <li class="relative pl-7 text-[0.9375rem] leading-snug text-muted" style="position:relative;padding-left:1.75rem;margin-bottom:0.625rem;line-height:1.375;color:var(--color-muted);">
+                    <span style="position:absolute;left:0;font-weight:700;color:var(--color-brand);">✓</span>
+                    {{ block.settings.text }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if product.description != blank -%}
+  <section class="section bg-white">
+    <div class="container-main max-w-3xl">
+      <h2 class="section-label mb-6">About this product</h2>
+      <div class="prose text-muted">{{ product.description }}</div>
+    </div>
+  </section>
+{%- endif -%}
+
+<div
+  class="sticky-atc"
+  data-sticky-atc
+  aria-hidden="true"
+>
+  <div class="flex items-center gap-3" style="display:flex;align-items:center;gap:0.75rem;padding:0 0.25rem;">
+    <div class="min-w-0 shrink" style="min-width:0;">
+      <div class="truncate text-xs text-muted">{{ product.title }}</div>
+      <div class="text-lg font-bold" data-sticky-price>{{ current_variant.price | money }}</div>
+    </div>
+    <button type="button" data-sticky-add class="btn-primary min-h-[48px] flex-1 py-3" {% unless current_variant.available %}disabled{% endunless %}>
+      {%- if current_variant.available -%}Add to Cart →{%- else -%}Sold Out{%- endif -%}
+    </button>
+  </div>
+</div>
+
+<style>
+  @media (min-width: 1024px) {
+    .product-page-hero .grid { grid-template-columns: repeat(2, 1fr); }
+    .lg\\:sticky { position: sticky; top: 7rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product information",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Buy box bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Fits 14mm bongs"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "category_label",
+      "label": "Category label",
+      "default": "Magnetic Bowl Piece"
+    }
+  ]
+}
+{% endschema %}

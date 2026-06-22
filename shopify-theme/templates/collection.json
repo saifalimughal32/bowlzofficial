@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "trust_bar": {
+      "type": "collection-trust-bar",
+      "settings": {
+        "primary": "20% OFF MAGNETIC GLASS + A FREE OG BOWL. WHILE SUPPLIES LAST.",
+        "secondary": "FREE SHIPPING ON ORDERS $75+ · 30-DAY WARRANTY · SECURE CHECKOUT"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_page": 12,
+        "show_add_to_cart": true
+      }
+    }
+  },
+  "order": ["trust_bar", "main"]
+}

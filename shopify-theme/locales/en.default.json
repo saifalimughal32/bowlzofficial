@@ -1,0 +1,98 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you requested does not exist.",
+      "link": "Continue shopping"
+    },
+    "pagination": {
+      "page": "Page {{ current }} of {{ total }}"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "adding": "Adding…",
+      "added": "Added ✓",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "price": "Price",
+      "from_price_html": "From {{ price }}",
+      "include_taxes": "Tax included.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout →",
+      "remove": "Remove",
+      "free_shipping_unlocked": "You've unlocked free USA shipping!",
+      "free_shipping_remaining_html": "Add {{ amount }} for free shipping",
+      "warranty_note": "30-day warranty & exchanges on defective items.",
+      "free_shipping_note_html": "Free USA shipping on orders over ${{ threshold }}"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Collections",
+      "no_matches": "Sorry, there are no products in this collection.",
+      "items_with_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      }
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send Message",
+      "success": "Thanks — your email client should open shortly."
+    }
+  },
+  "newsletter": {
+    "label": "Email",
+    "placeholder": "email@example.com",
+    "button": "Subscribe",
+    "success": "Thanks for subscribing — check your inbox to confirm.",
+    "heading": "Stay in The Know",
+    "subtext": "Join our newsletter for the latest product announcements and sales"
+  },
+  "wholesale": {
+    "heading": "Got a Smokeshop or Dispensary?",
+    "subtext": "Choose an option below and our wholesale team will be in touch.",
+    "apply_label": "Apply for Wholesale",
+    "apply_desc": "New smoke shops & dispensaries",
+    "account_label": "Create Wholesale Account",
+    "account_desc": "Get set up with our wholesale team",
+    "form_heading": "Wholesale Contact Form",
+    "form_subtext": "Enter your contact info and our wholesale team will be in touch.",
+    "back": "Back to options",
+    "submit": "Submit",
+    "success": "Thanks — your email client should open with your wholesale inquiry."
+  },
+  "age_gate": {
+    "yes": "Yes",
+    "no": "No",
+    "terms_html": "By entering this site you are agreeing to the <a href=\"/policies/terms-of-service\" target=\"_blank\">Terms of Use</a> and <a href=\"/policies/privacy-policy\">Privacy Policy</a>."
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart": "Cart"
+    },
+    "footer": {
+      "contact": "Contact",
+      "copyright": "© {{ year }}, {{ shop_name }}"
+    }
+  }
+}
