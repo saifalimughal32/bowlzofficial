@@ -27,6 +27,7 @@ export default function HomePage() {
         products={bongzProducts.slice(0, 4)}
         seeAllHref="/shop/bongz"
         seeAllLabel="Shop All Bongz"
+        layout="carousel"
       />
       <HomeEditorial />
       <HomeCollections />

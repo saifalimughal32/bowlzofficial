@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/home/ProductCard";
+import { ProductCarousel } from "@/components/shop/ProductCarousel";
 import type { StoreProduct } from "@/data/content";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ type Props = {
   columns?: 2 | 3;
   showSwatches?: boolean;
   hideTitle?: boolean;
+  layout?: "grid" | "carousel";
 };
 
 export function ShopProductSection({
@@ -23,6 +25,7 @@ export function ShopProductSection({
   columns = 2,
   showSwatches = false,
   hideTitle = false,
+  layout = "grid",
 }: Props) {
   const isExternal = shopAllHref?.startsWith("http");
 
@@ -39,21 +42,25 @@ export function ShopProductSection({
           <h2 className="shop-category-title mb-8 md:mb-10">{title}:</h2>
         )}
 
-        <div
-          className={cn(
-            "grid gap-x-6 gap-y-10 md:gap-x-10 md:gap-y-12",
-            columns === 2 ? "grid-cols-2" : "grid-cols-2 md:grid-cols-3"
-          )}
-        >
-          {products.map((product, i) => (
-            <ProductCard
-              key={product.handle}
-              product={product}
-              priority={i < 4}
-              showSwatches={showSwatches}
-            />
-          ))}
-        </div>
+        {layout === "carousel" ? (
+          <ProductCarousel products={products} showSwatches={showSwatches} />
+        ) : (
+          <div
+            className={cn(
+              "grid gap-x-6 gap-y-10 md:gap-x-10 md:gap-y-12",
+              columns === 2 ? "grid-cols-2" : "grid-cols-2 md:grid-cols-3"
+            )}
+          >
+            {products.map((product, i) => (
+              <ProductCard
+                key={product.handle}
+                product={product}
+                priority={i < 4}
+                showSwatches={showSwatches}
+              />
+            ))}
+          </div>
+        )}
 
         {shopAllHref && shopAllLabel && (
           <div className="mt-10 text-center md:mt-12">

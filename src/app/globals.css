@@ -94,6 +94,27 @@ h1, h2, h3, h4 {
   @apply grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-4 md:gap-x-6 md:gap-y-12;
 }
 
+.product-carousel-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.product-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.product-carousel-nav {
+  @apply absolute top-[30%] z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-ink/15 bg-white text-ink shadow-[0_1px_4px_rgb(0_0_0_/_0.08)] transition-opacity duration-200 hover:border-ink/30 hover:bg-white disabled:opacity-0 md:flex;
+}
+
+.product-carousel-nav-left {
+  @apply left-0 -translate-x-1/2;
+}
+
+.product-carousel-nav-right {
+  @apply right-0 translate-x-1/2;
+}
+
 .btn-pill {
   @apply inline-flex min-h-[48px] min-w-[160px] items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-[0.06em] transition-opacity duration-200 hover:opacity-85 md:text-[0.9375rem];
 }

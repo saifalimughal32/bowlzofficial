@@ -35,6 +35,7 @@ export default function ShopPage() {
         shopAllHref="/shop/bongz"
         shopAllLabel={bongzSection.shopAllLabel}
         columns={2}
+        layout={bongzSection.layout}
       />
       <ShopProductSection
         id={cleaningSection.id}

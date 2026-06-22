@@ -27,6 +27,7 @@ export function CollectionPage({ section, showSwatches = false }: Props) {
         columns={section.columns === 4 ? 3 : 2}
         showSwatches={showSwatches}
         hideTitle
+        layout={section.layout}
       />
     </>
   );

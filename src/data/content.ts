@@ -336,6 +336,7 @@ export type ProductSection = {
   shopAllHref: string;
   shopAllLabel: string;
   columns?: 2 | 3 | 4;
+  layout?: "grid" | "carousel";
 };
 
 export const productSections: ProductSection[] = [
@@ -354,6 +355,7 @@ export const productSections: ProductSection[] = [
     shopAllHref: "/shop/bongz",
     shopAllLabel: "Shop All Bongz",
     columns: 2,
+    layout: "carousel",
   },
   {
     id: "cleaning",
