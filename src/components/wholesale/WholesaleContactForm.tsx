@@ -113,10 +113,27 @@ export function WholesaleContactForm() {
             Phone<span className="text-red-600">*</span>
           </label>
           <div className="flex overflow-hidden rounded-xl border border-black/10 bg-white focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
-            <span className="flex items-center gap-1.5 border-r border-black/10 px-3 text-sm text-muted">
-              <span aria-hidden>🇺🇸</span>
-              <span>+1</span>
-            </span>
+            <label
+              htmlFor="wholesale-phone-country"
+              className="flex shrink-0 items-center border-r border-black/10 pl-3 pr-2"
+            >
+              <select
+                id="wholesale-phone-country"
+                name="phoneCountry"
+                value={phoneCountryCode}
+                onChange={(e) =>
+                  setPhoneCountryCode(e.target.value as (typeof PHONE_COUNTRIES)[number]["code"])
+                }
+                className="max-w-[6.5rem] cursor-pointer appearance-none border-0 bg-transparent py-3 text-sm text-muted outline-none"
+                aria-label="Phone country code"
+              >
+                {PHONE_COUNTRIES.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.flag} {country.dialCode}
+                  </option>
+                ))}
+              </select>
+            </label>
             <input
               id="wholesale-phone"
               name="phone"
