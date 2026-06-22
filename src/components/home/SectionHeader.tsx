@@ -1,12 +1,14 @@
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type Props = {
   title: string;
+  className?: string;
 };
 
-export function SectionHeader({ title }: Props) {
+export function SectionHeader({ title, className }: Props) {
   return (
-    <div className="section-header">
+    <div className={cn("section-header", className)}>
       <h2 className="section-label">{title}</h2>
     </div>
   );

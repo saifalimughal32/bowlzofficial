@@ -1,5 +1,8 @@
+"use client";
+
 import { Users, Shield, Ruler, Sparkles } from "lucide-react";
-import { trustSignals } from "@/data/content";
+import { siteConfig, trustSignals } from "@/data/content";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 const icons = [Users, Shield, Ruler, Sparkles];
 
@@ -14,7 +17,18 @@ export function TrustBar() {
               <li key={item.label} className="flex flex-col items-center text-center">
                 <Icon className="mb-3 h-7 w-7 text-brand md:h-8 md:w-8" strokeWidth={1.5} />
                 <p className="text-xs font-bold uppercase tracking-[0.06em] text-ink md:text-sm">
-                  {item.label}
+                  {"animateCount" in item && item.animateCount ? (
+                    <>
+                      <AnimatedCounter
+                        end={siteConfig.customerCountValue}
+                        suffix="+"
+                        className="tabular-nums"
+                      />{" "}
+                      {item.label}
+                    </>
+                  ) : (
+                    item.label
+                  )}
                 </p>
                 <p className="mt-1 text-xs text-muted">{item.description}</p>
               </li>

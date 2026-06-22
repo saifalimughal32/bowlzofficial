@@ -17,6 +17,7 @@ export const siteConfig = {
   starRating: 4.9,
   reviewCount: "1,000+",
   customerCount: "50,000+",
+  customerCountValue: 50000,
 };
 
 export type NavLink = {
@@ -55,18 +56,24 @@ export const navLinks: NavLink[] = [
 export const collections = [
   {
     label: "Shop Bowlz",
+    title: "Bowlz",
+    subtitle: "Magnetic bowl pieces",
     href: "/shop/bowlz",
     image:
       "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8096.png?v=1774974454",
   },
   {
     label: "Shop Bongz",
+    title: "Bongz",
+    subtitle: "Magnetic glass",
     href: "/shop/bongz",
     image:
       "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1_fd5146ab-67d2-4f07-8183-be825247d297.png?v=1775494606",
   },
   {
     label: "Shop Cleaning Gear",
+    title: "Cleaning Gear",
+    subtitle: "Swabz & accessories",
     href: "/shop/cleaning",
     image:
       "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_10.png?v=1780777450",
@@ -290,8 +297,9 @@ export const shopHero = {
 
 export const trustSignals = [
   {
-    label: `${siteConfig.customerCount} Customers`,
+    label: "Customers",
     description: "Trusted nationwide",
+    animateCount: true,
   },
   {
     label: "Shatterproof Design",
