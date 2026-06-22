@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeWholesale } from "@/components/home/HomeWholesale";
+import { WholesaleContactForm } from "@/components/wholesale/WholesaleContactForm";
 import { siteConfig } from "@/data/content";
 
 export const metadata: Metadata = {
@@ -9,17 +9,21 @@ export const metadata: Metadata = {
 
 export default function WholesalePage() {
   return (
-    <>
-      <div className="bg-white pt-24 pb-6 md:pt-28 md:pb-8">
-        <div className="container-main">
-          <h1 className="shop-section-title">Wholesale</h1>
-          <p className="mt-3 max-w-2xl text-sm text-muted md:text-base">
-            Partner with Bowlz for wholesale magnetic bowls and Bongz glass. Fast
-            fulfillment, display-ready packaging, and dedicated support for retailers.
-          </p>
+    <div className="bg-white pt-24 pb-16 md:pt-28 md:pb-20">
+      <div className="container-main">
+        <div className="mx-auto max-w-3xl">
+          <header className="mb-10 text-center md:mb-12">
+            <h1 className="mb-3 text-2xl font-semibold tracking-[0.12em] text-ink uppercase md:text-3xl">
+              Wholesale Contact Form
+            </h1>
+            <p className="text-sm text-muted md:text-base">
+              Enter your contact info and our wholesale team will be in touch.
+            </p>
+          </header>
+
+          <WholesaleContactForm />
         </div>
       </div>
-      <HomeWholesale />
-    </>
+    </div>
   );
 }

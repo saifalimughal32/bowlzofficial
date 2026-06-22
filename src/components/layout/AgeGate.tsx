@@ -28,45 +28,62 @@ export function AgeGate() {
 
   return (
     <div
-      className="fixed inset-0 z-[250] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[250] flex items-center justify-center bg-black/75 p-4 backdrop-blur-[2px]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="age-gate-title"
     >
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 text-center shadow-2xl md:p-10">
-        <div className="mb-6 flex justify-center">
+      <div className="w-full max-w-lg rounded-2xl bg-white px-6 py-10 text-center shadow-2xl md:px-12 md:py-12">
+        <div className="mb-8 flex justify-center">
           <Image
-            src="/logo/bowlz-logo.png"
+            src="/logo/bowlz-icon.svg"
             alt="bowlz"
-            width={483}
-            height={138}
-            className="h-10 w-auto"
+            width={80}
+            height={80}
+            className="h-16 w-16 md:h-20 md:w-20"
+            priority
           />
         </div>
-        <h2 id="age-gate-title" className="mb-3 text-xl font-bold text-ink md:text-2xl">
-          Age Verification
+
+        <h2
+          id="age-gate-title"
+          className="mb-2 text-2xl font-semibold tracking-wide text-ink md:text-[1.75rem]"
+        >
+          Are you 21+?
         </h2>
-        <p className="mb-8 text-sm leading-relaxed text-muted md:text-base">
-          You must be at least <strong className="text-ink">21 years old</strong> to enter
-          this site. By entering, you confirm you are of legal age in your location.
-        </p>
-        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <p className="mb-8 text-sm text-muted md:text-base">(we have to ask 😉)</p>
+
+        <div className="mx-auto flex max-w-sm gap-3">
           <button
             type="button"
             onClick={verify}
-            className="btn-pill btn-pill-brand w-full sm:min-w-[140px] sm:w-auto"
+            className="btn-pill btn-pill-outline flex-1 border-black/20 px-8"
           >
-            I am 21+
+            Yes
           </button>
           <Link
             href="https://www.google.com"
-            className="btn-pill btn-pill-outline w-full sm:min-w-[140px] sm:w-auto"
+            className="btn-pill btn-pill-outline flex-1 border-black/20 px-8"
           >
-            Exit
+            No
           </Link>
         </div>
-        <p className="mt-6 text-[0.6875rem] leading-relaxed text-muted">
-          Products are intended for legal herbal use only. Please consume responsibly.
+
+        <p className="mx-auto mt-8 max-w-sm text-[0.6875rem] leading-relaxed text-muted">
+          By entering this site you are agreeing to the{" "}
+          <a
+            href="https://bowlzofficial.com/policies/terms-of-service"
+            className="underline underline-offset-2 hover:text-ink"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Terms of Use
+          </a>{" "}
+          and{" "}
+          <Link href="/policies/privacy-policy" className="underline underline-offset-2 hover:text-ink">
+            Privacy Policy
+          </Link>
+          .
         </p>
       </div>
     </div>
