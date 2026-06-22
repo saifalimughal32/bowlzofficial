@@ -302,6 +302,29 @@ h1, h2, h3, h4 {
   }
 }
 
+.press-marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.animate-press-marquee {
+  animation: press-marquee 42s linear infinite;
+}
+
+@keyframes press-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

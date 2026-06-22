@@ -1,4 +1,5 @@
 import { HomeVideoBanner } from "@/components/home/HomeVideoBanner";
+import { HomeAsSeenIn } from "@/components/home/HomeAsSeenIn";
 import { HomeBestProducts } from "@/components/home/HomeBestProducts";
 import { HomeProductGrid } from "@/components/home/HomeProductGrid";
 import { HomeEditorial } from "@/components/home/HomeEditorial";
@@ -12,6 +13,7 @@ export default function HomePage() {
   return (
     <>
       <HomeVideoBanner />
+      <HomeAsSeenIn />
       <HomeBestProducts
         id="bowlz"
         title="Bowlz"
