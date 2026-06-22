@@ -42,6 +42,17 @@ shopify theme push --store YOUR-STORE.myshopify.com --live
 shopify theme pull --store YOUR-STORE.myshopify.com
 ```
 
+## Upload zip (under 50 MB)
+
+Shopify theme uploads must stay **under 50 MB**. The hero video (`bongz-hero.mp4`, ~35 MB) is **not** included in `bowlz-shopify-theme-upload.zip`.
+
+After installing the theme:
+
+1. Go to **Content → Files** and upload `bongz-hero.mp4` (or use the file from `public/videos/` in this repo).
+2. Open **Theme customizer → Home page → Video banner** and select the uploaded video under **Hero video**.
+
+Until then, a dark gradient (or optional **Poster image**) is shown.
+
 ## Post-install setup
 
 1. **Navigation** — Create menus in Shopify Admin → Online Store → Navigation:

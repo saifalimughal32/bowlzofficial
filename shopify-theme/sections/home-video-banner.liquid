@@ -1,10 +1,10 @@
 <section class="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-black" style="position:relative;display:flex;min-height:100svh;width:100%;align-items:center;justify-content:center;overflow:hidden;background:#000;">
   {%- if section.settings.video != blank -%}
     {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'absolute inset-0 h-full w-full object-cover', style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;' }}
+  {%- elsif section.settings.poster_image != blank -%}
+    {{ section.settings.poster_image | image_url: width: 2400 | image_tag: class: 'absolute inset-0 h-full w-full object-cover', style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;', loading: 'eager', alt: '' }}
   {%- else -%}
-    <video class="absolute inset-0 h-full w-full object-cover" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" autoplay muted loop playsinline preload="auto" aria-label="Bowlz brand video">
-      <source src="{{ 'bongz-hero.mp4' | asset_url }}" type="video/mp4">
-    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#2a2a2a] to-black" style="position:absolute;inset:0;background:linear-gradient(180deg,#2a2a2a 0%,#000 100%);"></div>
   {%- endif -%}
 
   <div class="pointer-events-none absolute inset-0 bg-black/45" style="position:absolute;inset:0;background:rgba(0,0,0,0.45);"></div>
@@ -31,7 +31,13 @@
     {
       "type": "video",
       "id": "video",
-      "label": "Hero video"
+      "label": "Hero video",
+      "info": "Upload after installing the theme (Settings → Files, or pick here). Not included in the theme zip to stay under Shopify's 50 MB upload limit."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image",
+      "label": "Poster image (fallback before video is set)"
     },
     {
       "type": "text",
