@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { AgeGate } from "@/components/layout/AgeGate";
 import { siteConfig } from "@/data/content";
 import "./globals.css";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className={`${inter.className} overflow-x-hidden antialiased`}>
         <CartProvider>
+          <AgeGate />
           <Header />
           <main className="overflow-x-hidden">{children}</main>
           <Footer />

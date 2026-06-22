@@ -12,12 +12,12 @@ type Props = {
 export function CollectionPage({ section, showSwatches = false }: Props) {
   return (
     <>
-      <div className="bg-white pt-24 pb-8 md:pt-28 md:pb-10">
-        <div className="container-main max-w-[1100px]">
+      <div className="bg-white pt-24 md:pt-28">
+        <CollectionTrustBar />
+        <div className="container-main max-w-[1100px] pb-4 pt-8 md:pb-6 md:pt-10">
           <h1 className="shop-section-title">{section.title}</h1>
         </div>
       </div>
-      <CollectionTrustBar />
       <ShopProductSection
         id={section.id}
         title={section.title}
@@ -26,6 +26,7 @@ export function CollectionPage({ section, showSwatches = false }: Props) {
         shopAllLabel={section.shopAllLabel}
         columns={section.columns === 4 ? 3 : 2}
         showSwatches={showSwatches}
+        hideTitle
       />
     </>
   );

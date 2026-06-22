@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useCart } from "./CartProvider";
 import { formatMoney } from "@/lib/shopify";
@@ -14,14 +14,14 @@ function FreeShippingBar({ subtotal }: { subtotal: number }) {
 
   if (remaining <= 0) {
     return (
-      <div className="mb-4 rounded-xl bg-cream px-4 py-3 text-center text-sm font-medium text-plum">
+      <div className="mb-4 rounded-xl bg-black/[0.03] px-4 py-3 text-center text-sm font-medium text-plum">
         🎉 You&apos;ve unlocked free USA shipping!
       </div>
     );
   }
 
   return (
-    <div className="mb-4 rounded-xl bg-cream px-4 py-3">
+    <div className="mb-4 rounded-xl bg-black/[0.03] px-4 py-3">
       <p className="mb-2 text-center text-sm text-taupe-dark">
         Add <span className="font-semibold text-plum">${remaining.toFixed(0)}</span> for free shipping
       </p>
@@ -35,12 +35,22 @@ function FreeShippingBar({ subtotal }: { subtotal: number }) {
 export function CartDrawer() {
   const { cart, isOpen, closeCart, checkout, removeLine, updateLine, addItem, isLoading } = useCart();
   const [upsellAdded, setUpsellAdded] = useState(false);
+  const [swabzVariantId, setSwabzVariantId] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch(`/api/product-variant?handle=${cartUpsell.handle}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.variantId) setSwabzVariantId(data.variantId);
+      })
+      .catch(() => undefined);
+  }, []);
 
   const subtotal = cart ? parseFloat(cart.cost.subtotalAmount.amount) : 0;
 
   return (
     <div
-      className={`fixed inset-0 z-[200] ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+      className={`fixed inset-0 z-[210] ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       aria-hidden={!isOpen}
     >
       <div
@@ -121,18 +131,15 @@ export function CartDrawer() {
               ))}
 
               {/* In-cart upsell */}
-              {!upsellAdded && cart.lines.length === 1 && (
+              {!upsellAdded && cart.lines.length === 1 && swabzVariantId && (
                 <div className="mt-4 rounded-xl border border-dashed border-coral/40 bg-coral/5 p-4">
                   <p className="text-sm font-semibold text-plum">{cartUpsell.label}</p>
                   <p className="mt-1 text-xs text-taupe-dark">{cartUpsell.description}</p>
                   <button
                     type="button"
                     onClick={() => {
-                      const secondVariant = cart.lines[0]?.merchandise.id;
-                      if (secondVariant) {
-                        addItem(secondVariant, 1);
-                        setUpsellAdded(true);
-                      }
+                      addItem(swabzVariantId, 1);
+                      setUpsellAdded(true);
                     }}
                     className="mt-3 text-sm font-semibold text-coral underline"
                   >
@@ -144,8 +151,8 @@ export function CartDrawer() {
           </>
         )}
 
-        <div className="mt-4 rounded-xl bg-cream p-4 text-center text-sm text-taupe-dark">
-          🔁 Covered by our 30-Night Comfort Guarantee — love it or your money back.
+        <div className="mt-4 rounded-xl bg-black/[0.03] p-4 text-center text-sm text-taupe-dark">
+          🔁 30-day warranty &amp; exchanges on defective items.
         </div>
 
         <div className="mt-auto border-t border-plum/10 pt-4">

@@ -86,7 +86,7 @@ function DesktopNavLink({
                   setOpen(false);
                   onNavigate?.();
                 }}
-                className="block px-4 py-2.5 text-sm text-ink transition-colors hover:bg-cream"
+                className="block px-4 py-2.5 text-sm text-ink transition-colors hover:bg-black/5"
               >
                 {child.label}
               </Link>
@@ -227,7 +227,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={closeMenu}
-                  className="rounded-xl px-4 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-cream"
+                  className="rounded-xl px-4 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-black/5"
                 >
                   {item.label}
                 </Link>
@@ -239,7 +239,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setShopOpen((o) => !o)}
-                  className="flex w-full items-center justify-between px-4 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-cream"
+                  className="flex w-full items-center justify-between px-4 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-black/5"
                   aria-expanded={shopOpen}
                 >
                   {item.label}
@@ -255,7 +255,7 @@ export function Header() {
                         key={child.href}
                         href={child.href}
                         onClick={closeMenu}
-                        className="block rounded-lg px-4 py-2.5 text-sm text-muted transition-colors hover:bg-cream hover:text-ink"
+                        className="block rounded-lg px-4 py-2.5 text-sm text-muted transition-colors hover:bg-black/5 hover:text-ink"
                       >
                         {child.label}
                       </Link>

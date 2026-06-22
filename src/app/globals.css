@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #f7f2eb;
+  --color-cream: #ffffff;
   --color-surface: #ffffff;
   --color-ink: #0a0a0a;
   --color-charcoal: #1b252f;
@@ -41,7 +41,7 @@ main [id] {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-cream);
+  background-color: #ffffff;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -75,11 +75,11 @@ h1, h2, h3, h4 {
 }
 
 .home-section {
-  @apply bg-cream py-16 md:py-24 lg:py-28;
+  @apply bg-white py-16 md:py-24 lg:py-28;
 }
 
 .home-section-tight {
-  @apply bg-cream py-14 md:py-20;
+  @apply bg-white py-14 md:py-20;
 }
 
 .section-header {
@@ -108,6 +108,31 @@ h1, h2, h3, h4 {
 
 .btn-pill-brand {
   @apply bg-brand text-white hover:bg-brand-dark;
+}
+
+.btn-primary {
+  @apply inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-brand px-6 py-3 text-sm font-bold tracking-wide text-white transition-all hover:bg-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.btn-primary-lg {
+  @apply min-h-[52px] px-8 py-4 text-base uppercase;
+}
+
+.btn-primary-sm {
+  @apply min-h-[40px] px-4 py-2 text-xs font-semibold uppercase md:min-h-[44px] md:text-sm;
+}
+
+.btn-full {
+  @apply w-full;
+}
+
+.btn-success-pulse {
+  animation: btn-success-pulse 0.55s ease;
+}
+
+@keyframes btn-success-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); background-color: var(--color-brand-dark); }
 }
 
 .product-card-image {
@@ -156,6 +181,60 @@ h1, h2, h3, h4 {
   @apply absolute right-2 top-2 z-10 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white md:right-3 md:top-3 md:text-[11px];
 }
 
+.product-page-hero {
+  @apply min-h-0 bg-white;
+}
+
+.product-gallery {
+  @apply flex flex-col gap-3 md:gap-4;
+}
+
+.product-gallery-main {
+  @apply relative aspect-square w-full overflow-hidden rounded-2xl bg-white;
+}
+
+.product-gallery-thumbs {
+  @apply flex gap-2 overflow-x-auto pb-1;
+}
+
+.product-gallery-thumb {
+  @apply relative aspect-square h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-xl border-2 border-transparent bg-white transition-all hover:border-brand/30 md:h-20 md:w-20;
+}
+
+.product-gallery-thumb-active {
+  @apply border-brand ring-2 ring-brand/15;
+}
+
+.product-buy-card {
+  @apply rounded-2xl border border-black/6 bg-white p-5 shadow-[0_4px_24px_rgba(0,0,0,0.05)] md:rounded-3xl md:p-7 lg:p-8;
+}
+
+.product-buy-label {
+  @apply mb-2 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-brand md:text-xs;
+}
+
+.product-buy-price {
+  @apply text-3xl font-bold text-ink md:text-4xl;
+}
+
+.product-buy-divider {
+  @apply my-6 border-t border-black/8;
+}
+
+.image-slot {
+  @apply relative overflow-hidden;
+}
+
+.product-page-hero h1 {
+  @apply text-[clamp(1.5rem,4vw,2.25rem)] font-bold leading-tight text-ink;
+}
+
+@media (max-width: 640px) {
+  .product-page-hero .btn-primary-lg {
+    @apply min-h-[52px] text-base;
+  }
+}
+
 .color-swatch[style*="#1a1a1a"],
 .color-swatch[style*="#2B2B2B"],
 .color-swatch[style*="#2b2b2b"],
@@ -200,7 +279,7 @@ h1, h2, h3, h4 {
 .text-taupe-dark { color: var(--color-muted); }
 .text-plum { color: var(--color-charcoal); }
 .text-taupe { color: var(--color-muted); }
-.bg-cream { background-color: var(--color-cream); }
+.bg-cream { background-color: #ffffff; }
 .border-plum\/10 { border-color: rgb(0 0 0 / 0.08); }
 .hover\:text-plum:hover { color: var(--color-charcoal); }
 .shipping-progress { @apply h-2 overflow-hidden rounded-full bg-black/10; }

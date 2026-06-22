@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/cart/CartProvider";
 import { TrustBadges } from "@/components/ui/TrustBadges";
 import { PaymentIcons } from "@/components/ui/PaymentIcons";
+import { VariantOptionPicker } from "@/components/product/VariantOptionPicker";
+import { getProductCategoryLabel, isBowlProduct } from "@/lib/productCategory";
 import {
   bongzBuyBoxBullets,
   buyBoxBullets,
@@ -28,7 +29,8 @@ export function ProductBuyBox({ product }: Props) {
 function StandardProductBuyBox({ product }: Props) {
   const { addItem, isLoading, justAdded } = useCart();
   const [addedPulse, setAddedPulse] = useState(false);
-  const variant = product.variants[0];
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const variant = product.variants[selectedIndex] ?? product.variants[0];
 
   const displayPrice = variant
     ? formatMoney(variant.price.amount, variant.price.currencyCode)
@@ -45,13 +47,16 @@ function StandardProductBuyBox({ product }: Props) {
     return compare > price ? Math.round(compare - price) : null;
   }, [variant]);
 
-  const bullets = product.handle === "swabz" || product.handle.includes("replacement")
-    ? buyBoxBullets.slice(2, 5)
-    : bongzBuyBoxBullets;
+  const bullets =
+    product.handle === "swabz" || product.handle.includes("replacement")
+      ? buyBoxBullets.slice(2, 5)
+      : product.handle === "tubez" ||
+          product.handle === "beakerz" ||
+          product.handle === "percs"
+        ? bongzBuyBoxBullets
+        : buyBoxBullets;
 
-  const summary =
-    product.description?.slice(0, 180) ||
-    "Premium magnetic glass and accessories built for everyday sessions.";
+  const categoryLabel = getProductCategoryLabel(product.handle);
 
   useEffect(() => {
     if (justAdded) {
@@ -67,34 +72,52 @@ function StandardProductBuyBox({ product }: Props) {
 
   return (
     <>
-      <div id="buybox" className="lg:sticky lg:top-24">
-        <h1 className="mb-2 text-[clamp(1.5rem,3vw,2rem)]">{product.title}</h1>
+      <div id="buybox" className="product-buy-card lg:sticky lg:top-28">
+        <p className="product-buy-label">{categoryLabel}</p>
+        <h1 className="mb-3 text-[clamp(1.375rem,3.5vw,2rem)] font-bold leading-tight text-ink">
+          {product.title}
+        </h1>
 
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
+        <div className="mb-5 flex flex-wrap items-center gap-2 text-sm">
           <span className="text-gold">★★★★★</span>
-          <span className="text-taupe-dark">
+          <span className="font-medium text-ink">
             {siteConfig.starRating} ({siteConfig.reviewCount})
           </span>
-          <span className="text-caption">·</span>
-          <Link href="#reviews" className="underline text-taupe-dark hover:text-plum">
+          <span className="text-muted">·</span>
+          <Link href="#reviews" className="font-medium text-brand underline-offset-2 hover:underline">
             {siteConfig.customerCount} customers
           </Link>
         </div>
 
-        <p className="mb-6 text-taupe-dark">{summary}</p>
-
-        <div className="mb-1 flex items-baseline gap-3">
-          <span className="text-3xl font-bold">{displayPrice}</span>
+        <div className="mb-1 flex flex-wrap items-baseline gap-3">
+          <span className="product-buy-price">{displayPrice}</span>
           {comparePrice && (
-            <span className="text-lg text-caption line-through">{comparePrice}</span>
+            <span className="text-lg text-muted line-through">{comparePrice}</span>
           )}
         </div>
         {saveAmount && (
-          <div className="mb-2 font-semibold text-coral">Save ${saveAmount}</div>
+          <p className="mb-2 text-sm font-semibold text-red-600">Save ${saveAmount}</p>
         )}
-        <p className="mb-6 text-sm text-taupe-dark">
+        <p className="mb-5 text-sm text-muted">
           or 4 interest-free payments with Shop Pay / Klarna
         </p>
+
+        <VariantOptionPicker product={product} onSelect={setSelectedIndex} />
+
+        {isBowlProduct(product.handle) && (
+          <p className="mb-5 text-sm">
+            <Link
+              href="#sizing-guide"
+              className="font-semibold text-brand underline-offset-2 hover:underline"
+            >
+              Bowl sizing guide →
+            </Link>
+          </p>
+        )}
+
+        {variant?.availableForSale !== false && (
+          <p className="mb-4 text-sm font-semibold text-brand">In stock — ready to ship</p>
+        )}
 
         <button
           type="button"
@@ -108,17 +131,19 @@ function StandardProductBuyBox({ product }: Props) {
               ? "Adding…"
               : justAdded
                 ? "Added ✓"
-                : "Add to Cart →"}
+                : "Add to Cart"}
         </button>
 
         <TrustBadges />
         <PaymentIcons className="mt-4" />
 
-        <ul className="mt-6 space-y-2.5">
+        <div className="product-buy-divider" />
+
+        <ul className="space-y-2.5">
           {bullets.map((b) => (
             <li
               key={b}
-              className="relative pl-7 text-[0.9375rem] text-taupe-dark before:absolute before:left-0 before:font-bold before:text-coral before:content-['✓']"
+              className="relative pl-7 text-[0.9375rem] leading-snug text-muted before:absolute before:left-0 before:font-bold before:text-brand before:content-['✓']"
             >
               {b}
             </li>
@@ -183,26 +208,29 @@ function BundleProductBuyBox({ product }: Props) {
 
   return (
     <>
-      <div id="buybox" className="lg:sticky lg:top-24">
-        <h1 className="mb-2 text-[clamp(1.5rem,3vw,2rem)]">{product.title}</h1>
+      <div id="buybox" className="product-buy-card lg:sticky lg:top-28">
+        <p className="product-buy-label">{getProductCategoryLabel(product.handle)}</p>
+        <h1 className="mb-3 text-[clamp(1.375rem,3.5vw,2rem)] font-bold leading-tight text-ink">
+          {product.title}
+        </h1>
 
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
+        <div className="mb-5 flex flex-wrap items-center gap-2 text-sm">
           <span className="text-gold">★★★★★</span>
-          <span className="text-taupe-dark">
+          <span className="font-medium text-ink">
             {siteConfig.starRating} ({siteConfig.reviewCount})
           </span>
-          <span className="text-caption">·</span>
-          <Link href="#reviews" className="underline text-taupe-dark hover:text-plum">
+          <span className="text-muted">·</span>
+          <Link href="#reviews" className="font-medium text-brand underline-offset-2 hover:underline">
             {siteConfig.customerCount} customers
           </Link>
         </div>
 
-        <p className="mb-6 italic text-taupe-dark">
+        <p className="mb-5 text-sm italic leading-relaxed text-muted md:text-base">
           &ldquo;The magnetic bowl that started it all — shatterproof and cleans with one wipe.&rdquo;
         </p>
 
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-plum">
-          Choose your bundle:
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-ink">
+          Choose your bundle
         </p>
 
         <div className="mb-6 space-y-3">
@@ -260,16 +288,16 @@ function BundleProductBuyBox({ product }: Props) {
           })}
         </div>
 
-        <div className="mb-1 flex items-baseline gap-3">
-          <span className="text-3xl font-bold">{displayPrice}</span>
+        <div className="mb-1 flex flex-wrap items-baseline gap-3">
+          <span className="product-buy-price">{displayPrice}</span>
           {comparePrice && (
-            <span className="text-lg text-caption line-through">{comparePrice}</span>
+            <span className="text-lg text-muted line-through">{comparePrice}</span>
           )}
         </div>
         {saveAmount && (
-          <div className="mb-2 font-semibold text-coral">Save ${saveAmount}</div>
+          <p className="mb-2 text-sm font-semibold text-red-600">Save ${saveAmount}</p>
         )}
-        <p className="mb-6 text-sm text-taupe-dark">
+        <p className="mb-5 text-sm text-muted">
           or 4 interest-free payments with Shop Pay / Klarna
         </p>
 
@@ -285,11 +313,13 @@ function BundleProductBuyBox({ product }: Props) {
         <TrustBadges />
         <PaymentIcons className="mt-4" />
 
-        <ul className="mt-6 space-y-2.5">
+        <div className="product-buy-divider" />
+
+        <ul className="space-y-2.5">
           {buyBoxBullets.map((b) => (
             <li
               key={b}
-              className="relative pl-7 text-[0.9375rem] text-taupe-dark before:absolute before:left-0 before:font-bold before:text-coral before:content-['✓']"
+              className="relative pl-7 text-[0.9375rem] leading-snug text-muted before:absolute before:left-0 before:font-bold before:text-brand before:content-['✓']"
             >
               {b}
             </li>
@@ -335,7 +365,7 @@ function StickyAtc({
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-[99] border-t border-plum/10 bg-white/95 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-transform duration-300 lg:hidden ${visible ? "translate-y-0" : "translate-y-full"}`}
+      className={`fixed bottom-0 left-0 right-0 z-[99] border-t border-plum/10 bg-white/95 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-transform duration-300 lg:hidden ${visible ? "translate-y-0" : "translate-y-full"}`}
     >
       <div className="flex items-center gap-3">
         <div className="min-w-0 shrink">
@@ -351,56 +381,6 @@ function StickyAtc({
           {disabled ? "Sold Out" : "Add to Cart →"}
         </button>
       </div>
-    </div>
-  );
-}
-
-export function ProductGallery({ product }: Props) {
-  const [active, setActive] = useState(0);
-  const images = product.images.length > 0 ? product.images : [];
-
-  return (
-    <div>
-      <div className="mb-3">
-        {images[active]?.url ? (
-          <div className="image-slot aspect-square">
-            <Image
-              src={images[active].url}
-              alt={images[active].altText || product.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-        ) : (
-          <div className="image-slot flex aspect-square items-center justify-center bg-cream text-sm text-muted">
-            {product.title}
-          </div>
-        )}
-      </div>
-      {images.length > 1 && (
-        <div className="grid grid-cols-5 gap-2">
-          {images.slice(0, 5).map((image, i) => (
-            <button
-              key={image.url}
-              type="button"
-              onClick={() => setActive(i)}
-              className={`aspect-square overflow-hidden rounded-lg transition-all duration-200 ${
-                active === i ? "ring-2 ring-plum ring-offset-1" : "opacity-60 hover:opacity-90"
-              }`}
-            >
-              <Image
-                src={image.url}
-                alt={image.altText || `${product.title} ${i + 1}`}
-                width={100}
-                height={100}
-                className="h-full w-full object-cover"
-              />
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

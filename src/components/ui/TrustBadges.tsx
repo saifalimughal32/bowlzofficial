@@ -12,7 +12,7 @@ export function TrustBadges({ centered = false }: { centered?: boolean }) {
       <span className="flex items-center gap-1">
         <span aria-hidden>🇺🇸</span> Ships from USA
       </span>
-      <span>🔁 30-Night Guarantee</span>
+      <span>🔁 30-Day Warranty</span>
       <span>🔒 Secure checkout</span>
     </div>
   );

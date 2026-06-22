@@ -2,14 +2,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProduct } from "@/lib/shopify";
-import { ProductBuyBox, ProductGallery } from "@/components/product/ProductBuyBox";
-import { TrustStrip, PaymentIcons } from "@/components/ui/PaymentIcons";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
-import { VideoDemo } from "@/components/sections/VideoDemo";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Reviews } from "@/components/sections/Reviews";
+import { isBowlProduct } from "@/lib/productCategory";
+import { ProductBuyBox } from "@/components/product/ProductBuyBox";
+import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductPolicies } from "@/components/product/ProductPolicies";
+import { ProductSizingGuide } from "@/components/product/ProductSizingGuide";
+import { ProductHowItWorks } from "@/components/product/ProductHowItWorks";
+import { ProductDescription } from "@/components/product/ProductDescription";
+import { ProductContactCta } from "@/components/product/ProductContactCta";
+import { HomeReviews } from "@/components/home/HomeReviews";
 import { Comparison } from "@/components/sections/Comparison";
-import { Guarantee } from "@/components/sections/Guarantee";
 import { FAQ } from "@/components/sections/FAQ";
 
 type Props = { params: Promise<{ handle: string }> };
@@ -29,37 +31,41 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(handle);
   if (!product) notFound();
 
+  const showSizingGuide = isBowlProduct(handle);
+
   return (
     <>
-      <section className="section pb-12 pt-6 md:pb-16 md:pt-8">
+      <section className="product-page-hero pb-12 pt-24 md:pb-16 md:pt-28">
         <div className="container-main">
-          <nav className="mb-6 text-sm text-taupe-dark">
-            <Link href="/" className="hover:text-plum">
+          <nav className="mb-6 text-sm text-muted">
+            <Link href="/" className="transition-colors hover:text-ink">
               Home
-            </Link>{" "}
-            / {product.title}
+            </Link>
+            <span className="mx-2">/</span>
+            <Link href="/shop" className="transition-colors hover:text-ink">
+              Shop
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-ink">{product.title}</span>
           </nav>
 
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-start">
-            <ProductGallery product={product} />
+          <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+            <div className="lg:sticky lg:top-28">
+              <ProductGallery product={product} />
+            </div>
             <ProductBuyBox product={product} />
-          </div>
-
-          <div className="mt-10 space-y-4 border-y border-plum/10 py-8">
-            <TrustStrip />
-            <PaymentIcons />
           </div>
         </div>
       </section>
 
-      {/* Trimmed product page — focused on conversion, not a second homepage */}
-      <VideoDemo />
-      <BeforeAfter />
-      <HowItWorks compact />
-      <Reviews />
+      <ProductDescription description={product.description} />
+      <ProductHowItWorks />
+      <ProductPolicies />
+      {showSizingGuide && <ProductSizingGuide />}
       <Comparison />
-      <Guarantee />
+      <HomeReviews />
       <FAQ />
+      <ProductContactCta />
     </>
   );
 }

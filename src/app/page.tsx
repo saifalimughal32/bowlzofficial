@@ -18,6 +18,7 @@ export default function HomePage() {
         products={bowlzProducts.slice(0, 4)}
         seeAllHref="/shop/bowlz"
         seeAllLabel="Shop All Bowlz"
+        showSwatches
       />
       <TrustBar />
       <HomeProductGrid

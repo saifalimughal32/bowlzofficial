@@ -11,6 +11,7 @@ type Props = {
   shopAllLabel?: string;
   columns?: 2 | 3;
   showSwatches?: boolean;
+  hideTitle?: boolean;
 };
 
 export function ShopProductSection({
@@ -21,13 +22,22 @@ export function ShopProductSection({
   shopAllLabel,
   columns = 2,
   showSwatches = false,
+  hideTitle = false,
 }: Props) {
   const isExternal = shopAllHref?.startsWith("http");
 
   return (
-    <section id={id} className="scroll-mt-24 bg-white py-10 md:py-14">
+    <section
+      id={id}
+      className={cn(
+        "scroll-mt-24 bg-white py-10 md:py-14",
+        hideTitle && "pt-0 md:pt-2"
+      )}
+    >
       <div className="container-main max-w-[1100px]">
-        <h2 className="shop-category-title mb-8 md:mb-10">{title}:</h2>
+        {!hideTitle && (
+          <h2 className="shop-category-title mb-8 md:mb-10">{title}:</h2>
+        )}
 
         <div
           className={cn(

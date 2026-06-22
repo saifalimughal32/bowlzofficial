@@ -11,6 +11,7 @@ type Props = {
   products?: StoreProduct[];
   seeAllHref?: string;
   seeAllLabel?: string;
+  showSwatches?: boolean;
 };
 
 export function HomeBestProducts({
@@ -19,6 +20,7 @@ export function HomeBestProducts({
   products = bestsellingBowlz,
   seeAllHref = "/#bongz",
   seeAllLabel = "See All Products",
+  showSwatches = false,
 }: Props) {
   return (
     <HomeSection id={id}>
@@ -26,7 +28,12 @@ export function HomeBestProducts({
         <SectionHeader title={title} />
         <div className="product-grid">
           {products.map((product, i) => (
-            <ProductCard key={product.handle} product={product} priority={i < 2} />
+            <ProductCard
+              key={product.handle}
+              product={product}
+              priority={i < 2}
+              showSwatches={showSwatches}
+            />
           ))}
         </div>
         {seeAllHref && seeAllLabel && (

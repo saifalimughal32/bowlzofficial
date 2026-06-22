@@ -19,7 +19,7 @@ export default function ContactPage() {
           </p>
         </div>
       </div>
-      <section className="bg-cream py-12 md:py-16">
+      <section className="bg-white py-12 md:py-16">
         <div className="container-main">
           <ContactForm />
           <div className="mx-auto mt-8 max-w-3xl text-center text-sm text-muted">

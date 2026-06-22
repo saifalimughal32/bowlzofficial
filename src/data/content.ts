@@ -307,6 +307,13 @@ export const trustSignals = [
   },
 ];
 
+/** Stashlogix-style banner copy shown at the top of collection pages. */
+export const collectionTrustBanner = {
+  primary: "20% OFF MAGNETIC GLASS + A FREE OG BOWL. WHILE SUPPLIES LAST.",
+  secondary:
+    "FREE SHIPPING ON ORDERS $75+ · 30-DAY WARRANTY · SECURE CHECKOUT",
+};
+
 export const promoHighlights = [
   {
     title: "Magnetic Lock",
@@ -423,10 +430,6 @@ export const bundles = [
 
 export const bundleProductHandles = [
   "bowlz-v2",
-  "v3-18mm",
-  "faceted",
-  "xl-pre-order",
-  "platinum",
 ] as const;
 
 export function isBundleProduct(handle: string) {
@@ -435,11 +438,95 @@ export function isBundleProduct(handle: string) {
 
 export const buyBoxBullets = [
   "Fits 14mm bongs",
-  "100% shatterproof design",
-  "Cleans with one wipe",
-  "Food-grade, cool-touch materials",
+  "Higher volume (holds a half gram)",
+  "Cleans with one wipe post-sesh",
+  "100% shatterproof (aka clumsy st*ner friendly)",
+  "Made from food-grade, cool-touch materials",
+  "Airtight (doesn't affect airflow)",
   "High heat-resistant magnets",
-  "Airtight — doesn't affect airflow",
+];
+
+export const productPolicies = [
+  {
+    title: "Shipping Info",
+    body: `We ship to the USA, Canada, Australia, Mexico, New Zealand, the EU, and the UK.
+
+In-stock orders ship in 1–2 business days.
+
+Delivery estimates: Ground (3–5 business days), Priority (1–3 business days).
+
+Disclaimer: Bowlz Official isn't responsible for lost or stolen packages. Add Route Shipping Insurance at checkout for coverage.`,
+  },
+  {
+    title: "Warranty & Exchanges",
+    body: `If your item is defective or incorrect, email us within 30 days for a free replacement.
+
+Exchanges must be unused and in original packaging (no exchanges after use or cleaning). Exchange value is based on the original purchase price.
+
+We cover return shipping for defective or incorrect items; otherwise, the return label cost is the customer's responsibility.
+
+To request an exchange, email us your order number, the item requested, and photos if damaged. All exchanges are subject to availability.`,
+  },
+  {
+    title: "Returns",
+    body: `Returns follow the same eligibility and condition requirements as Warranty & Exchanges (unused, original packaging, 30-day window).
+
+Approved refunds are issued to the original payment method within 2–5 business days after the return is received and approved. Original shipping charges are non-refundable.
+
+International fees (shipping, duties, taxes, customs, and return shipping) are non-refundable.
+
+Purchases made through third-party retailers or smoke shops are not eligible for return—please contact the original seller.`,
+  },
+  {
+    title: "Privacy Policy",
+    body: `Bowlz Official ("we", "us") respects your privacy. This policy describes how we collect, use, and protect personal information when you visit bowlzofficial.com or make a purchase.
+
+We collect information you provide (name, email, shipping address, payment details processed by Shopify) and technical data (cookies, device info, analytics) to fulfill orders, improve our site, and communicate with you.
+
+We do not sell your personal information. We share data only with service providers needed to operate our store (e.g., Shopify, shipping carriers, email platforms) and when required by law.
+
+You may request access, correction, or deletion of your data by emailing hello@bowlzofficial.com.
+
+By using this site you agree to this policy. We may update it periodically; continued use constitutes acceptance.`,
+  },
+];
+
+export const bowlSizingGuide = {
+  title: "Bowl Sizing Guide",
+  intro:
+    "You can use a penny to determine the size bowl you need for your bong. Place the penny into the downstem and depending on how deep it sinks in, you will know what size bowl you need.",
+  sizes: [
+    {
+      label: "14mm",
+      detail:
+        "If the penny goes about 1/4 of the way in, that means you need a 14mm bowl. This is the most common size.",
+      highlight: true,
+    },
+    {
+      label: "18mm",
+      detail: "If the penny goes in halfway, then you will need an 18mm bowl.",
+    },
+    {
+      label: "10mm",
+      detail:
+        "If the penny barely goes in, then you need a 10mm bowl. We do not offer a 10mm size at this time.",
+    },
+  ],
+};
+
+export const productHowItWorks = [
+  {
+    title: "Snap",
+    text: "High heat-resistant magnets lock your bowl in place with an airtight seal that doesn't affect airflow.",
+  },
+  {
+    title: "Session",
+    text: "Food-grade, cool-touch materials hold a half gram comfortably and stay shatterproof through real-life use.",
+  },
+  {
+    title: "Wipe",
+    text: "One wipe post-sesh keeps it like brand new — no soaking, scrubbing, or broken glass on the floor.",
+  },
 ];
 
 export const bongzBuyBoxBullets = [
@@ -450,6 +537,7 @@ export const bongzBuyBoxBullets = [
 ];
 
 export const cartUpsell = {
+  handle: "swabz",
   label: "Add Swabz cleaning kit",
   price: 9.99,
   description: "Keep your bowl spotless — pairs perfectly with every Bowlz piece.",
@@ -564,9 +652,9 @@ export const footerLinks = {
   support: [
     { href: "/contact", label: "Contact Us" },
     { href: "/wholesale", label: "Wholesale" },
-    { href: "https://bowlzofficial.com/policies/shipping-policy", label: "Shipping Policy" },
-    { href: "https://bowlzofficial.com/policies/refund-policy", label: "Refund Policy" },
-    { href: "https://bowlzofficial.com/policies/privacy-policy", label: "Privacy Policy" },
+    { href: "/policies/shipping-policy", label: "Shipping Policy" },
+    { href: "/policies/refund-policy", label: "Refund Policy" },
+    { href: "/policies/privacy-policy", label: "Privacy Policy" },
   ],
   /** @deprecated use footerLinks.shop */
   main: [
@@ -576,8 +664,8 @@ export const footerLinks = {
     { href: "/shop#bongz", label: "Bongz" },
   ],
   order: [
-    { href: "https://bowlzofficial.com/policies/shipping-policy", label: "Shipping Policy" },
-    { href: "https://bowlzofficial.com/policies/refund-policy", label: "Return Policy" },
+    { href: "/policies/shipping-policy", label: "Shipping Policy" },
+    { href: "/policies/refund-policy", label: "Return Policy" },
     { href: "https://bowlzofficial.com/account", label: "Account" },
   ],
   contact: [
@@ -585,9 +673,9 @@ export const footerLinks = {
     { href: "/contact", label: "Contact Us" },
   ],
   legal: [
-    { href: "https://bowlzofficial.com/policies/privacy-policy", label: "Privacy Policy" },
+    { href: "/policies/privacy-policy", label: "Privacy Policy" },
     { href: "https://bowlzofficial.com/policies/terms-of-service", label: "Terms of Use" },
-    { href: "https://bowlzofficial.com/policies/refund-policy", label: "Return Policy" },
+    { href: "/policies/refund-policy", label: "Return Policy" },
   ],
 };
 
