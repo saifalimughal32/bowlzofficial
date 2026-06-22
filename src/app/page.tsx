@@ -1,56 +1,36 @@
-import { HomeHero } from "@/components/home/HomeHero";
-import { HomeMarquee } from "@/components/home/HomeMarquee";
-import { HomeFeatureGrid } from "@/components/home/HomeFeatureGrid";
-import { HomeShowcase } from "@/components/home/HomeShowcase";
-import { HomeSpecs } from "@/components/home/HomeSpecs";
+import { HomeVideoBanner } from "@/components/home/HomeVideoBanner";
+import { HomeBestProducts } from "@/components/home/HomeBestProducts";
+import { HomeProductGrid } from "@/components/home/HomeProductGrid";
+import { HomeEditorial } from "@/components/home/HomeEditorial";
+import { HomeCollections } from "@/components/home/HomeCollections";
 import { HomeReviews } from "@/components/home/HomeReviews";
-import { HomeBundles } from "@/components/home/HomeBundles";
-import { HomeFAQ } from "@/components/home/HomeFAQ";
-import { HomeFinalCTA } from "@/components/home/HomeFinalCTA";
-import { siteConfig } from "@/data/content";
-import { getProduct } from "@/lib/shopify";
-import { galleryUrls, pickImage } from "@/lib/product-gallery";
+import { HomeWholesale } from "@/components/home/HomeWholesale";
+import { TrustBar } from "@/components/shop/TrustBar";
+import { bowlzProducts, bongzProducts } from "@/data/content";
 
-export default async function HomePage() {
-  const product = await getProduct(siteConfig.productHandle);
-  const urls = galleryUrls(product?.images ?? []);
-
+export default function HomePage() {
   return (
     <>
-      <HomeHero
-        heroImage={pickImage(urls, 0)}
-        secondaryImage={pickImage(urls, 1)}
+      <HomeVideoBanner />
+      <HomeBestProducts
+        id="bowlz"
+        title="Bowlz"
+        products={bowlzProducts.slice(0, 4)}
+        seeAllHref="/shop#bowlz"
+        seeAllLabel="Shop All Bowlz"
       />
-      <HomeMarquee />
-      <HomeFeatureGrid
-        images={[
-          pickImage(urls, 2),
-          pickImage(urls, 3),
-          pickImage(urls, 4),
-          pickImage(urls, 5),
-          pickImage(urls, 6),
-          pickImage(urls, 7),
-        ]}
+      <TrustBar />
+      <HomeProductGrid
+        id="bongz"
+        title="Bongz"
+        products={bongzProducts.slice(0, 4)}
+        seeAllHref="/shop#bongz"
+        seeAllLabel="Shop All Bongz"
       />
-      <HomeShowcase
-        images={[
-          pickImage(urls, 8),
-          pickImage(urls, 9),
-          pickImage(urls, 10),
-        ]}
-      />
-      <HomeSpecs />
-      <HomeReviews
-        images={[
-          pickImage(urls, 11),
-          pickImage(urls, 12),
-          pickImage(urls, 13),
-          pickImage(urls, 14),
-        ]}
-      />
-      <HomeBundles />
-      <HomeFAQ />
-      <HomeFinalCTA />
+      <HomeEditorial />
+      <HomeCollections />
+      <HomeReviews />
+      <HomeWholesale />
     </>
   );
 }

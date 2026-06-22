@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
-import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { Inter, Playfair_Display } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -8,38 +7,43 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { siteConfig } from "@/data/content";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-heading",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-body",
+  weight: ["600", "700"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — Heated Menstrual Relief Vibration Belt`,
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
+  icons: {
+    icon: "/logo/bowlz-logo.png",
+    shortcut: "/logo/bowlz-logo.png",
+    apple: "/logo/bowlz-logo.png",
+  },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${instrumentSerif.variable} ${dmSans.variable}`}>
-      <body className="antialiased">
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className={`${inter.className} overflow-x-hidden antialiased`}>
         <CartProvider>
-          <AnnouncementBar />
           <Header />
-          <main>{children}</main>
+          <main className="overflow-x-hidden">{children}</main>
           <Footer />
           <CartDrawer />
         </CartProvider>

@@ -26,7 +26,7 @@ export function ProductBuyBox({ product }: Props) {
 
   const displayPrice = hasDedicatedVariant && selectedVariant
     ? formatMoney(selectedVariant.price.amount, selectedVariant.price.currencyCode)
-    : `$${selectedBundle?.price ?? bundles[0]?.price ?? 55.58}`;
+    : `$${selectedBundle?.price ?? bundles[0]?.price ?? 35}`;
 
   const comparePrice = hasDedicatedVariant && selectedVariant?.compareAtPrice
     ? formatMoney(selectedVariant.compareAtPrice.amount, selectedVariant.compareAtPrice.currencyCode)
@@ -68,12 +68,12 @@ export function ProductBuyBox({ product }: Props) {
           </span>
           <span className="text-caption">·</span>
           <Link href="#reviews" className="underline text-taupe-dark hover:text-plum">
-            {siteConfig.customerCount} women
+            {siteConfig.customerCount} customers
           </Link>
         </div>
 
         <p className="mb-6 italic text-taupe-dark">
-          &ldquo;Heats in 3 seconds — warmth and vibration that goes wherever you do.&rdquo;
+          &ldquo;The magnetic bowl that started it all — shatterproof and cleans with one wipe.&rdquo;
         </p>
 
         <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-plum">

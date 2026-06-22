@@ -26,7 +26,7 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const CART_COOKIE = "nova_cart_id";
+const CART_COOKIE = "bowlz_cart_id";
 
 function getCartIdFromCookie(): string | null {
   if (typeof document === "undefined") return null;

@@ -1,256 +1,587 @@
+import { colorSwatch, type ProductColor } from "@/lib/productColors";
+
 export const siteConfig = {
-  name: "Nova Triggers",
-  productHandle: "heated-menstrual-relief-vibration-belt",
+  name: "Bowlz",
+  tagline: "Magnetic Bowl Piece",
+  productHandle: "bowlz-v2",
   description:
-    "Heated menstrual relief vibration belt. Warms in 3 seconds, 3 heat + 3 vibration levels. USB rechargeable, adjustable up to 50\". Ships from California.",
-  url: "https://novatriggers.com",
-  email: "hello@novatriggers.com",
-  freeShippingThreshold: 49,
-  starRating: 4.8,
-  reviewCount: "3,000+",
-  customerCount: "20,000+",
+    "Premium magnetic bowl pieces and glass — shatterproof, easy to clean, and built for everyday sessions. Fits 14mm bongs.",
+  url: "https://bowlzofficial.com",
+  email: "hello@bowlzofficial.com",
+  freeShippingThreshold: 75,
+  promo: "20% off magnetic glass + a free OG bowl. While supplies last.",
+  reviewsBackground:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7917.jpg?v=1774974454",
+  instagram: "https://www.instagram.com/bowlzofficial/",
+  facebook: "https://www.facebook.com/bowlzofficial",
+  starRating: 4.9,
+  reviewCount: "1,000+",
+  customerCount: "50,000+",
 };
+
+export type NavLink = {
+  href: string;
+  label: string;
+};
+
+export type NavItem =
+  | (NavLink & { children?: never })
+  | (NavLink & { children: NavLink[] });
+
+export const mainNav: NavItem[] = [
+  { href: "/", label: "Home" },
+  {
+    href: "/shop",
+    label: "Shop",
+    children: [
+      { href: "/shop", label: "All Products" },
+      { href: "/shop/bowlz", label: "Bowlz" },
+      { href: "/shop/bongz", label: "Bongz" },
+      { href: "/shop/cleaning", label: "Cleaning Gear" },
+    ],
+  },
+  { href: "/wholesale", label: "Wholesale" },
+  { href: "/contact", label: "Contact" },
+];
+
+/** @deprecated use mainNav */
+export const navLinks: NavLink[] = [
+  { href: "/shop", label: "All Products" },
+  { href: "/shop/bowlz", label: "Bowlz" },
+  { href: "/shop/bongz", label: "Bongz" },
+  { href: "/shop/cleaning", label: "Cleaning Gear" },
+];
+
+export const collections = [
+  {
+    label: "Shop Bowlz",
+    href: "/shop/bowlz",
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8096.png?v=1774974454",
+  },
+  {
+    label: "Shop Bongz",
+    href: "/shop/bongz",
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1_fd5146ab-67d2-4f07-8183-be825247d297.png?v=1775494606",
+  },
+  {
+    label: "Shop Cleaning Gear",
+    href: "/shop/cleaning",
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_10.png?v=1780777450",
+  },
+];
+
+export type StoreProduct = {
+  handle: string;
+  title: string;
+  priceMin: number;
+  priceMax: number;
+  image: string;
+  compareAt?: number;
+  badge?: string;
+  soldOut?: boolean;
+  colors?: ProductColor[];
+};
+
+export const bowlzProducts: StoreProduct[] = [
+  {
+    handle: "platinum",
+    title: "Stripe 14mm",
+    priceMin: 50,
+    priceMax: 50,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_11.png?v=1774974454",
+    colors: [
+      colorSwatch(
+        "Carbon",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4890-Edit.jpg?v=1774975266"
+      ),
+      colorSwatch(
+        "Electric",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4880-Edit.jpg?v=1774975266"
+      ),
+      colorSwatch(
+        "Emerald",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4881-Edit.jpg?v=1774975266"
+      ),
+    ],
+  },
+  {
+    handle: "v3-18mm",
+    title: "V3 14mm",
+    priceMin: 39,
+    priceMax: 39,
+    compareAt: 49,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8003.jpg?v=1780777330",
+    colors: [
+      colorSwatch(
+        "Slime green",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7776.jpg?v=1774985607"
+      ),
+      colorSwatch(
+        "Pink Panther",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7815.jpg?v=1774982669"
+      ),
+      colorSwatch(
+        "Fire OG",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7878.jpg?v=1774982669"
+      ),
+      colorSwatch(
+        "Blueberry",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7809.jpg?v=1774982669"
+      ),
+      colorSwatch(
+        "Carbon",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4888-Edit_e685949c-ae01-474a-afe4-9e86d98206a7.jpg?v=1774982669"
+      ),
+    ],
+  },
+  {
+    handle: "bowlz-v2",
+    title: "The OG 14mm",
+    priceMin: 35,
+    priceMax: 35,
+    compareAt: 50,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8096.png?v=1774974454",
+    colors: [
+      colorSwatch(
+        "Black Mamba",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7905.png?v=1774974454"
+      ),
+    ],
+  },
+  {
+    handle: "xl-pre-order",
+    title: "XL 14mm PRE-ORDER",
+    priceMin: 59,
+    priceMax: 59,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_8.png?v=1774974454",
+    colors: [
+      colorSwatch(
+        "Carbon",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A9197-1.jpg?v=1775502542"
+      ),
+      colorSwatch(
+        "Grape",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/12.jpg?v=1775511811"
+      ),
+      colorSwatch(
+        "Emerald",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A9197-2.jpg?v=1775511811"
+      ),
+    ],
+  },
+  {
+    handle: "faceted",
+    title: "Faceted 14mm",
+    priceMin: 55,
+    priceMax: 55,
+    soldOut: true,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A5132_7e837930-8002-4491-b6fd-d9aebe10fa21.jpg?v=1770650047",
+    colors: [
+      colorSwatch(
+        "Tundra",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4904-Edit.jpg?v=1770679478"
+      ),
+      colorSwatch(
+        "Bubble Gum",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4915-Edit.jpg?v=1770679478"
+      ),
+      colorSwatch(
+        "Carbon",
+        "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A4923-Edit.jpg?v=1770649482"
+      ),
+    ],
+  },
+  {
+    handle: "swabz",
+    title: "Swabz",
+    priceMin: 9.99,
+    priceMax: 9.99,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_10.png?v=1780777450",
+  },
+];
+
+/** @deprecated use bowlzProducts */
+export const bestsellingBowlz = bowlzProducts;
+
+export const bongzProducts: StoreProduct[] = [
+  {
+    handle: "tubez",
+    title: "Tubez",
+    priceMin: 180,
+    priceMax: 180,
+    compareAt: 225,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1_fd5146ab-67d2-4f07-8183-be825247d297.png?v=1775494606",
+  },
+  {
+    handle: "beakerz",
+    title: "Beakerz",
+    priceMin: 140,
+    priceMax: 140,
+    compareAt: 175,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1_8b18ff22-e2e0-4ab1-9ec0-2b612c647ff0.png?v=1775495004",
+  },
+  {
+    handle: "percs",
+    title: "Percz",
+    priceMin: 40,
+    priceMax: 40,
+    compareAt: 50,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8753.png?v=1775495154",
+  },
+  {
+    handle: "base",
+    title: "Tubez Replacement Base",
+    priceMin: 75,
+    priceMax: 75,
+    compareAt: 95,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8742.png?v=1775495325",
+  },
+  {
+    handle: "tubez-replacement-neck",
+    title: "Replacement neck",
+    priceMin: 65,
+    priceMax: 65,
+    compareAt: 76,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8719.png?v=1775495283",
+  },
+  {
+    handle: "replacement-glass-downstem",
+    title: "Replacement Glass Downstem",
+    priceMin: 6.99,
+    priceMax: 6.99,
+    soldOut: true,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8768.png?v=1775495191",
+  },
+];
+
+export const cleaningProducts: StoreProduct[] = [
+  {
+    handle: "swabz",
+    title: "Swabz",
+    priceMin: 9.99,
+    priceMax: 9.99,
+    image:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_10.png?v=1780777450",
+  },
+];
+
+export const replacementParts: StoreProduct[] = bongzProducts.slice(3);
+
+export const shopHero = {
+  image:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7917.jpg?v=1774974454",
+  alt: "Bowlz magnetic bowl pieces and Bongz glass",
+};
+
+export const trustSignals = [
+  {
+    label: `${siteConfig.customerCount} Customers`,
+    description: "Trusted nationwide",
+  },
+  {
+    label: "Shatterproof Design",
+    description: "Built for real sessions",
+  },
+  {
+    label: "14mm Universal Fit",
+    description: "Works with standard bongs",
+  },
+  {
+    label: "One-Wipe Clean",
+    description: "Post-session in seconds",
+  },
+];
+
+export const promoHighlights = [
+  {
+    title: "Magnetic Lock",
+    body: "High heat-resistant magnets create an airtight seal without affecting airflow.",
+  },
+  {
+    title: "Easy to Clean",
+    body: "Wipe your bowl clean after every session — no soaking or scrubbing required.",
+  },
+  {
+    title: "Wholesale Ready",
+    body: "Display-ready packaging and fast fulfillment for smoke shops nationwide.",
+  },
+];
+
+export type ProductSection = {
+  id: string;
+  title: string;
+  products: StoreProduct[];
+  shopAllHref: string;
+  shopAllLabel: string;
+  columns?: 2 | 3 | 4;
+};
+
+export const productSections: ProductSection[] = [
+  {
+    id: "bowlz",
+    title: "Bowlz",
+    products: bowlzProducts,
+    shopAllHref: "https://bowlzofficial.com/collections/bowlz-1",
+    shopAllLabel: "Shop All Bowlz",
+    columns: 2,
+  },
+  {
+    id: "bongz",
+    title: "Bongz",
+    products: bongzProducts,
+    shopAllHref: "https://bowlzofficial.com/collections/glass",
+    shopAllLabel: "Shop All Bongz",
+    columns: 2,
+  },
+  {
+    id: "cleaning",
+    title: "Cleaning Gear",
+    products: cleaningProducts,
+    shopAllHref: "/shop/cleaning",
+    shopAllLabel: "Shop Cleaning Gear",
+    columns: 2,
+  },
+];
+
+export const editorial = {
+  image:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7917.jpg?v=1774974454",
+  headline: "Built for Sessions,\nInspired by Better Design",
+  body: "Two friends set out in 2021 to make a better bowl — shatterproof, magnetic, and effortless to clean. The OG design still has a cult following for a reason.",
+};
+
+export const homeReviews = [
+  {
+    name: "Marcus T.",
+    text: "The magnetic connection is solid and the bowl cleans with one wipe. No more broken glass on the floor — this thing is built different.",
+    location: "Los Angeles, United States",
+  },
+  {
+    name: "Jordan K.",
+    text: "Fits my 14mm perfectly. Holds a half gram easy and the cool-touch material doesn't heat up like traditional glass.",
+    location: "Denver, United States",
+  },
+  {
+    name: "Alex R.",
+    text: "Bought the OG and a V3. Both are airtight and don't mess with airflow. Shipping was fast and packaging felt premium.",
+    location: "Portland, United States",
+  },
+  {
+    name: "Chris M.",
+    text: "Finally something clumsy-stoner friendly. Dropped it twice already and not a scratch. The Swabz pair perfectly for cleaning.",
+    location: "Austin, United States",
+  },
+];
 
 export const bundles = [
   {
     qty: 1,
-    label: "1 Belt — Try it",
-    price: 55.58,
-    compareAt: 79,
-    save: null as number | null,
+    label: "1 Bowl — Try the OG",
+    price: 35,
+    compareAt: 50,
+    save: 15,
     badge: null as string | null,
     subtitle: null as string | null,
     default: false,
   },
   {
     qty: 2,
-    label: "2 Belts — One for home, one for your bag",
-    price: 99,
-    compareAt: 111,
-    save: 12,
+    label: "2 Bowls — Backup ready",
+    price: 65,
+    compareAt: 78,
+    save: 13,
     badge: "Most Popular",
-    subtitle: "Save $12 · Free travel pouch",
+    subtitle: "Save $13 · Mix OG + V3",
     default: true,
   },
   {
     qty: 3,
-    label: "3 Belts — Share with the women you love",
-    price: 139,
-    compareAt: 167,
-    save: 28,
+    label: "3 Bowls — Full rotation",
+    price: 95,
+    compareAt: 117,
+    save: 22,
     badge: "Best Value",
-    subtitle: "Save $28 · Free travel pouch",
+    subtitle: "Save $22 · Free Swabz",
     default: false,
   },
 ];
 
+export const buyBoxBullets = [
+  "Fits 14mm bongs",
+  "100% shatterproof design",
+  "Cleans with one wipe",
+  "Food-grade, cool-touch materials",
+  "High heat-resistant magnets",
+  "Airtight — doesn't affect airflow",
+];
+
+export const cartUpsell = {
+  label: "Add Swabz cleaning kit",
+  price: 9.99,
+  description: "Keep your bowl spotless — pairs perfectly with every Bowlz piece.",
+};
+
+export const faqs = [
+  {
+    q: "What size bong does Bowlz fit?",
+    a: "All Bowlz magnetic bowl pieces are designed for standard 14mm bong joints. Check individual product pages for size details on XL and specialty models.",
+  },
+  {
+    q: "Is Bowlz really shatterproof?",
+    a: "Yes — Bowlz is made from food-grade, cool-touch materials that won't shatter like traditional glass. It's built for real-life sessions.",
+  },
+  {
+    q: "How do I clean my Bowlz?",
+    a: "Most Bowlz pieces clean with a single wipe post-session. Pair with Swabz for a deeper clean on your bong and downstem.",
+  },
+  {
+    q: "Do the magnets affect airflow?",
+    a: "No — Bowlz uses an airtight magnetic seal designed to maintain full airflow through your piece without leaks or drag.",
+  },
+  {
+    q: "What's the current promotion?",
+    a: "20% off magnetic glass plus a free OG bowl while supplies last. Discount applied automatically at checkout on eligible items.",
+  },
+  {
+    q: "Do you offer wholesale?",
+    a: "Yes — we work with smoke shops and dispensaries nationwide. Visit our wholesale page or contact us to create a wholesale account.",
+  },
+];
+
+export const reviews = homeReviews.map((r) => ({
+  text: r.text,
+  author: r.name,
+  location: r.location,
+  date: "Recently",
+  imageSrc: "",
+}));
+
 export const ratingDistribution = [
-  { stars: 5, percent: 89 },
-  { stars: 4, percent: 8 },
+  { stars: 5, percent: 92 },
+  { stars: 4, percent: 6 },
   { stars: 3, percent: 2 },
-  { stars: 2, percent: 1 },
+  { stars: 2, percent: 0 },
   { stars: 1, percent: 0 },
 ];
 
 export const ugcClips = [
-  {
-    id: "ugc-1",
-    label: "Day 1 at the office",
-    caption: "Wore it under my sweater all day",
-    videoSrc: "",
-  },
-  {
-    id: "ugc-2",
-    label: "Morning routine",
-    caption: "My go-to comfort ritual",
-    videoSrc: "",
-  },
-  {
-    id: "ugc-3",
-    label: "Unboxing",
-    caption: "Finally something that works",
-    videoSrc: "",
-  },
+  { id: "ugc-1", label: "Magnetic snap", caption: "Satisfying every time", videoSrc: "" },
+  { id: "ugc-2", label: "One-wipe clean", caption: "Post-sesh routine", videoSrc: "" },
+  { id: "ugc-3", label: "OG unboxing", caption: "The original design", videoSrc: "" },
 ];
 
-export const cartUpsell = {
-  label: "Add a 2nd belt for your bag",
-  price: 43,
-  description: "One for home, one on the go — most women grab both.",
-};
-
-export const reviews = [
-  {
-    text: "I wore it under my sweater at the office and got through my whole day. The heat kicks in within seconds — first period in years I didn't go home early.",
-    author: "Mia T.",
-    location: "Denver CO",
-    date: "2 weeks ago",
-    imageSrc: "",
-  },
-  {
-    text: "Bought one, immediately ordered a second for my daughter. The vibration settings are so soothing. This is the gift every woman secretly wants.",
-    author: "Karen L.",
-    location: "Tampa FL",
-    date: "1 month ago",
-    imageSrc: "",
-  },
-  {
-    text: "I was sure it was overhyped. Day 1 changed my mind — it warms up in literally 3 seconds. Skeptic turned believer.",
-    author: "Destiny W.",
-    location: "Columbus OH",
-    date: "3 weeks ago",
-    imageSrc: "",
-  },
-  {
-    text: "So discreet under my work clothes. The adjustable strap fits perfectly and nobody has to know you're getting relief all day.",
-    author: "Jessica M.",
-    location: "Austin TX",
-    date: "1 week ago",
-    imageSrc: "",
-  },
-  {
-    text: "The massage setting is my favorite. Three heat levels and three vibration modes — it's like a warm hug when cramps hit.",
-    author: "Alicia R.",
-    location: "Seattle WA",
-    date: "2 months ago",
-    imageSrc: "",
-  },
-  {
-    text: "Got the 2-pack — one stays in my nightstand, one in my work bag. USB rechargeable and lasts about 2 hours. Best purchase I've made for myself in years.",
-    author: "Taylor B.",
-    location: "Nashville TN",
-    date: "3 weeks ago",
-    imageSrc: "",
-  },
-];
-
-export const faqs = [
-  {
-    q: "How fast does it heat up?",
-    a: "The belt warms up in just 3 seconds. Choose from 3 heat levels — 113°F, 131°F, or 149°F — to find the warmth that feels right for you.",
-  },
-  {
-    q: "Is it cordless and rechargeable?",
-    a: "Yes — fully USB rechargeable with up to 2 hours of use per charge. No plug, no wires. Wear it anywhere and charge it like your phone.",
-  },
-  {
-    q: "Can I wear it under clothes?",
-    a: "Absolutely. The slim, adjustable belt fits up to 50 inches and is discreet under a hoodie, dress, or jeans. Most women wear it all day without anyone noticing.",
-  },
-  {
-    q: "What about the vibration massage?",
-    a: "Three vibration settings work alongside the heat to ease tension. It's gentle, soothing, and designed for comfortable daily wear — not intense massage.",
-  },
-  {
-    q: "Is it safe to use?",
-    a: "Yes — it includes an automatic shut-off after 30 minutes of inactivity for safety. Nova Triggers is a personal comfort product, not a medical device. Consult your healthcare provider for medical concerns.",
-  },
-  {
-    q: "How long does shipping take?",
-    a: "We ship from California within 1 business day. Most orders arrive within 3–7 business days. You'll receive tracking as soon as your order ships.",
-  },
-  {
-    q: "What if it doesn't work for me?",
-    a: "You're covered by our 30-Night Comfort Guarantee. Try it through a full cycle — if it doesn't bring you real comfort, send it back for a full refund. No awkward questions.",
-  },
-  {
-    q: "Is it a good gift?",
-    a: "It's one of our most-gifted items. Choose the 2 or 3-pack for sisters, daughters, and best friends. Every woman deserves this kind of comfort.",
-  },
+export const comparisonRows = [
+  { feature: "Shatterproof", bowlz: true, glass: false, silicone: false },
+  { feature: "Magnetic attachment", bowlz: true, glass: false, silicone: false },
+  { feature: "One-wipe cleaning", bowlz: true, glass: false, silicone: false },
+  { feature: "Cool-touch material", bowlz: true, glass: false, silicone: false },
+  { feature: "Fits 14mm bongs", bowlz: true, glass: true, silicone: false },
 ];
 
 export const benefits = [
   {
-    title: "Heats in 3 seconds",
-    description:
-      "Instant warmth when cramps hit — no waiting around. Three heat levels from gentle to deep soothing warmth.",
-    imageLabel: "Heat levels demo",
-    imageHint: "Control panel showing 3 heat settings",
-    imageSrc: "",
+    title: "Magnetic snap-on",
+    description: "High heat-resistant magnets lock in tight — airtight seal without affecting airflow.",
+    imageLabel: "Magnetic connection",
+    imageHint: "Bowlz attached to bong",
+    imageSrc:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8208.png?v=1774974454",
   },
   {
-    title: "3 vibration modes",
-    description:
-      "Gentle vibration works with the heat to ease tension. Three settings let you dial in exactly what feels good today.",
-    imageLabel: "Vibration settings",
-    imageHint: "Control panel / vibration mode buttons",
-    imageSrc: "",
+    title: "One-wipe clean",
+    description: "No soaking, no scrubbing. Wipe and you're done — built for everyday sessions.",
+    imageLabel: "Easy cleaning",
+    imageHint: "Clean bowl close-up",
+    imageSrc:
+      "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A7917.jpg?v=1774974454",
   },
-  {
-    title: "USB rechargeable",
-    description:
-      "Up to 2 hours per charge. No plug, no wires. Relief that follows you everywhere — desk, car, errands, bed.",
-    imageLabel: "USB charging",
-    imageHint: "Belt charging via USB cable",
-    imageSrc: "",
-  },
-  {
-    title: "Adjustable & discreet",
-    description:
-      "Fits up to 50 inches with a soft, skin-friendly strap. Wear it under a hoodie, dress, or jeans — nobody has to know.",
-    imageLabel: "Under clothing",
-    imageHint: "Discreet wear under hoodie or dress",
-    imageSrc: "",
-  },
-];
-
-export const comparisonRows = [
-  { feature: "Heats in 3 seconds", nova: true, pills: false, bottle: false },
-  { feature: "Heat + vibration", nova: true, pills: false, bottle: false },
-  { feature: "USB rechargeable", nova: true, pills: false, bottle: false },
-  { feature: "Drug-free comfort", nova: true, pills: false, bottle: true },
-  { feature: "Wear anywhere", nova: true, pills: true, bottle: false },
-  { feature: "Auto shut-off safety", nova: true, pills: false, bottle: false },
-  { feature: "Discreet under clothes", nova: true, pills: true, bottle: false },
-];
-
-export const buyBoxBullets = [
-  "Heats in 3 seconds",
-  "3 heat + 3 vibration levels",
-  "USB rechargeable — 2 hrs per charge",
-  "Adjustable up to 50\" — discreet wear",
-];
-
-export const productSpecs = [
-  { label: "Heat-up time", value: "3 seconds" },
-  { label: "Heat levels", value: "113°F · 131°F · 149°F" },
-  { label: "Vibration modes", value: "3 gentle settings" },
-  { label: "Battery life", value: "Up to 2 hours per charge" },
-  { label: "Fit range", value: "Adjustable up to 50\"" },
-  { label: "Safety", value: "Auto shut-off after 30 min" },
-  { label: "Charging", value: "USB rechargeable" },
-  { label: "Shipping", value: "California · 1 business day" },
 ];
 
 export const homeFeatures = [
-  {
-    title: "3-Second Instant Heat",
-    description:
-      "Warmth the moment cramps hit. Three calibrated heat levels let you dial in gentle or deep soothing relief.",
-  },
-  {
-    title: "Triple Vibration Modes",
-    description:
-      "Gentle massage paired with heat eases tension without overwhelming — designed for all-day comfort.",
-  },
-  {
-    title: "Discreet Under-Clothing Wear",
-    description:
-      "Slim, adjustable belt disappears under a hoodie, dress, or jeans. Relief that follows you everywhere.",
-  },
-  {
-    title: "USB Rechargeable Freedom",
-    description:
-      "Up to 2 hours per charge. No plug, no wires — desk, car, errands, bed. Charge it like your phone.",
-  },
-  {
-    title: "Soft Skin-Friendly Strap",
-    description:
-      "Premium adjustable band fits up to 50 inches with a beautifully textured, comfortable touch.",
-  },
-  {
-    title: "Smart Auto Shut-Off",
-    description:
-      "30-minute inactivity shut-off for peace of mind. Personal comfort product built for everyday trust.",
-  },
+  { title: "Shatterproof Build", description: "Food-grade materials — clumsy-session friendly." },
+  { title: "Magnetic Lock", description: "Airtight seal with high heat-resistant magnets." },
+  { title: "One-Wipe Clean", description: "Post-session cleanup in seconds, not minutes." },
+  { title: "14mm Universal Fit", description: "Works with standard 14mm bong joints." },
 ];
+
+export const productSpecs = [
+  { label: "Joint size", value: "14mm standard" },
+  { label: "Capacity", value: "Holds ~0.5g" },
+  { label: "Material", value: "Food-grade, cool-touch" },
+  { label: "Magnets", value: "High heat-resistant" },
+  { label: "Cleaning", value: "One wipe post-session" },
+  { label: "Durability", value: "100% shatterproof" },
+];
+
+export const footerLinks = {
+  shop: [
+    { href: "/shop/bowlz", label: "Bowlz" },
+    { href: "/shop/bongz", label: "Bongz" },
+    { href: "/shop/cleaning", label: "Cleaning Gear" },
+    { href: "/shop", label: "Shop All" },
+    { href: "/", label: "Home" },
+  ],
+  learn: [
+    { href: "/#reviews", label: "Reviews" },
+    { href: "/wholesale", label: "Wholesale" },
+    { href: "/products/bowlz-v2", label: "The OG 14mm" },
+    { href: "https://bowlzofficial.com/blogs/news", label: "Blog" },
+  ],
+  support: [
+    { href: "/contact", label: "Contact Us" },
+    { href: "/wholesale", label: "Wholesale" },
+    { href: "https://bowlzofficial.com/policies/shipping-policy", label: "Shipping Policy" },
+    { href: "https://bowlzofficial.com/policies/refund-policy", label: "Refund Policy" },
+    { href: "https://bowlzofficial.com/policies/privacy-policy", label: "Privacy Policy" },
+  ],
+  /** @deprecated use footerLinks.shop */
+  main: [
+    { href: "/", label: "Home" },
+    { href: "/shop", label: "Shop All" },
+    { href: "/shop#bowlz", label: "Bowlz" },
+    { href: "/shop#bongz", label: "Bongz" },
+  ],
+  order: [
+    { href: "https://bowlzofficial.com/policies/shipping-policy", label: "Shipping Policy" },
+    { href: "https://bowlzofficial.com/policies/refund-policy", label: "Return Policy" },
+    { href: "https://bowlzofficial.com/account", label: "Account" },
+  ],
+  contact: [
+    { href: "/wholesale", label: "Wholesale" },
+    { href: "/contact", label: "Contact Us" },
+  ],
+  legal: [
+    { href: "https://bowlzofficial.com/policies/privacy-policy", label: "Privacy Policy" },
+    { href: "https://bowlzofficial.com/policies/terms-of-service", label: "Terms of Use" },
+    { href: "https://bowlzofficial.com/policies/refund-policy", label: "Return Policy" },
+  ],
+};
+
+export const footerSocial = [
+  { href: siteConfig.facebook, label: "Facebook" },
+  { href: siteConfig.instagram, label: "Instagram" },
+];
+
+export const brand = {
+  name: siteConfig.name,
+  tagline: siteConfig.tagline,
+  promoText: siteConfig.promo,
+  editorialImage: editorial.image,
+};
+
+export const bestSellingProducts = bowlzProducts.slice(0, 4);

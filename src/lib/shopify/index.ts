@@ -14,10 +14,6 @@ import {
 } from "./queries";
 import type { Cart, Product, ProductImage, ProductVariant } from "./types";
 
-const DEFAULT_HANDLE =
-  process.env.SHOPIFY_PRODUCT_HANDLE?.trim() ||
-  "heated-menstrual-relief-vibration-belt";
-
 const ADMIN_PRODUCT_BY_HANDLE = `
   query ProductByHandle($handle: String!) {
     productByHandle(handle: $handle) {
@@ -176,34 +172,48 @@ function mapCart(raw: {
   };
 }
 
+const DEFAULT_HANDLE =
+  process.env.SHOPIFY_PRODUCT_HANDLE?.trim() || "bowlz-v2";
+
+const MOCK_IMAGES: Record<string, string> = {
+  "bowlz-v2":
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8096.png?v=1774974454",
+  "v3-18mm":
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A8003.jpg?v=1780777330",
+  faceted:
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/1A9A5132_7e837930-8002-4491-b6fd-d9aebe10fa21.jpg?v=1770650047",
+  "xl-pre-order":
+    "https://cdn.shopify.com/s/files/1/0738/8253/4171/files/Untitled_design_8.png?v=1774974454",
+};
+
 export function getMockProduct(handle: string = DEFAULT_HANDLE): Product {
+  const image =
+    MOCK_IMAGES[handle] ??
+    MOCK_IMAGES["bowlz-v2"];
+
+  const titles: Record<string, string> = {
+    "bowlz-v2": "The OG 14mm",
+    "v3-18mm": "V3 14mm",
+    faceted: "Faceted 14mm",
+    "xl-pre-order": "XL 14mm",
+    tubez: "Tubez",
+    beakerz: "Beakerz",
+    swabz: "Swabz",
+  };
+
   return {
-    id: "gid://shopify/Product/mock",
+    id: `gid://shopify/Product/mock-${handle}`,
     handle,
-    title: "Heated Menstrual Relief Vibration Belt",
+    title: titles[handle] ?? "The OG 14mm",
     description:
-      "Instant heat and gentle vibration belt you can wear under your clothes. Warms in 3 seconds with 3 heat levels and 3 vibration modes.",
-    images: [],
+      "The magnetic bowl that started it all. Fits 14mm bongs, shatterproof, cleans with one wipe, and made from food-grade cool-touch materials.",
+    images: [{ url: image, altText: titles[handle] ?? "Bowlz product" }],
     variants: [
       {
         id: "gid://shopify/ProductVariant/mock-1",
-        title: "1 Belt",
-        price: { amount: "55.58", currencyCode: "USD" },
-        compareAtPrice: { amount: "79.00", currencyCode: "USD" },
-        availableForSale: true,
-      },
-      {
-        id: "gid://shopify/ProductVariant/mock-2",
-        title: "2 Belts",
-        price: { amount: "99.00", currencyCode: "USD" },
-        compareAtPrice: { amount: "111.00", currencyCode: "USD" },
-        availableForSale: true,
-      },
-      {
-        id: "gid://shopify/ProductVariant/mock-3",
-        title: "3 Belts",
-        price: { amount: "139.00", currencyCode: "USD" },
-        compareAtPrice: { amount: "167.00", currencyCode: "USD" },
+        title: "Black Mamba / 14mm",
+        price: { amount: "35.00", currencyCode: "USD" },
+        compareAtPrice: { amount: "50.00", currencyCode: "USD" },
         availableForSale: true,
       },
     ],

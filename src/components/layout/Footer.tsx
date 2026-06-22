@@ -1,64 +1,69 @@
 import Link from "next/link";
-import { siteConfig } from "@/data/content";
-import { PaymentIcons } from "@/components/ui/PaymentIcons";
+import { footerLinks, footerSocial, siteConfig } from "@/data/content";
+import { FooterNewsletter } from "@/components/layout/FooterNewsletter";
+import { PaymentIcons, SocialIcons } from "@/components/layout/FooterIcons";
+import { Logo } from "@/components/brand/Logo";
+
+function FooterLinkList({ links }: { links: { href: string; label: string }[] }) {
+  return (
+    <ul className="space-y-3">
+      {links.map((link) => {
+        const isExternal = link.href.startsWith("http");
+        const className = "footer-nav-link";
+
+        return (
+          <li key={link.label}>
+            {isExternal ? (
+              <a href={link.href} className={className} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            ) : (
+              <Link href={link.href} className={className}>
+                {link.label}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 export function Footer() {
   return (
-    <footer className="border-t border-plum/10 bg-ink px-5 py-16 text-white/70">
-      <div className="container-wide">
-        <div className="mb-12 grid gap-10 md:grid-cols-4">
-          <div className="md:col-span-2">
-            <div className="mb-4 font-heading text-2xl text-white">Nova Triggers</div>
-            <p className="max-w-sm leading-relaxed">
-              Heated menstrual relief belt — instant warmth and gentle vibration for every
-              day of your cycle. Designed for comfort, built for your real life.
-            </p>
-            <div className="mt-6 opacity-80">
-              <PaymentIcons />
-            </div>
-          </div>
+    <footer className="bg-white text-ink">
+      <FooterNewsletter />
+
+      <div className="w-full py-12 md:py-16">
+        <div className="mb-10 px-4 md:px-5">
+          <Logo variant="dark" />
+        </div>
+        <div className="grid gap-10 px-4 sm:grid-cols-2 md:px-5 lg:grid-cols-4 lg:gap-8">
+          <FooterLinkList links={footerLinks.shop} />
+          <FooterLinkList links={footerLinks.learn} />
+          <FooterLinkList links={footerLinks.support} />
 
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-white">
-              Shop
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href={`/products/${siteConfig.productHandle}`} className="hover:text-white">
-                  Heating Belt
-                </Link>
-              </li>
-              <li>
-                <Link href="/#faq" className="hover:text-white">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/#reviews" className="hover:text-white">
-                  Reviews
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-white">
-              Support
-            </h4>
-            <a href={`mailto:${siteConfig.email}`} className="text-sm hover:text-white">
+            <h3 className="footer-nav-link mb-4">Contact</h3>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="mb-5 block text-sm text-muted transition-colors hover:text-ink"
+            >
               {siteConfig.email}
             </a>
+            <SocialIcons links={footerSocial} />
           </div>
         </div>
+      </div>
 
-        <div className="feature-line mb-8" />
+      <div className="border-t border-black/10">
+        <div className="flex w-full flex-col gap-6 px-4 py-6 md:flex-row md:items-center md:justify-between md:px-5">
+          <PaymentIcons />
 
-        <p className="text-xs leading-relaxed opacity-50">
-          Nova Triggers is a personal comfort product, not a medical device. It is not
-          intended to diagnose, treat, cure, or prevent any condition. Consult your
-          healthcare provider for medical concerns. © {new Date().getFullYear()}{" "}
-          {siteConfig.name}. All rights reserved.
-        </p>
+          <p className="text-xs text-muted md:text-sm">
+            © {new Date().getFullYear()}, {siteConfig.name.toUpperCase()}
+          </p>
+        </div>
       </div>
     </footer>
   );

@@ -12,7 +12,7 @@ export function Comparison() {
       <div className="container-main">
         <AnimateIn>
           <h2 className="mb-8 text-center text-[clamp(1.75rem,4vw,2.5rem)]">
-            Why women switch to Nova Triggers
+            Why Bowlz beats traditional glass
           </h2>
         </AnimateIn>
         <AnimateIn delay={1}>
@@ -21,18 +21,18 @@ export function Comparison() {
               <thead>
                 <tr className="bg-plum text-white">
                   <th className="p-4 text-left font-semibold"></th>
-                  <th className="p-4 font-semibold">Nova Triggers</th>
-                  <th className="p-4 font-semibold">Pain pills</th>
-                  <th className="p-4 font-semibold">Hot water bottle</th>
+                  <th className="p-4 font-semibold">Bowlz</th>
+                  <th className="p-4 font-semibold">Glass bowls</th>
+                  <th className="p-4 font-semibold">Silicone</th>
                 </tr>
               </thead>
               <tbody>
                 {comparisonRows.map((row) => (
                   <tr key={row.feature} className="border-b border-plum/10 last:border-0">
                     <td className="p-4 font-medium text-taupe-dark">{row.feature}</td>
-                    <td className="p-4 text-center"><Cell value={row.nova} /></td>
-                    <td className="p-4 text-center"><Cell value={row.pills} /></td>
-                    <td className="p-4 text-center"><Cell value={row.bottle} /></td>
+                    <td className="p-4 text-center"><Cell value={row.bowlz} /></td>
+                    <td className="p-4 text-center"><Cell value={row.glass} /></td>
+                    <td className="p-4 text-center"><Cell value={row.silicone} /></td>
                   </tr>
                 ))}
               </tbody>
