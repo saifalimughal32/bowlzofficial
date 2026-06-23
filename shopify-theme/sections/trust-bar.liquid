@@ -1,0 +1,85 @@
+<section class="trust-bar">
+  <div class="container-main">
+    <ul class="trust-bar__grid">
+      {%- for block in section.blocks -%}
+        <li class="trust-bar__item" {{ block.shopify_attributes }}>
+          {%- case block.settings.icon -%}
+            {%- when 'users' -%}
+              <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            {%- when 'shield' -%}
+              <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            {%- when 'ruler' -%}
+              <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 8H3M21 12H3M21 16H3M21 20H3"/></svg>
+            {%- else -%}
+              <svg class="trust-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          {%- endcase -%}
+          <p class="text-xs font-bold uppercase tracking-[0.06em] text-ink md:text-sm" style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">
+            {%- if block.settings.animate_count -%}
+              <span data-counter="{{ settings.customer_count }}" data-counter-suffix="+" class="tabular-nums"></span>
+              {{ block.settings.label }}
+            {%- else -%}
+              {{ block.settings.label }}
+            {%- endif -%}
+          </p>
+          <p class="mt-1 text-xs text-muted">{{ block.settings.description }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust bar",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "signal",
+      "name": "Trust signal",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "users", "label": "Users" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "ruler", "label": "Ruler" },
+            { "value": "sparkles", "label": "Sparkles" }
+          ],
+          "default": "users"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Customers"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Trusted nationwide"
+        },
+        {
+          "type": "checkbox",
+          "id": "animate_count",
+          "label": "Animate customer count",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust bar",
+      "blocks": [
+        { "type": "signal", "settings": { "icon": "users", "label": "Customers", "description": "Trusted nationwide", "animate_count": true } },
+        { "type": "signal", "settings": { "icon": "shield", "label": "Shatterproof Design", "description": "Built for real sessions" } },
+        { "type": "signal", "settings": { "icon": "ruler", "label": "14mm Universal Fit", "description": "Works with standard bongs" } },
+        { "type": "signal", "settings": { "icon": "sparkles", "label": "One-Wipe Clean", "description": "Post-session in seconds" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

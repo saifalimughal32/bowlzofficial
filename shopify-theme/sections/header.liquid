@@ -1,0 +1,101 @@
+{%- liquid
+  if template.name == 'collection' or template.name == 'product' or template.name == 'page'
+    assign static_header = true
+  else
+    assign static_header = false
+  endif
+-%}
+
+<header class="site-header" data-site-header data-static-header="{% if static_header %}true{% else %}false{% endif %}">
+  <div class="site-header__bar site-header__bar--transparent" data-header-bar>
+    <div class="container-main site-header__inner">
+      {% render 'logo', variant: 'dark' %}
+
+      <nav class="site-header__nav" aria-label="Main">
+        {%- for link in linklists[section.settings.menu].links -%}
+          {%- if link.links.size > 0 -%}
+            <div class="nav-dropdown">
+              <a href="{{ link.url }}" class="nav-link nav-link-dark" data-nav-link aria-haspopup="true">
+                {{ link.title }}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-left:2px;"><path d="M6 9l6 6 6-6"/></svg>
+              </a>
+              <div class="nav-dropdown__menu">
+                <ul class="nav-dropdown__list">
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" class="nav-link nav-link-dark" data-nav-link>{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <div class="site-header__actions">
+        <a href="{{ section.settings.wholesale_url | default: '/pages/wholesale' }}" class="header-icon-btn header-icon-btn--dark hidden sm:flex" data-header-icon aria-label="Wholesale account" style="display:none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a href="{{ routes.all_products_collection_url }}" class="header-icon-btn header-icon-btn--dark" data-header-icon aria-label="Search products" style="display:none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </a>
+        <button type="button" class="header-icon-btn header-icon-btn--dark relative" data-header-icon data-cart-open aria-label="{{ 'sections.header.cart' | t }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-count-badge" data-cart-count style="display:none;">0</span>
+        </button>
+        <button type="button" class="header-icon-btn header-icon-btn--dark md:hidden" data-menu-toggle aria-label="Menu" aria-expanded="false" style="display:flex;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu md:hidden" data-mobile-menu aria-hidden="true">
+    <nav>
+      {%- for link in linklists[section.settings.menu].links -%}
+        {%- if link.links.size > 0 -%}
+          <div>
+            <button type="button" data-shop-toggle aria-expanded="false">{{ link.title }} ▾</button>
+            <div data-shop-submenu class="pl-4">
+              {%- for child in link.links -%}
+                <a href="{{ child.url }}" class="text-sm text-muted">{{ child.title }}</a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+</header>
+
+<style>
+  @media (min-width: 640px) {
+    .site-header__actions a[aria-label="Wholesale account"],
+    .site-header__actions a[aria-label="Search products"] { display: flex !important; }
+  }
+  @media (min-width: 768px) {
+    .site-header__actions button[data-menu-toggle] { display: none !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "url",
+      "id": "wholesale_url",
+      "label": "Wholesale page URL"
+    }
+  ]
+}
+{% endschema %}

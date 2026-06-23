@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "home-wholesale",
+      "settings": {
+        "heading": "Got a Smokeshop or Dispensary?",
+        "subtext": "Choose an option below and our wholesale team will be in touch."
+      }
+    }
+  },
+  "order": ["main"]
+}

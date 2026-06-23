@@ -1,0 +1,32 @@
+<section class="border-y border-black/8 bg-white py-4 md:py-5" style="border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);padding:1rem 0;padding-top:6rem;">
+  <div class="container-main max-w-[1100px]" style="max-width:1100px;">
+    <p class="text-center text-[0.6875rem] font-bold uppercase leading-relaxed tracking-[0.1em] text-ink md:text-xs" style="text-align:center;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">
+      {{ section.settings.primary | default: settings.promo_text | upcase }}
+    </p>
+    <p class="mt-2 text-center text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted md:text-[0.6875rem]" style="margin-top:0.5rem;text-align:center;font-size:0.625rem;text-transform:uppercase;color:var(--color-muted);">
+      {{ section.settings.secondary }}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection trust bar",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "primary",
+      "label": "Primary text",
+      "default": "20% OFF MAGNETIC GLASS + A FREE OG BOWL. WHILE SUPPLIES LAST."
+    },
+    {
+      "type": "text",
+      "id": "secondary",
+      "label": "Secondary text",
+      "default": "FREE SHIPPING ON ORDERS $75+ · 30-DAY WARRANTY · SECURE CHECKOUT"
+    }
+  ],
+  "presets": [{ "name": "Collection trust bar" }]
+}
+{% endschema %}

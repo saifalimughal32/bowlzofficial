@@ -1,0 +1,58 @@
+<div class="bg-white" style="background:#fff;">
+  <div class="container-main max-w-[1100px] pb-4 pt-8 md:pb-6 md:pt-10" style="max-width:1100px;padding-top:2rem;padding-bottom:1rem;">
+    <h1 class="shop-section-title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="mt-4 text-muted">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+<section class="home-section" style="padding-top:0;">
+  <div class="container-main">
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, show_add_to_cart: section.settings.show_add_to_cart %}
+        {%- else -%}
+          <p class="text-muted">{{ 'collections.general.no_matches' | t }}</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="mt-10 text-center" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn-pill btn-pill-outline">← Previous</a>
+          {%- endif -%}
+          <span class="mx-4 text-sm text-muted">{{ 'general.pagination.page' | t: current: paginate.current_page, total: paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn-pill btn-pill-outline">Next →</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection products",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "label": "Products per page",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show add to cart on cards",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+<section class="home-section-tight" style="padding-bottom:0;">
+  <div class="container-main">
+    <a href="{{ section.settings.link | default: routes.all_products_collection_url }}" class="group block" style="text-decoration:none;color:inherit;">
+      <div class="image-banner relative aspect-[16/9] sm:aspect-[21/9]" style="position:relative;aspect-ratio:16/9;">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1600 | image_tag: alt: section.settings.headline, class: 'w-full h-full object-cover', loading: 'lazy', widths: '800,1200,1600', sizes: '100vw' }}
+        {%- endif -%}
+        <div class="absolute inset-0" style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.15), transparent);"></div>
+        <div class="absolute inset-x-0 bottom-0 p-6 md:p-10 lg:p-12" style="position:absolute;left:0;right:0;bottom:0;padding:1.5rem;">
+          <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-white/80 md:text-sm" style="color:rgba(255,255,255,0.8);margin-bottom:0.5rem;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">
+            {{ section.settings.eyebrow | default: shop.name }}
+          </p>
+          <h2 class="max-w-xl text-2xl font-bold uppercase leading-tight text-white md:text-3xl lg:text-4xl" style="color:#fff;max-width:36rem;font-weight:700;text-transform:uppercase;line-height:1.25;">
+            {{ section.settings.headline }}
+          </h2>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Bowlz"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Built for Sessions, Inspired by Better Design"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [{ "name": "Editorial banner" }]
+}
+{% endschema %}

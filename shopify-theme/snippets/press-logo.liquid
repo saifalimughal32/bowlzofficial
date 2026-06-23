@@ -1,0 +1,26 @@
+{%- case logo_type -%}
+  {%- when 'wapo' -%}
+    <svg viewBox="0 0 220 36" class="h-8 w-auto md:h-9" role="img" aria-label="The Washington Post"><text x="110" y="26" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="17" font-weight="700">The Washington Post</text></svg>
+  {%- when 'nyt' -%}
+    <svg viewBox="0 0 120 52" class="h-10 w-auto md:h-11" role="img" aria-label="The New York Times"><text x="60" y="14" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="11" font-weight="700">The</text><text x="60" y="30" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="13" font-weight="700">New York</text><text x="60" y="46" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="15" font-weight="700">Times</text></svg>
+  {%- when 'forbes' -%}
+    <svg viewBox="0 0 120 32" class="h-7 w-auto md:h-8" role="img" aria-label="Forbes"><text x="60" y="24" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="26" font-weight="400" letter-spacing="0.04em">Forbes</text></svg>
+  {%- when 'inc' -%}
+    <svg viewBox="0 0 72 32" class="h-8 w-auto md:h-9" role="img" aria-label="Inc."><text x="36" y="26" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="30" font-weight="900">Inc.</text></svg>
+  {%- when 'high-times' -%}
+    <svg viewBox="0 0 150 32" class="h-8 w-auto md:h-9" role="img" aria-label="High Times"><text x="75" y="24" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="22" font-weight="700">High Times</text></svg>
+  {%- when 'rolling-stone' -%}
+    <svg viewBox="0 0 170 32" class="h-7 w-auto md:h-8" role="img" aria-label="Rolling Stone"><text x="85" y="24" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="20" font-weight="700">Rolling Stone</text></svg>
+  {%- when 'wired' -%}
+    <svg viewBox="0 0 100 32" class="h-7 w-auto md:h-8" role="img" aria-label="Wired"><text x="50" y="24" text-anchor="middle" fill="currentColor" font-family="Inter, sans-serif" font-size="24" font-weight="800" letter-spacing="-0.04em">WIRED</text></svg>
+  {%- when 'gq' -%}
+    <svg viewBox="0 0 56 32" class="h-8 w-auto md:h-9" role="img" aria-label="GQ"><text x="28" y="26" text-anchor="middle" fill="currentColor" font-family="Inter, sans-serif" font-size="28" font-weight="900" letter-spacing="0.08em">GQ</text></svg>
+  {%- when 'entrepreneur' -%}
+    <svg viewBox="0 0 170 32" class="h-7 w-auto md:h-8" role="img" aria-label="Entrepreneur"><text x="85" y="24" text-anchor="middle" fill="currentColor" font-family="Georgia, serif" font-size="19" font-weight="600" letter-spacing="0.06em">Entrepreneur</text></svg>
+  {%- else -%}
+    {%- if block.settings.logo_image != blank -%}
+      {{ block.settings.logo_image | image_url: width: 200 | image_tag: alt: block.settings.logo_name, class: 'h-8 w-auto md:h-9' }}
+    {%- else -%}
+      <span class="text-sm font-bold uppercase tracking-widest">{{ block.settings.logo_name }}</span>
+    {%- endif -%}
+{%- endcase -%}

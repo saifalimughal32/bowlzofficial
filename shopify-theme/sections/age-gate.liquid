@@ -1,0 +1,32 @@
+<div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" hidden>
+  <div class="age-gate__panel">
+    <div class="mb-8 flex justify-center" style="margin-bottom:2rem;display:flex;justify-content:center;">
+      {%- if settings.logo_icon != blank -%}
+        {{ settings.logo_icon | image_url: width: 160 | image_tag: alt: shop.name, class: 'h-16 w-16 md:h-20 md:w-20', widths: '80,160' }}
+      {%- else -%}
+        <img src="{{ 'bowlz-icon.svg' | asset_url }}" alt="{{ shop.name }}" width="80" height="80" class="h-16 w-16 md:h-20 md:w-20" style="height:4rem;width:4rem;">
+      {%- endif -%}
+    </div>
+
+    <h2 id="age-gate-title" class="mb-2 text-2xl font-semibold tracking-wide text-ink md:text-3xl">
+      {{ settings.age_gate_title | default: 'Are you 21+?' }}
+    </h2>
+    <p class="mb-8 text-sm text-muted md:text-base">{{ settings.age_gate_subtitle | default: '(we have to ask 😉)' }}</p>
+
+    <div class="mx-auto flex max-w-sm gap-3" style="display:flex;gap:0.75rem;max-width:24rem;margin:0 auto;">
+      <button type="button" data-age-verify class="btn-pill btn-pill-outline flex-1 border-black/20 px-8" style="flex:1;">{{ 'age_gate.yes' | t }}</button>
+      <a href="https://www.google.com" class="btn-pill btn-pill-outline flex-1 border-black/20 px-8" style="flex:1;text-align:center;">{{ 'age_gate.no' | t }}</a>
+    </div>
+
+    <p class="mx-auto mt-8 max-w-sm text-xs leading-relaxed text-muted" style="margin-top:2rem;font-size:0.6875rem;line-height:1.625;">
+      {{ 'age_gate.terms_html' | t }}
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Age gate",
+  "settings": []
+}
+{% endschema %}

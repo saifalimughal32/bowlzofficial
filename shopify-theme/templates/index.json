@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "home_video_banner": {
+      "type": "home-video-banner",
+      "settings": {
+        "headline_line1": "Magnetic Bowls Built for",
+        "headline_line2": "Your Session, Not Your Floor.",
+        "button_label": "Shop Bowlz"
+      }
+    },
+    "home_as_seen_in": {
+      "type": "home-as-seen-in",
+      "blocks": {
+        "logo_wapo": { "type": "logo", "settings": { "logo_type": "wapo" } },
+        "logo_nyt": { "type": "logo", "settings": { "logo_type": "nyt" } },
+        "logo_forbes": { "type": "logo", "settings": { "logo_type": "forbes" } },
+        "logo_inc": { "type": "logo", "settings": { "logo_type": "inc" } },
+        "logo_ht": { "type": "logo", "settings": { "logo_type": "high-times" } },
+        "logo_rs": { "type": "logo", "settings": { "logo_type": "rolling-stone" } },
+        "logo_wired": { "type": "logo", "settings": { "logo_type": "wired" } },
+        "logo_gq": { "type": "logo", "settings": { "logo_type": "gq" } },
+        "logo_ent": { "type": "logo", "settings": { "logo_type": "entrepreneur" } }
+      },
+      "block_order": ["logo_wapo", "logo_nyt", "logo_forbes", "logo_inc", "logo_ht", "logo_rs", "logo_wired", "logo_gq", "logo_ent"],
+      "settings": { "heading": "As Seen In" }
+    },
+    "home_best_products": {
+      "type": "home-best-products",
+      "settings": {
+        "section_id": "bowlz",
+        "title": "Bowlz",
+        "products_to_show": 4,
+        "show_add_to_cart": true,
+        "show_view_all": true,
+        "view_all_label": "Shop All Bowlz"
+      }
+    },
+    "trust_bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "signal_1": { "type": "signal", "settings": { "icon": "users", "label": "Customers", "description": "Trusted nationwide", "animate_count": true } },
+        "signal_2": { "type": "signal", "settings": { "icon": "shield", "label": "Shatterproof Design", "description": "Built for real sessions" } },
+        "signal_3": { "type": "signal", "settings": { "icon": "ruler", "label": "14mm Universal Fit", "description": "Works with standard bongs" } },
+        "signal_4": { "type": "signal", "settings": { "icon": "sparkles", "label": "One-Wipe Clean", "description": "Post-session in seconds" } }
+      },
+      "block_order": ["signal_1", "signal_2", "signal_3", "signal_4"],
+      "settings": {}
+    },
+    "home_product_carousel": {
+      "type": "home-product-carousel",
+      "settings": {
+        "section_id": "bongz",
+        "title": "Bongz",
+        "products_to_show": 4,
+        "show_add_to_cart": true,
+        "show_view_all": true,
+        "view_all_label": "Shop All Bongz"
+      }
+    },
+    "home_editorial": {
+      "type": "home-editorial",
+      "settings": {
+        "eyebrow": "Bowlz",
+        "headline": "Built for Sessions, Inspired by Better Design"
+      }
+    },
+    "home_collections": {
+      "type": "home-collections",
+      "blocks": {
+        "col_1": { "type": "collection_card", "settings": { "subtitle": "Magnetic bowl pieces", "title": "Bowlz", "button_label": "Shop Bowlz" } },
+        "col_2": { "type": "collection_card", "settings": { "subtitle": "Magnetic glass", "title": "Bongz", "button_label": "Shop Bongz" } },
+        "col_3": { "type": "collection_card", "settings": { "subtitle": "Swabz & accessories", "title": "Cleaning Gear", "button_label": "Shop Cleaning Gear" } }
+      },
+      "block_order": ["col_1", "col_2", "col_3"],
+      "settings": { "title": "Collections" }
+    },
+    "home_reviews": {
+      "type": "home-reviews",
+      "settings": { "heading": "Don't Take Our Word for It" }
+    },
+    "home_wholesale": {
+      "type": "home-wholesale",
+      "settings": {}
+    }
+  },
+  "order": [
+    "home_video_banner",
+    "home_as_seen_in",
+    "home_best_products",
+    "trust_bar",
+    "home_product_carousel",
+    "home_editorial",
+    "home_collections",
+    "home_reviews",
+    "home_wholesale"
+  ]
+}

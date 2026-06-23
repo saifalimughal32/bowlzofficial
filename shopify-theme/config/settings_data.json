@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_brand": "#1f4d3a",
+    "color_brand_dark": "#163828",
+    "color_ink": "#0a0a0a",
+    "color_charcoal": "#1b252f",
+    "color_muted": "#6b6b6b",
+    "promo_text": "20% off magnetic glass + a free OG bowl. While supplies last.",
+    "free_shipping_threshold": 75,
+    "customer_count": 50000,
+    "customer_count_display": "50,000+",
+    "star_rating": "4.9",
+    "review_count": "1,000+",
+    "contact_email": "hello@bowlzofficial.com",
+    "social_instagram": "https://www.instagram.com/bowlzofficial/",
+    "social_facebook": "https://www.facebook.com/bowlzofficial",
+    "age_gate_enabled": true
+  }
+}

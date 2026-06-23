@@ -1,0 +1,34 @@
+<div class="product-gallery" data-product-gallery>
+  <div class="product-gallery-main">
+    {%- if product.images.size > 0 -%}
+      <img
+        data-gallery-main
+        src="{{ product.featured_image | image_url: width: 1200 }}"
+        alt="{{ product.featured_image.alt | escape | default: product.title }}"
+        width="1200"
+        height="1200"
+        loading="eager"
+      >
+    {%- else -%}
+      <div class="flex items-center justify-center text-sm text-muted" style="height:100%;">{{ product.title }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if product.images.size > 1 -%}
+    <div class="product-gallery-thumbs">
+      {%- for image in product.images limit: 6 -%}
+        <button
+          type="button"
+          class="product-gallery-thumb{% if forloop.first %} product-gallery-thumb-active{% endif %}"
+          data-gallery-thumb
+          data-src="{{ image | image_url: width: 1200 }}"
+          data-alt="{{ image.alt | escape | default: product.title }}"
+          aria-label="View image {{ forloop.index }}"
+          aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+        >
+          {{ image | image_url: width: 176 | image_tag: alt: image.alt, loading: 'lazy', widths: '88,176' }}
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,97 @@
+<section class="home-section">
+  <div class="container-main">
+    {% render 'section-header', title: section.settings.title, class: 'mb-10 text-center md:mb-14' %}
+
+    <div class="grid gap-5 md:grid-cols-3 md:gap-6" style="display:grid;gap:1.25rem;">
+      {%- for block in section.blocks -%}
+        {%- assign col = collections[block.settings.collection] -%}
+        <a
+          href="{% if col != blank %}{{ col.url }}{% else %}{{ block.settings.link }}{% endif %}"
+          class="collection-card"
+          {{ block.shopify_attributes }}
+        >
+          <div class="relative aspect-[4/5] bg-[#f4f4f4]" style="position:relative;aspect-ratio:4/5;background:#f4f4f4;">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: alt: block.settings.title, class: 'w-full h-full object-contain p-8 md:p-10', loading: 'lazy' }}
+            {%- elsif col != blank and col.image -%}
+              {{ col.image | image_url: width: 800 | image_tag: alt: col.title, class: 'w-full h-full object-contain p-8 md:p-10', loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+          <div class="flex flex-1 flex-col items-center border-t border-black/[0.06] px-6 py-6 text-center md:py-7" style="display:flex;flex-direction:column;align-items:center;border-top:1px solid rgba(0,0,0,0.06);padding:1.5rem;text-align:center;">
+            <p class="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted">{{ block.settings.subtitle }}</p>
+            <h3 class="mt-1.5 text-lg font-bold tracking-tight text-ink md:text-xl">{{ block.settings.title }}</h3>
+            <span class="mt-4 inline-flex min-h-[44px] items-center rounded-full border border-ink/15 px-6 text-xs font-bold uppercase tracking-[0.08em] text-ink" style="margin-top:1rem;display:inline-flex;min-height:44px;align-items:center;border-radius:9999px;border:1px solid rgba(10,10,10,0.15);padding:0 1.5rem;font-size:0.75rem;font-weight:700;text-transform:uppercase;">
+              {{ block.settings.button_label }}
+            </span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home collections",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collections"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image override"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Magnetic bowl pieces"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Bowlz"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Bowlz"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link override"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home collections",
+      "blocks": [
+        { "type": "collection_card", "settings": { "subtitle": "Magnetic bowl pieces", "title": "Bowlz", "button_label": "Shop Bowlz" } },
+        { "type": "collection_card", "settings": { "subtitle": "Magnetic glass", "title": "Bongz", "button_label": "Shop Bongz" } },
+        { "type": "collection_card", "settings": { "subtitle": "Swabz & accessories", "title": "Cleaning Gear", "button_label": "Shop Cleaning Gear" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
